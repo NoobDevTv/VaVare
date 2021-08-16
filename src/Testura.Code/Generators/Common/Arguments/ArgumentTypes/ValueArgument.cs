@@ -38,7 +38,20 @@ namespace Testura.Code.Generators.Common.Arguments.ArgumentTypes
         /// <param name="value">String value to send in as an argument.</param>
         /// <param name="stringType">The type of string.</param>
         /// <param name="namedArgument">Specificy the argument for a partical parameter.</param>
+        [Obsolete("Please use the ctor with the boolean parameter instead")]
         public ValueArgument(string value, StringType stringType = StringType.Normal, string namedArgument = null)
+            : this(value, true, stringType, namedArgument)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ValueArgument"/> class.
+        /// </summary>
+        /// <param name="value">String value to send in as an argument.</param>
+        /// <param name="escapeValueAsString">If <see langword="true"/>, inverted commas are added to the <paramref name="value"/></param>
+        /// <param name="stringType">The type of string.</param>
+        /// <param name="namedArgument">Specificy the argument for a partical parameter.</param>
+        public ValueArgument(string value, bool escapeValueAsString, StringType stringType = StringType.Normal, string namedArgument = null)
             : base(namedArgument)
         {
             if (value == null)
@@ -46,7 +59,14 @@ namespace Testura.Code.Generators.Common.Arguments.ArgumentTypes
                 throw new ArgumentNullException(nameof(value));
             }
 
-            Value = stringType == StringType.Path ? $"@\"{value}\"" : $"\"{value}\"";
+            if (escapeValueAsString)
+            {
+                Value = stringType == StringType.Verbatim ? $"@\"{value}\"" : $"\"{value}\"";
+            }
+            else
+            {
+                Value = value;
+            }
         }
 
         /// <summary>
