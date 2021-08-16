@@ -67,7 +67,26 @@ namespace Testura.Code.Statements
         /// <param name="reference">Value of the variable.</param>
         /// <param name="useVarKeyword">Will use "var" keyword if true, otherwise the type.</param>
         /// <returns>The generated local declaration statement.</returns>
+        [Obsolete("Use the overload without optional parameter or without type instead")]
         public LocalDeclarationStatementSyntax DeclareAndAssign(string name, Type type, VariableReference reference, bool useVarKeyword = true)
+        {
+            if (useVarKeyword)
+            {
+                return DeclareAndAssign(name, type, reference);
+            }
+            else
+            {
+                return DeclareAndAssign(name, reference);
+            }
+        }
+
+        public LocalDeclarationStatementSyntax DeclareAndAssign(string name, Type type, VariableReference reference)
+            => DeclareAndAssign(name, TypeGenerator.Create(type), reference);
+
+        public LocalDeclarationStatementSyntax DeclareAndAssign(string name, VariableReference reference) 
+            => DeclareAndAssign(name, IdentifierName("var"), reference);
+
+        public LocalDeclarationStatementSyntax DeclareAndAssign(string name, TypeSyntax type, VariableReference reference)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -84,7 +103,7 @@ namespace Testura.Code.Statements
                 throw new ArgumentNullException(nameof(reference));
             }
 
-            return LocalDeclarationStatement(VariableDeclaration(useVarKeyword ? IdentifierName("var") : TypeGenerator.Create(type))
+            return LocalDeclarationStatement(VariableDeclaration(type)
                 .WithVariables(SingletonSeparatedList(VariableDeclarator(Identifier(name))
                     .WithInitializer(EqualsValueClauseFactory.GetEqualsValueClause(reference).WithEqualsToken(Token(SyntaxKind.EqualsToken))))));
         }
