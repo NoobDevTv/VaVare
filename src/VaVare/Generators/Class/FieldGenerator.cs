@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Generators.Common;
-using Testura.Code.Generators.Special;
-using Testura.Code.Models;
+using VaVare.Generators.Common;
+using VaVare.Generators.Special;
+using VaVare.Models;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace Testura.Code.Generators.Class
+namespace VaVare.Generators.Class
 {
     /// <summary>
     /// Provides the functionality to generate fields.

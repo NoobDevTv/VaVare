@@ -1,9 +1,9 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Builders.BuilderHelpers;
-using Testura.Code.Builders.BuildMembers;
+using VaVare.Builders.BuilderHelpers;
+using VaVare.Builders.BuildMembers;
 
-namespace Testura.Code.Builders.Base
+namespace VaVare.Builders.Base
 {
     public class BuilderBase<TBuilder>
         where TBuilder : BuilderBase<TBuilder>

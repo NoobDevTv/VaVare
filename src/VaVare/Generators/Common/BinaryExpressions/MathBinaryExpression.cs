@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Factories;
-using Testura.Code.Models.References;
+using VaVare.Factories;
+using VaVare.Models.References;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace Testura.Code.Generators.Common.BinaryExpressions
+namespace VaVare.Generators.Common.BinaryExpressions
 {
     /// <summary>
     /// Provides the functionality to generate binary expressions with math operators

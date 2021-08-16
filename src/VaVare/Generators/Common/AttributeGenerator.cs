@@ -3,10 +3,10 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Generators.Common.Arguments.ArgumentTypes;
-using Testura.Code.Models;
+using VaVare.Generators.Common.Arguments.ArgumentTypes;
+using VaVare.Models;
 
-namespace Testura.Code.Generators.Common
+namespace VaVare.Generators.Common
 {
     /// <summary>
     /// Provides the functionality to generate attributes.

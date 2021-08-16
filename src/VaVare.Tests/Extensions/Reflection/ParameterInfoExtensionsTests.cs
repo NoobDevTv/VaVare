@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework.Internal;
 using NUnit.Framework;
-using Testura.Code.Extensions.Reflection;
+using VaVare.Extensions.Reflection;
 
-namespace Testura.Code.Tests.Extensions.Reflection
+namespace VaVare.Tests.Extensions.Reflection
 {
     [TestFixture]
     public class ParameterInfoExtensionsTests

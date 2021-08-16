@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
-using Testura.Code.Generators.Common.BinaryExpressions;
-using Testura.Code.Models.References;
+using VaVare.Generators.Common.BinaryExpressions;
+using VaVare.Models.References;
 
-namespace Testura.Code.Tests.Generators.Common.BinaryExpressions
+namespace VaVare.Tests.Generators.Common.BinaryExpressions
 {
     [TestFixture]
     public class OrBinaryExpressionTest

@@ -1,4 +1,4 @@
-﻿namespace Testura.Code
+﻿namespace VaVare
 {
     /// <summary>
     /// Describes all possible conditional statements.

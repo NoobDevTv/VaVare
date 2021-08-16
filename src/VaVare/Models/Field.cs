@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Testura.Code.Models
+namespace VaVare.Models
 {
     /// <summary>
     /// Represent a class field.

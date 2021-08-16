@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Testura.Code.Models
+namespace VaVare.Models
 {
     /// <summary>
     /// Represent a parameter.

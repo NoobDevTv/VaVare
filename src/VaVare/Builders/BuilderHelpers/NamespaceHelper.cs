@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace Testura.Code.Builders.BuilderHelpers
+namespace VaVare.Builders.BuilderHelpers
 {
     internal class NamespaceHelper
     {

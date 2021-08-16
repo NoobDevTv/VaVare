@@ -2,10 +2,10 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Models;
+using VaVare.Models;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace Testura.Code.Generators.Common
+namespace VaVare.Generators.Common
 {
     /// <summary>
     /// Provides the functionality to generate parameter lists.

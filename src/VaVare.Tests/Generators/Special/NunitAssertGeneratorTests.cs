@@ -1,10 +1,10 @@
 ﻿using System;
 using NUnit.Framework;
-using Testura.Code.Generators.Common.Arguments.ArgumentTypes;
-using Testura.Code.Generators.Special;
-using Testura.Code.Models.References;
+using VaVare.Generators.Common.Arguments.ArgumentTypes;
+using VaVare.Generators.Special;
+using VaVare.Models.References;
 
-namespace Testura.Code.Tests.Generators.Special
+namespace VaVare.Tests.Generators.Special
 {
     [TestFixture]
     public class NunitAssertGeneratorTests

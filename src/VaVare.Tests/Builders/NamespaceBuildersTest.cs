@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using Testura.Code.Builders;
-using Testura.Code.Builders.BuildMembers;
-using Testura.Code.Models;
-using Testura.Code.Saver;
+using VaVare.Builders;
+using VaVare.Builders.BuildMembers;
+using VaVare.Models;
+using VaVare.Saver;
 
-namespace Testura.Code.Tests.Builders
+namespace VaVare.Tests.Builders
 {
     [TestFixture]
     public class NamespaceBuildersTest

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Generators.Common;
-using Testura.Code.Generators.Special;
-using Testura.Code.Models;
-using Attribute = Testura.Code.Models.Attribute;
+using VaVare.Generators.Common;
+using VaVare.Generators.Special;
+using VaVare.Models;
+using Attribute = VaVare.Models.Attribute;
 
-namespace Testura.Code.Generators.Class
+namespace VaVare.Generators.Class
 {
     /// <summary>
     /// Provides functionality to generate class constructors.

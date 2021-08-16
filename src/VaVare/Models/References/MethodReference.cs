@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Testura.Code.Generators.Common.Arguments.ArgumentTypes;
+using VaVare.Generators.Common.Arguments.ArgumentTypes;
 
-namespace Testura.Code.Models.References
+namespace VaVare.Models.References
 {
     /// <summary>
     /// Represent a method reference.

@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
-using Testura.Code.Generators.Common;
+using VaVare.Generators.Common;
 
-namespace Testura.Code.Tests.Generators.Common
+namespace VaVare.Tests.Generators.Common
 {
     [TestFixture]
     public class ModifierGeneratorTests

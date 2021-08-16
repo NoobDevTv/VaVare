@@ -5,9 +5,9 @@ using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Extensions.Naming;
+using VaVare.Extensions.Naming;
 
-namespace Testura.Code.Generators.Common
+namespace VaVare.Generators.Common
 {
     internal static class GenericGenerator
     {

@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 #pragma warning disable 1591
 
-namespace Testura.Code.Generators.Common.Arguments.ArgumentTypes
+namespace VaVare.Generators.Common.Arguments.ArgumentTypes
 {
     /// <summary>
     /// Provices the functionality to generate a array initialization argument. Example of generated code:

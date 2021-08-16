@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Builders.BuildMembers;
+using VaVare.Builders.BuildMembers;
 
-namespace Testura.Code.Builders.BuilderHelpers
+namespace VaVare.Builders.BuilderHelpers
 {
     internal class MemberHelper
     {

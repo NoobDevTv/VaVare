@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-using Testura.Code.Generators.Class;
-using Testura.Code.Generators.Common;
-using Testura.Code.Models;
-using Testura.Code.Models.Properties;
-using Testura.Code.Models.References;
-using Testura.Code.Statements;
+using VaVare.Generators.Class;
+using VaVare.Generators.Common;
+using VaVare.Models;
+using VaVare.Models.Properties;
+using VaVare.Models.References;
+using VaVare.Statements;
 using Assert = NUnit.Framework.Assert;
 
-namespace Testura.Code.Tests.Generators.Class
+namespace VaVare.Tests.Generators.Class
 {
     [TestFixture]
     class PropertyGeneratorTests

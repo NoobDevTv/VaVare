@@ -1,11 +1,11 @@
 using System;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Models.References;
-using Testura.Code.Statements;
+using VaVare.Models.References;
+using VaVare.Statements;
 #pragma warning disable 1591
 
-namespace Testura.Code.Generators.Common.Arguments.ArgumentTypes
+namespace VaVare.Generators.Common.Arguments.ArgumentTypes
 {
     /// <summary>
     /// Provides the functionality to generate invocation arguments. Example of generated code: <c>(Do())</c>

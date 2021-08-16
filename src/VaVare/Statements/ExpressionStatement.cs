@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Generators.Common;
-using Testura.Code.Generators.Common.Arguments.ArgumentTypes;
-using Testura.Code.Models;
-using Testura.Code.Models.References;
+using VaVare.Generators.Common;
+using VaVare.Generators.Common.Arguments.ArgumentTypes;
+using VaVare.Models;
+using VaVare.Models.References;
 
-namespace Testura.Code.Statements
+namespace VaVare.Statements
 {
     /// <summary>
     /// Provides the functionality to generate expression statements.

@@ -1,7 +1,7 @@
 ﻿using System;
 #pragma warning disable 1591
 
-namespace Testura.Code.Extensions
+namespace VaVare.Extensions
 {
     public static class TypeExtensions
     {

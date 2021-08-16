@@ -1,4 +1,4 @@
-﻿namespace Testura.Code.Models.References
+﻿namespace VaVare.Models.References
 {
     /// <summary>
     /// Represent the member reference on another reference.

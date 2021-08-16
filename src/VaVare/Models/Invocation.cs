@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace Testura.Code.Models
+namespace VaVare.Models
 {
     /// <summary>
     /// Represent an invocation and used to convert between statement and expression.

@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 #pragma warning disable 1591
 
-namespace Testura.Code.Saver
+namespace VaVare.Saver
 {
     public interface ICodeSaver
     {

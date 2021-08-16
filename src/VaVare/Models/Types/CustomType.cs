@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Testura.Code.Models.Types
+namespace VaVare.Models.Types
 {
     /// <summary>
     /// Provides functionality to create a custom type

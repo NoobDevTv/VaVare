@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using Testura.Code.Builders;
-using Testura.Code.Generators.Common;
-using Testura.Code.Generators.Special;
-using Testura.Code.Models.References;
-using Testura.Code.Statements;
-using Attribute = Testura.Code.Models.Attribute;
+using VaVare.Builders;
+using VaVare.Generators.Common;
+using VaVare.Generators.Special;
+using VaVare.Models.References;
+using VaVare.Statements;
+using Attribute = VaVare.Models.Attribute;
 
-namespace Testura.Code.Tests.Integration
+namespace VaVare.Tests.Integration
 {
     [TestFixture]
     class NunitTest

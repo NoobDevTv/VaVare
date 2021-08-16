@@ -4,14 +4,14 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Factories;
-using Testura.Code.Generators.Common;
-using Testura.Code.Generators.Special;
-using Testura.Code.Models;
+using VaVare.Factories;
+using VaVare.Generators.Common;
+using VaVare.Generators.Special;
+using VaVare.Models;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
-using Attribute = Testura.Code.Models.Attribute;
+using Attribute = VaVare.Models.Attribute;
 
-namespace Testura.Code.Builders
+namespace VaVare.Builders
 {
     /// <summary>
     /// Provides a builder to generate a method

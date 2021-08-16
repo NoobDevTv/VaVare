@@ -4,11 +4,11 @@ using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Models;
+using VaVare.Models;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
-using Attribute = Testura.Code.Models.Attribute;
+using Attribute = VaVare.Models.Attribute;
 
-namespace Testura.Code.Generators.Common
+namespace VaVare.Generators.Common
 {
     public static class EnumGenerator
     {

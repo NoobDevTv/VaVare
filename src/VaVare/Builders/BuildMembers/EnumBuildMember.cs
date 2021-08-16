@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Generators.Common;
-using Testura.Code.Models;
-using Attribute = Testura.Code.Models.Attribute;
+using VaVare.Generators.Common;
+using VaVare.Models;
+using Attribute = VaVare.Models.Attribute;
 
-namespace Testura.Code.Builders.BuildMembers
+namespace VaVare.Builders.BuildMembers
 {
     public class EnumBuildMember : IBuildMember
     {

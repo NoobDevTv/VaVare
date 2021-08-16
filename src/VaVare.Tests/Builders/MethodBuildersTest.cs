@@ -1,9 +1,9 @@
 ﻿using NUnit.Framework;
-using Testura.Code.Builders;
-using Testura.Code.Generators.Common;
-using Testura.Code.Models;
+using VaVare.Builders;
+using VaVare.Generators.Common;
+using VaVare.Models;
 
-namespace Testura.Code.Tests.Builders
+namespace VaVare.Tests.Builders
 {
     [TestFixture]
     public class MethodBuildersTest

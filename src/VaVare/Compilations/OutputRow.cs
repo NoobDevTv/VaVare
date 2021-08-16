@@ -1,4 +1,4 @@
-﻿namespace Testura.Code.Compilations
+﻿namespace VaVare.Compilations
 {
     /// <summary>
     /// Represent an output row from compilation.

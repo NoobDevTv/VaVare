@@ -1,5 +1,5 @@
 ﻿#pragma warning disable 1591
-namespace Testura.Code.Extensions.Naming
+namespace VaVare.Extensions.Naming
 {
     public static class StringNamingExtensions
     {

@@ -1,4 +1,4 @@
-﻿namespace Testura.Code.Statements
+﻿namespace VaVare.Statements
 {
     /// <summary>
     /// Provides a way to generate different statements.

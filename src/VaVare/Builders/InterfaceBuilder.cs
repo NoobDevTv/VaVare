@@ -1,8 +1,8 @@
 ﻿using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Builders.Base;
+using VaVare.Builders.Base;
 
-namespace Testura.Code.Builders
+namespace VaVare.Builders
 {
     /// <summary>
     /// Provides a builder to generate an interface

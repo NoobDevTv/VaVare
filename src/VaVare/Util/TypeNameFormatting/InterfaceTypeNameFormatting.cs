@@ -1,7 +1,7 @@
 ﻿using System;
-using Testura.Code.Extensions.Naming;
+using VaVare.Extensions.Naming;
 
-namespace Testura.Code.Util.TypeNameFormatting
+namespace VaVare.Util.TypeNameFormatting
 {
     internal static class InterfaceTypeNameFormatting
     {

@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Testura.Code.Statements;
+using VaVare.Statements;
 using NUnit.Framework;
-using Testura.Code.Builders;
-using Testura.Code.Builders.BuildMembers;
-using Testura.Code.Extensions;
-using Testura.Code.Generators.Class;
-using Testura.Code.Generators.Common;
-using Testura.Code.Models;
-using Testura.Code.Models.Properties;
-using Testura.Code.Models.References;
-using Testura.Code.Saver;
+using VaVare.Builders;
+using VaVare.Builders.BuildMembers;
+using VaVare.Extensions;
+using VaVare.Generators.Class;
+using VaVare.Generators.Common;
+using VaVare.Models;
+using VaVare.Models.Properties;
+using VaVare.Models.References;
+using VaVare.Saver;
 
-namespace Testura.Code.Tests.Integration
+namespace VaVare.Tests.Integration
 {
     [TestFixture]
     public class ModelClassTests

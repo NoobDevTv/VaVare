@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
-using Testura.Code.Models.References;
+using VaVare.Models.References;
 
-namespace Testura.Code.Tests.Models.References
+namespace VaVare.Tests.Models.References
 {
     [TestFixture]
     public class VariableReferenceTests

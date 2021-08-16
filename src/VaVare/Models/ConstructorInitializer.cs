@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Testura.Code.Generators.Common.Arguments.ArgumentTypes;
+using VaVare.Generators.Common.Arguments.ArgumentTypes;
 
-namespace Testura.Code.Models
+namespace VaVare.Models
 {
     /// <summary>
     /// Represent a constructor initializer.

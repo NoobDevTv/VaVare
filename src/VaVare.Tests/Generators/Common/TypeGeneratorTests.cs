@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using Testura.Code.Generators.Common;
-using Testura.Code.Models.Types;
+using VaVare.Generators.Common;
+using VaVare.Models.Types;
 
-namespace Testura.Code.Tests.Generators.Common
+namespace VaVare.Tests.Generators.Common
 {
     [TestFixture]
     public class TypeGeneratorTests

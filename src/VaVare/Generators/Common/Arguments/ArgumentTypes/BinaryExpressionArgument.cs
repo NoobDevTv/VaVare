@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Generators.Common.BinaryExpressions;
+using VaVare.Generators.Common.BinaryExpressions;
 #pragma warning disable 1591
 
-namespace Testura.Code.Generators.Common.Arguments.ArgumentTypes
+namespace VaVare.Generators.Common.Arguments.ArgumentTypes
 {
     /// <summary>
     /// Provides the functionality to generate binary expression argument. Example of generated code: <c>(1+2)</c>

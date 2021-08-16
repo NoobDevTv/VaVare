@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace Testura.Code.Generators.Common
+namespace VaVare.Generators.Common
 {
     /// <summary>
     /// Provides the functionality to generate modifiers (public, protected, etc).

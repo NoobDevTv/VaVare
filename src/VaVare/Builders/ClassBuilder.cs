@@ -1,12 +1,12 @@
 ﻿using System.Linq;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Builders.Base;
-using Testura.Code.Builders.BuildMembers;
-using Testura.Code.Generators.Class;
-using Testura.Code.Models;
+using VaVare.Builders.Base;
+using VaVare.Builders.BuildMembers;
+using VaVare.Generators.Class;
+using VaVare.Models;
 
-namespace Testura.Code.Builders
+namespace VaVare.Builders
 {
     /// <summary>
     /// Provides a builder to generate a class.

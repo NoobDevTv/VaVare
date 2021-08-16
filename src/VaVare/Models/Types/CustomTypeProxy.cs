@@ -7,7 +7,7 @@ using System;
 using System.Globalization;
 using System.Reflection;
 
-namespace Testura.Code.Models.Types
+namespace VaVare.Models.Types
 {
     internal class CustomTypeProxy : Type
     {

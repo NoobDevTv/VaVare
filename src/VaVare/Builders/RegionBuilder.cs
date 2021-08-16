@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Builders.BuildMembers;
-using Testura.Code.Generators.Class;
-using Testura.Code.Models;
-using Testura.Code.Models.Properties;
+using VaVare.Builders.BuildMembers;
+using VaVare.Generators.Class;
+using VaVare.Models;
+using VaVare.Models.Properties;
 
-namespace Testura.Code.Builders
+namespace VaVare.Builders
 {
     public class RegionBuilder
     {

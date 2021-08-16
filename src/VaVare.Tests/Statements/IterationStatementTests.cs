@@ -1,11 +1,11 @@
 ﻿using NUnit.Framework;
-using Testura.Code.Generators.Common;
-using Testura.Code.Generators.Common.BinaryExpressions;
-using Testura.Code.Models.References;
-using Testura.Code.Statements;
+using VaVare.Generators.Common;
+using VaVare.Generators.Common.BinaryExpressions;
+using VaVare.Models.References;
+using VaVare.Statements;
 using Assert = NUnit.Framework.Assert;
 
-namespace Testura.Code.Tests.Statements
+namespace VaVare.Tests.Statements
 {
     [TestFixture]
     public class IterationStatementTests

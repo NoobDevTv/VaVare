@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Testura.Code.Models.Properties
+namespace VaVare.Models.Properties
 {
     /// <summary>
     /// Represent a property with a get/sets that have a multi line body/block.

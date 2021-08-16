@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
-using Testura.Code.Extensions;
+using VaVare.Extensions;
 
-namespace Testura.Code.Tests.Extensions
+namespace VaVare.Tests.Extensions
 {
     [TestFixture]
     public class ObjectExtensionsTests

@@ -1,5 +1,5 @@
 ﻿#pragma warning disable 1591
-namespace Testura.Code.Models.References
+namespace VaVare.Models.References
 {
     /// <summary>
     /// Represent a <c>value</c> keyword reference.

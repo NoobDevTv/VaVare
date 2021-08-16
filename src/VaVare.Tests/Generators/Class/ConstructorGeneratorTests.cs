@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-using Testura.Code.Generators.Class;
-using Testura.Code.Generators.Common;
-using Testura.Code.Generators.Common.Arguments.ArgumentTypes;
-using Testura.Code.Models;
-using Attribute = Testura.Code.Models.Attribute;
+using VaVare.Generators.Class;
+using VaVare.Generators.Common;
+using VaVare.Generators.Common.Arguments.ArgumentTypes;
+using VaVare.Models;
+using Attribute = VaVare.Models.Attribute;
 
-namespace Testura.Code.Tests.Generators.Class
+namespace VaVare.Tests.Generators.Class
 {
     [TestFixture]
     public class ConstructorGeneratorTests

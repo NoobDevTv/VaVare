@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using Testura.Code.Generators.Common;
-using Testura.Code.Models;
+using VaVare.Generators.Common;
+using VaVare.Models;
 
-namespace Testura.Code.Tests.Generators.Common
+namespace VaVare.Tests.Generators.Common
 {
     [TestFixture]
     public class ParameterGeneratorTests

@@ -2,7 +2,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Testura.Code.Builders.BuildMembers
+namespace VaVare.Builders.BuildMembers
 {
     public class FieldBuildMember : IBuildMember
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Testura.Code.Models
+namespace VaVare.Models
 {
     /// <summary>
     /// Represent a enum member.

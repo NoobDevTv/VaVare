@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-using Testura.Code.Generators.Common;
-using Testura.Code.Generators.Common.Arguments.ArgumentTypes;
-using Testura.Code.Models.References;
+using VaVare.Generators.Common;
+using VaVare.Generators.Common.Arguments.ArgumentTypes;
+using VaVare.Models.References;
 using Assert = NUnit.Framework.Assert;
-using IArgument = Testura.Code.Generators.Common.Arguments.ArgumentTypes.IArgument;
+using IArgument = VaVare.Generators.Common.Arguments.ArgumentTypes.IArgument;
 
-namespace Testura.Code.Tests.Generators.Common.References
+namespace VaVare.Tests.Generators.Common.References
 {
     [TestFixture]
     public class ReferenceGeneratorTests

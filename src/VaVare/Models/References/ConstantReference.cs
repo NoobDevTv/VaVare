@@ -1,8 +1,8 @@
 ﻿using System;
-using Testura.Code.Extensions;
+using VaVare.Extensions;
 #pragma warning disable 1591
 
-namespace Testura.Code.Models.References
+namespace VaVare.Models.References
 {
     /// <summary>
     /// Represent the reference to a contant value.

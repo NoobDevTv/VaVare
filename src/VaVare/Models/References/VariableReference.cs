@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Testura.Code.Models.References
+namespace VaVare.Models.References
 {
     /// <summary>
     /// The reference classes are used to simplify call to methods, fields, properties etc.

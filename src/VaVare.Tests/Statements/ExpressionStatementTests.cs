@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using Testura.Code.Generators.Common.Arguments.ArgumentTypes;
-using Testura.Code.Generators.Common.BinaryExpressions;
-using Testura.Code.Models.References;
-using Testura.Code.Statements;
+using VaVare.Generators.Common.Arguments.ArgumentTypes;
+using VaVare.Generators.Common.BinaryExpressions;
+using VaVare.Models.References;
+using VaVare.Statements;
 
-namespace Testura.Code.Tests.Statements
+namespace VaVare.Tests.Statements
 {
     [TestFixture]
     public class ExpressionStatementTests

@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Testura.Code.Generators.Common
+namespace VaVare.Generators.Common
 {
     /// <summary>
     /// Provides the functionality to generate body/block.

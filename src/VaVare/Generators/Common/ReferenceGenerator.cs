@@ -2,10 +2,10 @@
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Models.References;
+using VaVare.Models.References;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace Testura.Code.Generators.Common
+namespace VaVare.Generators.Common
 {
     /// <summary>
     /// Provides the functionality to generate references and reference chains. Example of generated code: "<c>test</c>", "<c>test.MyMethod()</c>".

@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Testura.Code.Extensions
+namespace VaVare.Extensions
 {
     public static class StatementSyntaxExtensions
     {

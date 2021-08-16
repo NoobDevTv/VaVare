@@ -2,7 +2,7 @@
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 #pragma warning disable 1591
 
-namespace Testura.Code.Generators.Common.Arguments.ArgumentTypes
+namespace VaVare.Generators.Common.Arguments.ArgumentTypes
 {
     /// <summary>
     /// Provides the base class from which the classes that represent argument derived.

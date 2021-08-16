@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace Testura.Code.Generators.Common.BinaryExpressions
+namespace VaVare.Generators.Common.BinaryExpressions
 {
     /// <summary>
     /// Provides the functionality to generate a binary expression with an and (<c>&amp;&amp;</c>).

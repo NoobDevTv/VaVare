@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp.Formatting;
 using NUnit.Framework;
-using Testura.Code.Builders;
-using Testura.Code.Models.Options;
-using Testura.Code.Saver;
+using VaVare.Builders;
+using VaVare.Models.Options;
+using VaVare.Saver;
 
-namespace Testura.Code.Tests.Saver
+namespace VaVare.Tests.Saver
 {
     [TestFixture]
     public class CodeSaverTests

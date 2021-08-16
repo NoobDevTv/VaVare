@@ -1,8 +1,8 @@
 ﻿using System;
-using Testura.Code.Util.TypeNameFormatting;
+using VaVare.Util.TypeNameFormatting;
 #pragma warning disable 1591
 
-namespace Testura.Code.Extensions.Naming
+namespace VaVare.Extensions.Naming
 {
     public static class TypeNamingExtensions
     {

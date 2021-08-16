@@ -4,10 +4,10 @@ using System.IO;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Formatting;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Models.Options;
+using VaVare.Models.Options;
 using Formatter = Microsoft.CodeAnalysis.Formatting.Formatter;
 
-namespace Testura.Code.Saver
+namespace VaVare.Saver
 {
     /// <summary>
     /// Provides the functionality to save code to file or string.

@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 #pragma warning disable 1591
 
-namespace Testura.Code.Generators.Common.Arguments.ArgumentTypes
+namespace VaVare.Generators.Common.Arguments.ArgumentTypes
 {
     /// <summary>
     /// Provides the functionality to generate lambda arguments. Example of generated code: <c>(n=>MyMethod())</c>

@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Emit;
 using Microsoft.CodeAnalysis.Text;
 
-namespace Testura.Code.Compilations
+namespace VaVare.Compilations
 {
     /// <summary>
     /// Provides functionality to compile in memory or to file.

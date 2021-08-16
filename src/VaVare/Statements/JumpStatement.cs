@@ -1,11 +1,11 @@
 ﻿using System;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Generators.Common;
-using Testura.Code.Models.References;
+using VaVare.Generators.Common;
+using VaVare.Models.References;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace Testura.Code.Statements
+namespace VaVare.Statements
 {
     /// <summary>
     /// Used to generate jump statements (for example return).

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using NUnit.Framework;
-using Testura.Code.Generators.Common.Arguments.ArgumentTypes;
-using Testura.Code.Models.Types;
+using VaVare.Generators.Common.Arguments.ArgumentTypes;
+using VaVare.Models.Types;
 
-namespace Testura.Code.Tests.Generators.Common.Arguments.ArgumentTypes
+namespace VaVare.Tests.Generators.Common.Arguments.ArgumentTypes
 {
     [TestFixture]
     public class ObjectInitializationArgumentTests

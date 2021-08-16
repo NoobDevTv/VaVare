@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
-using Testura.Code.Models;
+using VaVare.Models;
 #pragma warning disable 1591
 
-namespace Testura.Code.Extensions.Reflection
+namespace VaVare.Extensions.Reflection
 {
     public static class ParameterInfoExtensions
     {

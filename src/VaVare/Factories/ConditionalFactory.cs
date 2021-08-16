@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace Testura.Code.Factories
+namespace VaVare.Factories
 {
     internal static class ConditionalFactory
     {

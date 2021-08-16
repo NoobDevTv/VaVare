@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-using Testura.Code.Generators.Common;
-using Testura.Code.Models;
-using Attribute = Testura.Code.Models.Attribute;
+using VaVare.Generators.Common;
+using VaVare.Models;
+using Attribute = VaVare.Models.Attribute;
 
-namespace Testura.Code.Tests.Generators.Common
+namespace VaVare.Tests.Generators.Common
 {
     [TestFixture]
     public class EnumGeneratorTests

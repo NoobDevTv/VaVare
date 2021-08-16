@@ -1,6 +1,6 @@
 ﻿using Microsoft.CodeAnalysis.Options;
 
-namespace Testura.Code.Models.Options
+namespace VaVare.Models.Options
 {
     /// <summary>
     /// Represent the formattion options when saving generated code.

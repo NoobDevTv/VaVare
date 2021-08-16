@@ -4,15 +4,15 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Builders.BuildMembers;
-using Testura.Code.Generators.Class;
-using Testura.Code.Generators.Common;
-using Testura.Code.Generators.Special;
-using Testura.Code.Models.Properties;
-using Attribute = Testura.Code.Models.Attribute;
+using VaVare.Builders.BuildMembers;
+using VaVare.Generators.Class;
+using VaVare.Generators.Common;
+using VaVare.Generators.Special;
+using VaVare.Models.Properties;
+using Attribute = VaVare.Models.Attribute;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace Testura.Code.Builders.Base
+namespace VaVare.Builders.Base
 {
     public abstract class TypeBuilderBase<TBuilder> : BuilderBase<TBuilder>
         where TBuilder : TypeBuilderBase<TBuilder>

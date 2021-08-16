@@ -1,9 +1,9 @@
 ﻿using NUnit.Framework;
-using Testura.Code.Models.References;
-using Testura.Code.Statements;
+using VaVare.Models.References;
+using VaVare.Statements;
 using Assert = NUnit.Framework.Assert;
 
-namespace Testura.Code.Tests.Statements
+namespace VaVare.Tests.Statements
 {
     [TestFixture]
     public class JumpStatementTests

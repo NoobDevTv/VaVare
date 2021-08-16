@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Testura.Code.Compilations
+namespace VaVare.Compilations
 {
     /// <summary>
     /// Represent the result after a compilation

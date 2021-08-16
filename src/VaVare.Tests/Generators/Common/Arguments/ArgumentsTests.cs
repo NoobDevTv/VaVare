@@ -1,9 +1,9 @@
 ﻿using NUnit.Framework;
-using Testura.Code.Generators.Common;
-using Testura.Code.Generators.Common.Arguments.ArgumentTypes;
+using VaVare.Generators.Common;
+using VaVare.Generators.Common.Arguments.ArgumentTypes;
 using Assert = NUnit.Framework.Assert;
 
-namespace Testura.Code.Tests.Generators.Common.Arguments
+namespace VaVare.Tests.Generators.Common.Arguments
 {
     [TestFixture]
     public class ArgumentsTests

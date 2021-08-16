@@ -1,11 +1,11 @@
 ﻿using System;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Factories;
-using Testura.Code.Generators.Common.Arguments.ArgumentTypes;
-using Testura.Code.Generators.Common.BinaryExpressions;
+using VaVare.Factories;
+using VaVare.Generators.Common.Arguments.ArgumentTypes;
+using VaVare.Generators.Common.BinaryExpressions;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace Testura.Code.Statements
+namespace VaVare.Statements
 {
     /// <summary>
     /// Provides the functionality to generate selection statements.

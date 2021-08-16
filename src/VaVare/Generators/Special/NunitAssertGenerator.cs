@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Testura.Code.Generators.Common.Arguments.ArgumentTypes;
-using Testura.Code.Models.References;
-using Testura.Code.Statements;
+using VaVare.Generators.Common.Arguments.ArgumentTypes;
+using VaVare.Models.References;
+using VaVare.Statements;
 
-namespace Testura.Code.Generators.Special
+namespace VaVare.Generators.Special
 {
     /// <summary>
     /// Provides the functionality to generate Nunit asserts.

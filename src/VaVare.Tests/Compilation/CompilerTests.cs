@@ -2,10 +2,10 @@
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using NUnit.Framework;
-using Testura.Code.Builders;
-using Testura.Code.Compilations;
+using VaVare.Builders;
+using VaVare.Compilations;
 
-namespace Testura.Code.Tests.Compilation
+namespace VaVare.Tests.Compilation
 {
     [TestFixture]
     public class CompilerTests

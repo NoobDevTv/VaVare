@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Testura.Code.Util.TypeNameFormatting
+namespace VaVare.Util.TypeNameFormatting
 {
     internal static class ValueTypeNameFormatting
     {

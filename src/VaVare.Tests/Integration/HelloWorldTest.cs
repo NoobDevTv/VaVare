@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-using Testura.Code.Builders;
-using Testura.Code.Generators.Common;
-using Testura.Code.Generators.Common.Arguments.ArgumentTypes;
-using Testura.Code.Models;
-using Testura.Code.Statements;
+using VaVare.Builders;
+using VaVare.Generators.Common;
+using VaVare.Generators.Common.Arguments.ArgumentTypes;
+using VaVare.Models;
+using VaVare.Statements;
 
-namespace Testura.Code.Tests.Integration
+namespace VaVare.Tests.Integration
 {
     [TestFixture]
     public class HelloWorldTest

@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
-using Testura.Code.Extensions.Naming;
+using VaVare.Extensions.Naming;
 
-namespace Testura.Code.Tests.Extensions.Naming
+namespace VaVare.Tests.Extensions.Naming
 {
     [TestFixture]
     public class StringNamingExtensionsTests

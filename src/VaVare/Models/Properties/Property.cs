@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Testura.Code.Models.Properties
+namespace VaVare.Models.Properties
 {
     /// <summary>
     /// Provides the base class from which classes that represent properties are derived.

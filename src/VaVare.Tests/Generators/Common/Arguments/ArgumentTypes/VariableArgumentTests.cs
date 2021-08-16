@@ -1,8 +1,8 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 using NUnit.Framework;
-using Testura.Code.Generators.Common.Arguments.ArgumentTypes;
+using VaVare.Generators.Common.Arguments.ArgumentTypes;
 
-namespace Testura.Code.Tests.Generators.Common.Arguments.ArgumentTypes
+namespace VaVare.Tests.Generators.Common.Arguments.ArgumentTypes
 {
     [TestFixture]
     public class VariableArgumentTests
