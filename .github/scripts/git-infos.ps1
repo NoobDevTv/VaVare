@@ -16,6 +16,10 @@ $length = $selection.Length
 Write-Host "Select $length files"
 $paths = $selection | Select-Object Path
 
+Write-Host "fetch current repo"
+git fetch
+Write-Host "-----------------------------"
+
 Write-Host "get current branch"
 $branch = git branch --show-current
 Write-Host $branch
