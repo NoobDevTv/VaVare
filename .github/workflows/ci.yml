@@ -25,11 +25,11 @@ jobs:
         with:
           fetch-depth: 0 #to ensure to retrive everything for version lookup
           
-      # # Setup powershell
-      # - name: Setup powershell
-      #   run: |
-      #     chmod +x ./.github/scripts/install-powershell.sh
-      #     sh ./.github/scripts/install-powershell.sh
+      # Setup powershell
+      - name: Setup powershell
+        run: |
+          chmod +x ./.github/scripts/install-powershell.sh
+          sh ./.github/scripts/install-powershell.sh
 
       # setup dotnet with dotnet core 3.1
       - name: Setup .NET Core
