@@ -41,6 +41,10 @@ jobs:
         with:
           dotnet-version: '5.0.x' # SDK Version to use.
 
+      # Parse lit git templates
+      - name: Set GitInfo placeholder
+        run: pwsh ./.github/scripts/git-infos.ps1 -path './*'
+        
       # Set version suffix
       - name: Set Version SUFFIX for Release
         if: github.ref == 'refs/heads/productive' 
