@@ -23,7 +23,7 @@ namespace VaVare.Models.Properties
             string name,
             Type type,
             PropertyTypes propertyType,
-            IEnumerable<Code.Modifiers> modifiers = null,
+            IEnumerable<Modifiers> modifiers = null,
             IEnumerable<Attribute> attributes = null,
             IEnumerable<Modifiers> getModifiers = null,
             IEnumerable<Modifiers> setModifiers = null,
