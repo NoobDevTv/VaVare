@@ -1,10 +1,11 @@
 <Project>
     <!-- !#USE_LitGit -->
     <PropertyGroup>
-        <Version>${VERSION}${SUFFIX}</Version>
+        <Version>${VERSION_SHORT_BUILD}${SUFFIX}</Version>
+        <AssemblyVersion>${VERSION_LONG}</AssemblyVersion>
         <Authors>${AUTHORS}</Authors>
         <Copyright>${COPYRIGHT}</Copyright>
-        <Company>NoobDevTv</Company>
+        <Company>${COMPANY}</Company>
         <Title>${TITLE}</Title>
         <Description>${DESCRIPTION}</Description>
         <PackageReleaseNotes>
