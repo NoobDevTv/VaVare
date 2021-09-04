@@ -44,19 +44,19 @@ jobs:
       # Set version suffix
       - name: Set Version SUFFIX for Release
         if: github.ref == 'refs/heads/productive' 
-        run: pwsh ./.github/scripts/replace.ps1 -path * -placeholder SUFFIX -value ''
+        run: pwsh ./.github/scripts/replace.ps1 -path './*' -placeholder SUFFIX -value ''
 
       - name: Set Version SUFFIX for BETA build
         if: github.ref == 'refs/heads/deploy'
-        run: pwsh ./.github/scripts/replace.ps1 -path * -placeholder SUFFIX -value '-beta'
+        run: pwsh ./.github/scripts/replace.ps1 -path './*' -placeholder SUFFIX -value '-beta'
 
       - name: Set Version SUFFIX for ALPHA build
         if: github.ref != 'refs/heads/productive' && github.ref != 'refs/heads/deploy' 
-        run: pwsh ./.github/scripts/replace.ps1 -path * -placeholder SUFFIX -value '-alpha'
+        run: pwsh ./.github/scripts/replace.ps1 -path './*' -placeholder SUFFIX -value '-alpha'
       
       # Parse lit git templates
       - name: LitGit parse templates
-        run: pwsh ./.github/scripts/parse-template.ps1 -path * -litgit ./.github/LitGit/LitGit.ps1 -config ./.github/configs/VaVare.nuspec.config
+        run: pwsh ./.github/scripts/parse-template.ps1 -path './*' -litgit ./.github/LitGit/LitGit.ps1 -config ./.github/configs/VaVare.nuspec.config
         
       # Restore all dependecies
       - name: Restore dependencies
@@ -73,7 +73,7 @@ jobs:
       # Create nupkg
       - name: Pack extension
         if: github.event_name == 'push'
-        run: pwsh -File ./.github/scripts/pack-files.ps1 -path *
+        run: pwsh -File ./.github/scripts/pack-files.ps1 -path './*'
       
       # Setup Nuget
       - name: Setup NuGet.exe
