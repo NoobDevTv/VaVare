@@ -25,12 +25,6 @@ jobs:
         with:
           fetch-depth: 0 #to ensure to retrive everything for version lookup
           
-      # Setup powershell
-      - name: Setup powershell
-        run: |
-          chmod +x ./.github/scripts/install-powershell.sh
-          sh ./.github/scripts/install-powershell.sh
-
       # setup dotnet with dotnet core 3.1
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
@@ -46,15 +40,15 @@ jobs:
       # Set version suffix
       - name: Set Version SUFFIX for Release
         if: github.ref == 'refs/heads/productive' 
-        run: pwsh Get-Content -Path './.github/configs/VaVare.nuspec.config' | -replace '{{SUFFIX}}', '' | Set-Content './.github/configs/VaVare.nuspec.config'
+        run: pwsh -Command { Get-Content -Path './.github/configs/VaVare.nuspec.config' | -replace '{{SUFFIX}}', '' | Set-Content './.github/configs/VaVare.nuspec.config'}
 
       - name: Set Version SUFFIX for Alpha build
         if: github.ref == 'refs/heads/deploy'
-        run: pwsh Get-Content -Path './.github/configs/VaVare.nuspec.config' | -replace '{{SUFFIX}}', '-beta' | Set-Content './.github/configs/VaVare.nuspec.config'
+        run: pwsh -Command { Get-Content -Path './.github/configs/VaVare.nuspec.config' | -replace '{{SUFFIX}}', '-beta' | Set-Content './.github/configs/VaVare.nuspec.config'}
 
       - name: Set Version SUFFIX for Alpha build
         if: github.ref != 'refs/heads/productive' && github.ref != 'refs/heads/deploy' 
-        run: pwsh Get-Content -Path './.github/configs/VaVare.nuspec.config' | -replace '{{SUFFIX}}', '-alpha' | Set-Content './.github/configs/VaVare.nuspec.config'
+        run: pwsh -Command { Get-Content -Path './.github/configs/VaVare.nuspec.config' | -replace '{{SUFFIX}}', '-alpha' | Set-Content './.github/configs/VaVare.nuspec.config'}
       
       # Parse lit git templates
       - name: LitGit parse templates
@@ -76,15 +70,11 @@ jobs:
       # Create nupkg
       - name: Pack extension
         if: github.event_name == 'push'
-        run: dotnet pack ./NonSucking.Framework.Extension/NonSucking.Framework.Extension.csproj -c Release --no-build 
-
-      - name: Pack RX extension
-        if: github.event_name == 'push'
-        run: dotnet pack ./NonSucking.Framework.Extension.Rx/NonSucking.Framework.Extension.Rx.csproj -c Release --no-build 
+        run: pwsh -File ./.github/scripts/pack-files.ps1 -path *
       
       # Setup Nuget
       - name: Setup NuGet.exe
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/productive' || github.ref == 'refs/heads/deploy' || github.ref == 'refs/heads/stable' )
         # You may pin to the exact commit or the version.
         # uses: NuGet/setup-nuget@04b0c2b8d1b97922f67eca497d7cf0bf17b8ffe1
         uses: NuGet/setup-nuget@v1.0.5
@@ -98,5 +88,5 @@ jobs:
 
       # Push nuget packages
       - name: Publish packages
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/productive' || github.ref == 'refs/heads/deploy' || github.ref == 'refs/heads/stable' )
         run: nuget push "**/*.nupkg" -src https://api.nuget.org/v3/index.json

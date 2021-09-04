@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+<!-- #NUGET# -->
 <Import Project="$(MSBuildThisFileDirectory)\VaVare.props" Condition="'$(Configuration)'=='Release'"/>
   <PropertyGroup>   
     <NoWarn>$(NoWarn);NU5048</NoWarn>
