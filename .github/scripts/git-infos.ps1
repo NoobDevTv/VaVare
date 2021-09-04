@@ -21,13 +21,13 @@ git fetch
 Write-Host "-----------------------------"
 
 Write-Host "get current branch"
-$branch = git branch --show-current
-Write-Host $branch
+$current_branch = git branch --show-current
+Write-Host $current_branch
 Write-Host "-----------------------------"
 
 Write-Host "get commit count"
-$num = git rev-list --count $branch
-Write-Host $num
+$count = git rev-list --count HEAD
+Write-Host $count
 Write-Host "-----------------------------"
 
 Write-Host "get current hash"
@@ -45,8 +45,8 @@ $paths | ForEach-Object {
     $p = $_.Path;
     Write-Host "Replace Git placeholder in $p"
     $fileContent = Get-Content $_.Path
-    $fileContent = $fileContent -replace "{{BRANCH}}", $branch
-    $fileContent = $fileContent -replace "{{COMMIT_COUNT}}", $num
+    $fileContent = $fileContent -replace "{{BRANCH}}", $current_branch
+    $fileContent = $fileContent -replace "{{COMMIT_COUNT}}", $count
     $fileContent = $fileContent -replace "{{COMMIT_HASH}}", $longHash
     $fileContent = $fileContent -replace "{{COMMIT_HASH_SHORT}}", $shortHash
     $fileContent | Set-Content $_.Path
