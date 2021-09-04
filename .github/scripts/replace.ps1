@@ -11,8 +11,7 @@ Write-Host "Use $name"
 $childItems = Get-ChildItem -Recurse -Path $path
 $length = $childItems.Length
 Write-Host "Found $length files"
-Write-Host ($childItems | Select-String $enable -List)
-$selection = $childItems | Select-String $enable -List
+$selection = $childItems | Select-String -Pattern $enable -List
 $length = $selection.Length
 Write-Host "Select $length files"
 $paths = $selection | Select-Object Path
