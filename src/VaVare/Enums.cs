@@ -1,4 +1,6 @@
-﻿namespace VaVare
+﻿using System;
+
+namespace VaVare
 {
     /// <summary>
     /// Describes all possible conditional statements.
@@ -196,18 +198,7 @@
         /// </summary>
         Multiply,
     }
-
-    internal enum AssertType
-    {
-        AreEqual,
-        AreNotEqual,
-        IsTrue,
-        IsFalse,
-        Contains,
-        AreSame,
-        AreNotSame,
-    }
-
+    
     public enum ConstructorInitializerTypes
     {
         /// <summary>
@@ -249,5 +240,16 @@
         LessThanOrEqual,
         Increment,
         Decrement,
+    }
+
+    internal enum AssertType
+    {
+        AreEqual,
+        AreNotEqual,
+        IsTrue,
+        IsFalse,
+        Contains,
+        AreSame,
+        AreNotSame,
     }
 }
