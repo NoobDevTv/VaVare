@@ -52,7 +52,6 @@ jobs:
       
       # Parse lit git templates
       - name: LitGit parse templates
-        if: github.event_name == 'push' # Not required because we don't publish packages on PR's and other branches
         run: ./.github/LitGit/LitGit -c ./.github/configs/VaVare.nuspec.config -s ./ 
         
       # Restore all dependecies
