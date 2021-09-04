@@ -11,6 +11,13 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
     /// </summary>
     public class ValueArgument : Argument
     {
+        private readonly IdentifierNameSyntax identifierName;
+
+        /// <summary>
+        /// Gets the value sent in as an argument.
+        /// </summary>
+        public object Value { get; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ValueArgument"/> class.
         /// </summary>
@@ -30,6 +37,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
             }
 
             Value = value;
+            identifierName = CreateIdentifierNameSyntax(value);
         }
 
         /// <summary>
@@ -38,7 +46,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
         /// <param name="value">String value to send in as an argument.</param>
         /// <param name="stringType">The type of string.</param>
         /// <param name="namedArgument">Specificy the argument for a partical parameter.</param>
-        [Obsolete("Please use the ctor with the boolean parameter instead")]
+        [Obsolete($"Please use {nameof(StringValueArgument)} instead")]
         public ValueArgument(string value, StringType stringType = StringType.Normal, string namedArgument = null)
             : this(value, true, stringType, namedArgument)
         {
@@ -51,6 +59,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
         /// <param name="escapeValueAsString">If <see langword="true"/>, inverted commas are added to the <paramref name="value"/></param>
         /// <param name="stringType">The type of string.</param>
         /// <param name="namedArgument">Specificy the argument for a partical parameter.</param>
+        [Obsolete($"Please use {nameof(StringValueArgument)} instead")]
         public ValueArgument(string value, bool escapeValueAsString, StringType stringType = StringType.Normal, string namedArgument = null)
             : base(namedArgument)
         {
@@ -67,21 +76,28 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
             {
                 Value = value;
             }
+
+            identifierName = CreateIdentifierNameSyntax(value);
         }
 
-        /// <summary>
-        /// Gets the value sent in as an argument.
-        /// </summary>
-        public object Value { get; }
+        protected override ArgumentSyntax CreateArgumentSyntax() 
+            => SyntaxFactory.Argument(identifierName);
 
-        protected override ArgumentSyntax CreateArgumentSyntax()
+        public static ValueArgument Parse(string value)
+            => new ValueArgument(value, false);
+        public static ValueArgument Parse(string value, string namedArgument)
+            => new ValueArgument(value, false, namedArgument: namedArgument);
+
+        private static IdentifierNameSyntax CreateIdentifierNameSyntax(object value)
         {
-            if (Value is bool)
+            var name = value.ToString();
+
+            if(value is bool)
             {
-                return SyntaxFactory.Argument(SyntaxFactory.IdentifierName(Value.ToString().ToLower()));
+                name = name.ToLower();
             }
 
-            return SyntaxFactory.Argument(SyntaxFactory.IdentifierName(Value.ToString()));
+            return SyntaxFactory.IdentifierName(name);
         }
     }
 }
