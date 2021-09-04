@@ -8,14 +8,17 @@ $name = "LitGit"
 $enable = "!#USE_$name"
 Write-Host "Use $name"
 
-$childItems = Get-ChildItem -Recurse -Path $path -Include *.csproj
-Write-Host "Found $childItems.Length files"
+$childItems = Get-ChildItem -Recurse -Path $path
+$length = $childItems.Length
+Write-Host "Found $length files"
 $selection = $childItems | Select-String $enable -List
-Write-Host "Select $selection.Length files"
+$length = $selection.Length
+Write-Host "Select $length files"
 $paths = $selection | Select-Object Path
 
-Write-Host "Execute for "
+Write-Host "Execute"
 $paths | ForEach-Object {    
-    Write-Host "Parse template $_.Path"
+    $p = $_.Path;
+    Write-Host "Parse template $p"
     & $litgit -c $config -t $_.Path
 }

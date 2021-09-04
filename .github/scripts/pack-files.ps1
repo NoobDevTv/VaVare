@@ -9,13 +9,16 @@ $enable = "!#USE_$name"
 Write-Host "Use $name"
 
 $childItems = Get-ChildItem -Recurse -Path $path -Include *.csproj
-Write-Host "Found $childItems.Length files"
+$length = $childItems.Length
+Write-Host "Found $length files"
 $selection = $childItems | Select-String $enable -List
-Write-Host "Select $selection.Length files"
+$length = $selection.Length
+Write-Host "Select $length files"
 $paths = $selection | Select-Object Path
 
-Write-Host "Execute for "
+Write-Host "Execute"
 $paths | ForEach-Object {    
-    Write-Host "Pack Project" $_.Path
+    $p = $_.Path;
+    Write-Host "Pack Project $p" 
     dotnet pack $_.Path -c Release --no-build 
 }
