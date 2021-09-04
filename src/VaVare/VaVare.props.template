@@ -1,7 +1,7 @@
 <Project>
     <!-- !#USE_LitGit -->
     <PropertyGroup>
-        <Version>${VERSION_SHORT_BUILD}${SUFFIX}</Version>
+        <Version>${$VERSION_LONG}${SUFFIX}</Version>
         <AssemblyVersion>${VERSION_LONG}</AssemblyVersion>
         <Authors>${AUTHORS}</Authors>
         <Copyright>${COPYRIGHT}</Copyright>
@@ -17,7 +17,7 @@
         <PackageTags>
         ${TAGS}
         </PackageTags>
-        <PackageIconUrl>${ICON_URL}</PackageIconUrl>
+        <!-- <PackageIconUrl>${ICON_URL}</PackageIconUrl> -->
         <RepositoryUrl>${REPO_URL}</RepositoryUrl>
         <PackageProjectUrl>$(RepositoryUrl)</PackageProjectUrl>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
