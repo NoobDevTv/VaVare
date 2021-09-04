@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 <!-- !#USE_Nuget -->
-<Import Project="$(MSBuildThisFileDirectory)\VaVare.props" Condition="'$(Configuration)'=='Release'" />
+<Import Project="$(MSBuildThisFileDirectory)VaVare.props" Condition="'$(Configuration)'=='Release'" />
   <PropertyGroup>   
     <NoWarn>$(NoWarn);NU5048</NoWarn>
     <CodeAnalysisRuleSet>Settings\Testura.ruleset</CodeAnalysisRuleSet>
