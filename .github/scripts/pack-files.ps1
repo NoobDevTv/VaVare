@@ -8,6 +8,3 @@ Get-ChildItem -Recurse -Path $path -Include *.csproj | Select-String "#NUGET#" -
     Write-Host "Pack Project" $_.Path
     dotnet pack $_.Path -c Release --no-build 
 }
-
-
-
