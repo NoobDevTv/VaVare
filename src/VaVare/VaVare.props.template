@@ -1,4 +1,5 @@
 <Project>
+    <!-- !#USE_LitGit -->
     <PropertyGroup>
         <Version>${VERSION}${SUFFIX}</Version>
         <Authors>${AUTHORS}</Authors>

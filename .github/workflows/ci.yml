@@ -52,7 +52,7 @@ jobs:
       
       # Parse lit git templates
       - name: LitGit parse templates
-        run: pwsh ./.github/LitGit/LitGit.ps1 -c ./.github/configs/VaVare.nuspec.config -s ./ 
+        run: pwsh ./.github/scripts/parse-template.ps1 -path * -litgit ./.github/LitGit/LitGit.ps1 -config ./.github/configs/VaVare.nuspec.config
         
       # Restore all dependecies
       - name: Restore dependencies
