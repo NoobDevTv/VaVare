@@ -24,6 +24,12 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0 #to ensure to retrive everything for version lookup
+          
+      # # Setup powershell
+      # - name: Setup powershell
+      #   run: |
+      #     chmod +x ./.github/scripts/install-powershell.sh
+      #     sh ./.github/scripts/install-powershell.sh
 
       # setup dotnet with dotnet core 3.1
       - name: Setup .NET Core
@@ -36,6 +42,19 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '5.0.x' # SDK Version to use.
+
+      # Set version suffix
+      - name: Set Version SUFFIX for Release
+        if: github.ref == 'refs/heads/productive' 
+        run: pwsh Get-Content -Path './.github/configs/VaVare.nuspec.config' | -replace '{{SUFFIX}}', '' | Set-Content './.github/configs/VaVare.nuspec.config'
+
+      - name: Set Version SUFFIX for Alpha build
+        if: github.ref == 'refs/heads/deploy'
+        run: pwsh Get-Content -Path './.github/configs/VaVare.nuspec.config' | -replace '{{SUFFIX}}', '-beta' | Set-Content './.github/configs/VaVare.nuspec.config'
+
+      - name: Set Version SUFFIX for Alpha build
+        if: github.ref != 'refs/heads/productive' && github.ref != 'refs/heads/deploy' 
+        run: pwsh Get-Content -Path './.github/configs/VaVare.nuspec.config' | -replace '{{SUFFIX}}', '-alpha' | Set-Content './.github/configs/VaVare.nuspec.config'
       
       # Parse lit git templates
       - name: LitGit parse templates

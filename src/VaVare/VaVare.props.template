@@ -1,6 +1,6 @@
 <Project>
     <PropertyGroup>
-        <Version>${VERSION}</Version>
+        <Version>${VERSION}${SUFFIX}</Version>
         <Authors>${AUTHORS}</Authors>
         <Copyright>${COPYRIGHT}</Copyright>
         <Company>NoobDevTv</Company>
