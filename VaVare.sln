@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29318.209
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VaVare", "src\VaVare\VaVare.csproj", "{00B9050D-ECCE-45CE-851C-A88BECB912E8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VaVareTests", "src\VaVare.Tests\VaVareTests.csproj", "{84491222-6C36-4FA7-BBAE-1FA804129151}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VaVare.Tests", "src\VaVare.Tests\VaVare.Tests.csproj", "{84491222-6C36-4FA7-BBAE-1FA804129151}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

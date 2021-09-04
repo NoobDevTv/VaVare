@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
@@ -26,8 +27,17 @@ namespace VaVare.Compilations
         /// <param name="runtimeDirectory">Path to the .NET framework directory.</param>
         public Compiler(string[] referencedAssemblies = null, string runtimeDirectory = null)
         {
-            _referencedAssemblies = referencedAssemblies ?? new string[0];
-            _runtimeDirectory = runtimeDirectory ?? @"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\";
+            _referencedAssemblies = referencedAssemblies ?? Array.Empty<string>();
+
+            if (runtimeDirectory is null)
+            {
+                var file = new FileInfo(Assembly.GetAssembly(typeof(object)).Location);
+                runtimeDirectory = file.Directory.FullName;
+            }
+
+            _runtimeDirectory
+                = runtimeDirectory ?? throw new ArgumentException("Can not find any runtime", nameof(runtimeDirectory));
+
             _defaultNamespaces = new[]
             {
                 "System",
@@ -36,7 +46,7 @@ namespace VaVare.Compilations
                 "System.Linq",
                 "System.Text",
                 "System.Text.RegularExpressions",
-                "System.Collections.Generic"
+                "System.Collections.Generic",
             };
         }
 
@@ -162,6 +172,7 @@ namespace VaVare.Compilations
             metaData.Add(MetadataReference.CreateFromFile(Path.Combine(_runtimeDirectory, "mscorlib.dll")));
             metaData.Add(MetadataReference.CreateFromFile(Path.Combine(_runtimeDirectory, "System.dll")));
             metaData.Add(MetadataReference.CreateFromFile(Path.Combine(_runtimeDirectory, "System.Core.dll")));
+            metaData.Add(MetadataReference.CreateFromFile(Assembly.GetAssembly(typeof(object)).Location));
             return metaData;
         }
 

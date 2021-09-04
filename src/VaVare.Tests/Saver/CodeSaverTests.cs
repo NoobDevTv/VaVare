@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp.Formatting;
 using NUnit.Framework;
 using VaVare.Builders;
@@ -21,14 +22,22 @@ namespace VaVare.Tests.Saver
         [Test]
         public void SaveCodeAsString_WhenSavingCodeAsString_ShouldGetString()
         {
+            var expected
+                = "namespace test\r\n{\r\n    public class TestClass\r\n    {\r\n    }\r\n}"
+                .Replace("\r\n", Environment.NewLine);
+
             var code = _coderSaver.SaveCodeAsString(new ClassBuilder("TestClass", "test").Build());
             Assert.IsNotNull(code);
-            Assert.AreEqual("namespace test\r\n{\r\n    public class TestClass\r\n    {\r\n    }\r\n}", code);
+            Assert.AreEqual(expected, code);
         }
 
         [Test]
         public void SaveCodeAsString_WhenSavingCodeAsStringAndOptions_ShouldGetString()
         {
+            var expected
+                = "namespace test\r\n{\r\n    public class TestClass\r\n    {\r\n        void MyMethod() {\r\n        }\r\n    }\r\n}"
+                .Replace("\r\n", Environment.NewLine);
+
             var codeSaver = new CodeSaver(new List<OptionKeyValue> {  new OptionKeyValue(CSharpFormattingOptions.NewLinesForBracesInMethods, false) });
             var code = codeSaver.SaveCodeAsString(
                 new ClassBuilder("TestClass", "test")
@@ -37,7 +46,7 @@ namespace VaVare.Tests.Saver
                         .Build())
                     .Build());
             Assert.IsNotNull(code);
-            Assert.AreEqual("namespace test\r\n{\r\n    public class TestClass\r\n    {\r\n        void MyMethod() {\r\n        }\r\n    }\r\n}", code);
+            Assert.AreEqual(expected, code);
         } 
     }
 }

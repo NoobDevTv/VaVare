@@ -1,0 +1,27 @@
+<Project>
+    <!-- !#USE_LitGit -->
+    <PropertyGroup>
+        <Version>${VERSION_SHORT_BUILD}${SUFFIX}</Version>
+        <AssemblyVersion>${VERSION_LONG}</AssemblyVersion>
+        <Authors>${AUTHORS}</Authors>
+        <Copyright>${COPYRIGHT}</Copyright>
+        <Company>${COMPANY}</Company>
+        <Title>${TITLE}</Title>
+        <Description>${DESCRIPTION}</Description>
+        <PackageReleaseNotes>
+        Release 0.17.0:
+        - Added support for operator overloading
+        - Fixed bug with ThatInheritFrom and multiple types
+
+        </PackageReleaseNotes>
+        <PackageTags>
+        ${TAGS}
+        </PackageTags>
+        <PackageIconUrl>${ICON_URL}</PackageIconUrl>
+        <RepositoryUrl>${REPO_URL}</RepositoryUrl>
+        <PackageProjectUrl>$(RepositoryUrl)</PackageProjectUrl>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <NeutralLanguage>en-US</NeutralLanguage>
+    </PropertyGroup>
+</Project>
