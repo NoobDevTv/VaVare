@@ -1,7 +1,8 @@
 <Project>
     <!-- !#USE_LitGit -->
+    <!-- !#USE_GitInfo -->
     <PropertyGroup>
-        <Version>${$VERSION_LONG}${SUFFIX}</Version>
+        <Version>${VERSION_SHORT_BUILD}.{{COMMIT_COUNT}}${SUFFIX}</Version>
         <AssemblyVersion>${VERSION_LONG}</AssemblyVersion>
         <Authors>${AUTHORS}</Authors>
         <Copyright>${COPYRIGHT}</Copyright>
