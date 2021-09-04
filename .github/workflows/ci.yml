@@ -40,15 +40,15 @@ jobs:
       # Set version suffix
       - name: Set Version SUFFIX for Release
         if: github.ref == 'refs/heads/productive' 
-        run: pwsh -Command { Get-Content -Path './.github/configs/VaVare.nuspec.config' | Replace '{{SUFFIX}}', '' | Set-Content './.github/configs/VaVare.nuspec.config'}
+        run: pwsh ./.github/scripts/replace.ps1 -path * -placeholder SUFFIX -value ''
 
       - name: Set Version SUFFIX for BETA build
         if: github.ref == 'refs/heads/deploy'
-        run: pwsh -Command { Get-Content -Path './.github/configs/VaVare.nuspec.config' | Replace '{{SUFFIX}}', '-beta' | Set-Content './.github/configs/VaVare.nuspec.config'}
+        run: pwsh ./.github/scripts/replace.ps1 -path * -placeholder SUFFIX -value '-beta'
 
       - name: Set Version SUFFIX for ALPHA build
         if: github.ref != 'refs/heads/productive' && github.ref != 'refs/heads/deploy' 
-        run: pwsh -Command { Get-Content -Path './.github/configs/VaVare.nuspec.config' | Replace '{{SUFFIX}}', '-alpha' | Set-Content './.github/configs/VaVare.nuspec.config'}
+        run: pwsh ./.github/scripts/replace.ps1 -path * -placeholder SUFFIX -value '-alpha'
       
       # Parse lit git templates
       - name: LitGit parse templates
