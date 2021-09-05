@@ -3,7 +3,7 @@
     <!-- !#USE_GitInfo -->
     <PropertyGroup>
         <Version>${VERSION_SHORT_BUILD}.{{COMMIT_COUNT}}${SUFFIX}</Version>
-        <AssemblyVersion>${VERSION_LONG}</AssemblyVersion>
+        <AssemblyVersion>${VERSION_SHORT_BUILD}.{{COMMIT_COUNT}}</AssemblyVersion>
         <Authors>${AUTHORS}</Authors>
         <Copyright>${COPYRIGHT}</Copyright>
         <Company>${COMPANY}</Company>
