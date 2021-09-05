@@ -228,16 +228,16 @@ namespace VaVare.Statements
             }
         }
 
-        public LocalDeclarationStatementSyntax DeclareAndAssign(string name, Type type, ExpressionSyntax expressionSyntax, Type castTo = null)
-            => DeclareAndAssign(name, TypeGenerator.Create(type), expressionSyntax, TypeGenerator.Create(castTo));
+        public LocalDeclarationStatementSyntax DeclareAndAssign(string name, ExpressionSyntax expressionSyntax, Type type, Type castTo = null)
+            => DeclareAndAssign(name, expressionSyntax, TypeGenerator.Create(type), TypeGenerator.Create(castTo));
 
         public LocalDeclarationStatementSyntax DeclareAndAssign(string name, ExpressionSyntax expressionSyntax, Type castTo = null)
-            => DeclareAndAssign(name, IdentifierName("var"), expressionSyntax, TypeGenerator.Create(castTo));
+            => DeclareAndAssign(name, expressionSyntax, IdentifierName("var"), TypeGenerator.Create(castTo));
 
         public LocalDeclarationStatementSyntax DeclareAndAssign(string name, ExpressionSyntax expressionSyntax, TypeSyntax castTo = null)
-            => DeclareAndAssign(name, IdentifierName("var"), expressionSyntax, castTo);
+            => DeclareAndAssign(name, expressionSyntax, IdentifierName("var"), castTo);
 
-        public LocalDeclarationStatementSyntax DeclareAndAssign(string name, TypeSyntax type, ExpressionSyntax expressionSyntax, TypeSyntax castTo = null)
+        public LocalDeclarationStatementSyntax DeclareAndAssign(string name, ExpressionSyntax expressionSyntax, TypeSyntax type, TypeSyntax castTo = null)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -350,7 +350,7 @@ namespace VaVare.Statements
         /// <returns>The generated assign declaration syntax.</returns>
         public ExpressionStatementSyntax Assign(string name, ExpressionSyntax expressionSyntax, Type castTo = null)
             => Assign(name, expressionSyntax, TypeGenerator.Create(castTo));
-        public ExpressionStatementSyntax Assign(string name, ExpressionSyntax expressionSyntax, TypeSyntax castTo = null)
+        public ExpressionStatementSyntax Assign(string name, ExpressionSyntax expressionSyntax, TypeSyntax castTo)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -374,7 +374,7 @@ namespace VaVare.Statements
         /// <returns>The generated assign declaration syntax.</returns>
         public ExpressionStatementSyntax Assign(string name, VariableReference reference, Type castTo = null)
             => Assign(name, reference, TypeGenerator.Create(castTo));
-        public ExpressionStatementSyntax Assign(string name, VariableReference reference, TypeSyntax castTo = null)
+        public ExpressionStatementSyntax Assign(string name, VariableReference reference, TypeSyntax castTo)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -398,7 +398,7 @@ namespace VaVare.Statements
         /// <returns>The generated assign declaration syntax.</returns>
         public ExpressionStatementSyntax Assign(VariableReference reference, VariableReference valueReference, Type castTo = null)
             => Assign(reference, valueReference, TypeGenerator.Create(castTo));
-        public ExpressionStatementSyntax Assign(VariableReference reference, VariableReference valueReference, TypeSyntax castTo = null)
+        public ExpressionStatementSyntax Assign(VariableReference reference, VariableReference valueReference, TypeSyntax castTo)
         {
             if (reference == null)
             {
@@ -426,7 +426,7 @@ namespace VaVare.Statements
         /// <returns>The generated assign declaration syntax.</returns>
         public ExpressionStatementSyntax Assign(VariableReference reference, ExpressionSyntax expressionSyntax, Type castTo = null)
             => Assign(reference, expressionSyntax, TypeGenerator.Create(castTo));
-        public ExpressionStatementSyntax Assign(VariableReference reference, ExpressionSyntax expressionSyntax, TypeSyntax castTo = null)
+        public ExpressionStatementSyntax Assign(VariableReference reference, ExpressionSyntax expressionSyntax, TypeSyntax castTo)
         {
             if (reference == null)
             {
