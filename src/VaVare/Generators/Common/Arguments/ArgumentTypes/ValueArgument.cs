@@ -77,7 +77,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
                 Value = value;
             }
 
-            identifierName = CreateIdentifierNameSyntax(value);
+            identifierName = CreateIdentifierNameSyntax(Value);
         }
 
         protected override ArgumentSyntax CreateArgumentSyntax() 
