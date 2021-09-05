@@ -1,4 +1,6 @@
-﻿namespace VaVare
+﻿using System;
+
+namespace VaVare
 {
     /// <summary>
     /// Describes all possible conditional statements.
@@ -33,7 +35,7 @@
         /// <summary>
         /// Generate with a less than or equal conditional statement: <c>"&lt;="</c>.
         /// </summary>
-        LessThanOrEqual
+        LessThanOrEqual,
     }
 
     /// <summary>
@@ -104,7 +106,7 @@
         /// <summary>
         /// Generate with the <c>Protected</c> modifier.
         /// </summary>
-        Protected
+        Protected,
     }
 
     /// <summary>
@@ -130,7 +132,7 @@
         /// <summary>
         /// Generate with the <c>this</c> modifier/keyword.
         /// </summary>
-        This
+        This,
     }
 
     /// <summary>
@@ -146,7 +148,7 @@
         /// <summary>
         /// Generate a auto property with both <c>get</c> and <c>set</c>.
         /// </summary>
-        GetAndSet
+        GetAndSet,
     }
 
     /// <summary>
@@ -162,7 +164,13 @@
         /// <summary>
         /// Generate as a path: <c>@"test"</c>.
         /// </summary>
-        Path
+        [Obsolete("Will be replaced by " + nameof(Verbatim))]
+        Path = Verbatim,
+
+        /// <summary>
+        /// Generate as a verbatim string: <c>@"test"</c>.
+        /// </summary>
+        Verbatim = 1,
     }
 
     /// <summary>
@@ -188,20 +196,9 @@
         /// <summary>
         /// Generate the multiply (<c>*</c>) operator.
         /// </summary>
-        Multiply
+        Multiply,
     }
-
-    internal enum AssertType
-    {
-        AreEqual,
-        AreNotEqual,
-        IsTrue,
-        IsFalse,
-        Contains,
-        AreSame,
-        AreNotSame
-    }
-
+    
     public enum ConstructorInitializerTypes
     {
         /// <summary>
@@ -212,7 +209,7 @@
         /// <summary>
         /// Generate constructor initializer with <c>This</c>
         /// </summary>
-        This
+        This,
     }
 
     public enum CommentPosition
@@ -225,7 +222,7 @@
         /// <summary>
         /// Generate comment to the right of statement.
         /// </summary>
-        Right
+        Right,
     }
 
     public enum Operators
@@ -242,6 +239,17 @@
         LessThan,
         LessThanOrEqual,
         Increment,
-        Decrement
+        Decrement,
+    }
+
+    internal enum AssertType
+    {
+        AreEqual,
+        AreNotEqual,
+        IsTrue,
+        IsFalse,
+        Contains,
+        AreSame,
+        AreNotSame,
     }
 }

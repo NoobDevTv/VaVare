@@ -1,5 +1,5 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using System;
 using VaVare.Generators.Common;
 using VaVare.Generators.Common.BinaryExpressions;
 using VaVare.Models.References;
@@ -41,31 +41,31 @@ namespace VaVare.Tests.Statements
         [Test]
         public void DeclareAndAssign_WhenCreateTypeAndAssignToVariableReference_ShouldAssignToVarible()
         {
-            Assert.AreEqual("vartest=myVariable;", _statement.DeclareAndAssign("test", typeof(int), new VariableReference("myVariable")).ToString());
+            Assert.AreEqual("vartest=myVariable;", _statement.DeclareAndAssign("test", new VariableReference("myVariable")).ToString());
         }
 
         [Test]
         public void DeclareAndAssign_WhenCreateTypeAndAssignToContant_ShouldAssignToVarible()
         {
-            Assert.AreEqual("vartest=1;", _statement.DeclareAndAssign("test", typeof(int), new ConstantReference(1)).ToString());
+            Assert.AreEqual("vartest=1;", _statement.DeclareAndAssign("test", new ConstantReference(1)).ToString());
         }
 
         [Test]
         public void DeclareAndAssign_WhenCreateTypeAndAssignToStringConstant_ShouldAssignToVarible()
         {
-            Assert.AreEqual("vartest=\"1\";", _statement.DeclareAndAssign("test", typeof(int), new ConstantReference("1")).ToString());
+            Assert.AreEqual("vartest=\"1\";", _statement.DeclareAndAssign("test", new ConstantReference("1")).ToString());
         }
 
         [Test]
         public void DeclareAndAssign_WhenCreateTypeAndAssignToStringPathConstant_ShouldAssignToVarible()
         {
-            Assert.AreEqual("vartest=@\"1\";", _statement.DeclareAndAssign("test", typeof(int), new ConstantReference("1", StringType.Path)).ToString());
+            Assert.AreEqual("vartest=@\"1\";", _statement.DeclareAndAssign("test", new ConstantReference("1", StringType.Path)).ToString());
         }
 
         [Test]
         public void DeclareAndAssign_WhenCreateTypeAndAssignToVariableMember_ShouldAssignToVarible()
         {
-            Assert.AreEqual("vartest=var.member;", _statement.DeclareAndAssign("test", typeof(int), new VariableReference("var", new MemberReference("member"))).ToString());
+            Assert.AreEqual("vartest=var.member;", _statement.DeclareAndAssign("test", new VariableReference("var", new MemberReference("member"))).ToString());
         }
 
         [Test]
@@ -77,24 +77,24 @@ namespace VaVare.Tests.Statements
         [Test]
         public void DeclareAndAssign_WhenCreateTypeAndAssignToExpression_ShouldAssignToExpression()
         {
-            Assert.AreEqual("vartest=MyMethod();", _statement.DeclareAndAssign("test", typeof(int), new ExpressionStatement().Invoke("MyMethod").AsExpression()).ToString());
+            Assert.AreEqual("vartest=MyMethod();", _statement.DeclareAndAssign("test", new ExpressionStatement().Invoke("MyMethod").AsExpression()).ToString());
         }
         [Test]
         public void DeclareAndAssign_WhenCreateTypeAndAssignToExpressionAndNotUsingVarKeyword_ShouldAssignToExpressionWithoutVarKeyword()
         {
-            Assert.AreEqual("inttest=MyMethod();", _statement.DeclareAndAssign("test", typeof(int), new ExpressionStatement().Invoke("MyMethod").AsExpression(), useVarKeyword:false).ToString());
+            Assert.AreEqual("inttest=MyMethod();", _statement.DeclareAndAssign("test", typeof(int), new ExpressionStatement().Invoke("MyMethod").AsExpression(), useVarKeyword: false).ToString());
         }
 
         [Test]
         public void DeclareAndAssign_WhenCreateTypeAndAssignToExpressionAndCast_ShouldAssignToExpressionAndCast()
         {
-            Assert.AreEqual("vartest=(int)MyMethod();", _statement.DeclareAndAssign("test", typeof(int), new ExpressionStatement().Invoke("MyMethod").AsExpression(), typeof(int)).ToString());
+            Assert.AreEqual("vartest=(int)MyMethod();", _statement.DeclareAndAssign("test", new ExpressionStatement().Invoke("MyMethod").AsExpression(), TypeGenerator.Create(typeof(int))).ToString());
         }
 
         [Test]
         public void DeclareAndAssign_WhenCreateTypeAndAssignToBinaryExpression_ShouldAssignToExpressionAndCast()
         {
-            Assert.AreEqual("vartest=1+2;", _statement.DeclareAndAssign("test", typeof(int), new MathBinaryExpression(new ConstantReference(1), new ConstantReference(2), MathOperators.Add)).ToString());
+            Assert.AreEqual("vartest=1+2;", _statement.DeclareAndAssign("test", new MathBinaryExpression(new ConstantReference(1), new ConstantReference(2), MathOperators.Add)).ToString());
         }
 
         [Test]

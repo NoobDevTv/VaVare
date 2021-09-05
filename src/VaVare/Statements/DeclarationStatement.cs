@@ -42,6 +42,7 @@ namespace VaVare.Statements
         /// <param name="value">Value to assign variable.</param>
         /// <param name="useVarKeyword">Will use "var" keyword if true, otherwise the type.</param>
         /// <returns>The generated local declaration statement.</returns>
+        [Obsolete("Use DeclareAndAssingStringValue to Declare and Assing as string or ParseDeclareAndAssing to parse string")]
         public LocalDeclarationStatementSyntax DeclareAndAssign(string name, string value, bool useVarKeyword = true)
         {
             if (name == null)
@@ -59,6 +60,56 @@ namespace VaVare.Statements
                     .WithInitializer(EqualsValueClauseFactory.GetEqualsValueClause($@"""{value}""").WithEqualsToken(Token(SyntaxKind.EqualsToken))))));
         }
 
+        public LocalDeclarationStatementSyntax DeclareAndAssingStringValue(string name, string value, StringType stringType, bool useVarKeyword = true)
+        {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            switch (stringType)
+            {
+                case StringType.Normal:
+                    value = $"\"{value}\"";
+                    break;
+                case StringType.Verbatim:
+                    value = $"@\"{value}\"";
+                    break;
+                default:
+                    throw new NotSupportedException();
+            }
+
+            return LocalDeclarationStatement(VariableDeclaration(useVarKeyword ? IdentifierName("var") : TypeGenerator.Create(typeof(string)))
+                .WithVariables(SingletonSeparatedList(VariableDeclarator(Identifier(name))
+                    .WithInitializer(EqualsValueClauseFactory.GetEqualsValueClause(value).WithEqualsToken(Token(SyntaxKind.EqualsToken))))));
+        }
+
+        public LocalDeclarationStatementSyntax ParseDeclareAndAssing(string name, string value)
+            => ParseDeclareAndAssing(name, value, IdentifierName("var"));
+        public LocalDeclarationStatementSyntax ParseDeclareAndAssing(string name, string value, Type type)
+            => ParseDeclareAndAssing(name, value, TypeGenerator.Create(type));
+        public LocalDeclarationStatementSyntax ParseDeclareAndAssing(string name, string value, TypeSyntax type)
+        {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            return LocalDeclarationStatement(VariableDeclaration(type)
+                .WithVariables(SingletonSeparatedList(VariableDeclarator(Identifier(name))
+                    .WithInitializer(EqualsValueClauseFactory.GetEqualsValueClause(value).WithEqualsToken(Token(SyntaxKind.EqualsToken))))));
+        }
+
         /// <summary>
         /// Create a local declaration statement which declare a local variable and assign it a complex reference.
         /// </summary>
@@ -67,7 +118,26 @@ namespace VaVare.Statements
         /// <param name="reference">Value of the variable.</param>
         /// <param name="useVarKeyword">Will use "var" keyword if true, otherwise the type.</param>
         /// <returns>The generated local declaration statement.</returns>
+        [Obsolete("Use the overload without optional parameter or without type instead")]
         public LocalDeclarationStatementSyntax DeclareAndAssign(string name, Type type, VariableReference reference, bool useVarKeyword = true)
+        {
+            if (useVarKeyword)
+            {
+                return DeclareAndAssign(name, type, reference);
+            }
+            else
+            {
+                return DeclareAndAssign(name, reference);
+            }
+        }
+
+        public LocalDeclarationStatementSyntax DeclareAndAssign(string name, Type type, VariableReference reference)
+            => DeclareAndAssign(name, TypeGenerator.Create(type), reference);
+
+        public LocalDeclarationStatementSyntax DeclareAndAssign(string name, VariableReference reference) 
+            => DeclareAndAssign(name, IdentifierName("var"), reference);
+
+        public LocalDeclarationStatementSyntax DeclareAndAssign(string name, TypeSyntax type, VariableReference reference)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -84,7 +154,7 @@ namespace VaVare.Statements
                 throw new ArgumentNullException(nameof(reference));
             }
 
-            return LocalDeclarationStatement(VariableDeclaration(useVarKeyword ? IdentifierName("var") : TypeGenerator.Create(type))
+            return LocalDeclarationStatement(VariableDeclaration(type)
                 .WithVariables(SingletonSeparatedList(VariableDeclarator(Identifier(name))
                     .WithInitializer(EqualsValueClauseFactory.GetEqualsValueClause(reference).WithEqualsToken(Token(SyntaxKind.EqualsToken))))));
         }
@@ -97,23 +167,29 @@ namespace VaVare.Statements
         /// <param name="arguments">Arguments to use when creating the variable.</param>
         /// <param name="useVarKeyword">Will use "var" keyword if true, otherwise the type.</param>
         /// <returns>The generated local declaration statement.</returns>
-        public LocalDeclarationStatementSyntax DeclareAndAssign(string name, Type type, ArgumentListSyntax arguments, bool useVarKeyword = true)
+        [Obsolete("Use the overload without optional parameter or without type instead")]
+        public LocalDeclarationStatementSyntax DeclareAndAssign(string name, Type type, ArgumentListSyntax arguments, bool useVarKeyword = true) 
+            => DeclareAndAssign(name, TypeGenerator.Create(type), arguments, useVarKeyword);
+
+        public LocalDeclarationStatementSyntax DeclareAndAssign(string name, TypeSyntax type, ArgumentListSyntax arguments, bool useVarKeyword = true)
         {
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentException("Value cannot be null or empty.", nameof(name));
             }
 
-            if (type == null)
+            if (type is null)
             {
                 throw new ArgumentNullException(nameof(type));
             }
 
-            return LocalDeclarationStatement(VariableDeclaration(useVarKeyword ? IdentifierName("var") : TypeGenerator.Create(type))
+            var declaration = useVarKeyword ? IdentifierName("var") : type;
+
+            return LocalDeclarationStatement(VariableDeclaration(declaration)
                 .WithVariables(SingletonSeparatedList(VariableDeclarator(Identifier(name))
                     .WithInitializer(
                         EqualsValueClause(
-                            ObjectCreationExpression(TypeGenerator.Create(type)).WithArgumentList(arguments)
+                            ObjectCreationExpression(type).WithArgumentList(arguments)
                                 .WithNewKeyword(Token(SyntaxKind.NewKeyword)))))));
         }
 
@@ -126,7 +202,36 @@ namespace VaVare.Statements
         /// <param name="castTo">Cast the expression to this type.</param>
         /// <param name="useVarKeyword">Will use "var" keyword if true, otherwise the type.</param>
         /// <returns>The generated local declaration statement.</returns>
+        [Obsolete("Use the overload without optional parameter or without type instead")]
         public LocalDeclarationStatementSyntax DeclareAndAssign(string name, Type type, ExpressionSyntax expressionSyntax, Type castTo = null, bool useVarKeyword = true)
+        {
+            if (useVarKeyword)
+            {
+                var typeSyntax = castTo is not null ? TypeGenerator.Create(castTo) : null;
+                return DeclareAndAssign(name, expressionSyntax, castTo: typeSyntax);
+            }
+            else
+            {
+                
+                return DeclareAndAssign(name, expressionSyntax, type);
+            }
+        }
+
+        public LocalDeclarationStatementSyntax DeclareAndAssign(string name, ExpressionSyntax expressionSyntax, Type type, Type castTo = null)
+            => DeclareAndAssign(
+                name, 
+                expressionSyntax, 
+                TypeGenerator.Create(type), 
+                castTo is not null ? TypeGenerator.Create(castTo) : null
+               );
+
+        //public LocalDeclarationStatementSyntax DeclareAndAssign(string name, ExpressionSyntax expressionSyntax, Type castTo = null)
+        //    => DeclareAndAssign(name, expressionSyntax, IdentifierName("var"), TypeGenerator.Create(castTo));
+
+        public LocalDeclarationStatementSyntax DeclareAndAssign(string name, ExpressionSyntax expressionSyntax, TypeSyntax castTo = null)
+            => DeclareAndAssign(name, expressionSyntax, IdentifierName("var"), castTo);
+
+        public LocalDeclarationStatementSyntax DeclareAndAssign(string name, ExpressionSyntax expressionSyntax, TypeSyntax type, TypeSyntax castTo = null)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -143,12 +248,12 @@ namespace VaVare.Statements
                 throw new ArgumentNullException(nameof(expressionSyntax));
             }
 
-            if (castTo != null && castTo != typeof(void))
+            if (castTo != null)
             {
-                expressionSyntax = CastExpression(TypeGenerator.Create(castTo), expressionSyntax);
+                expressionSyntax = CastExpression(castTo, expressionSyntax);
             }
 
-            return LocalDeclarationStatement(VariableDeclaration(useVarKeyword ? IdentifierName("var") : TypeGenerator.Create(type))
+            return LocalDeclarationStatement(VariableDeclaration(type)
                 .WithVariables(SingletonSeparatedList(VariableDeclarator(Identifier(name))
                     .WithInitializer(EqualsValueClause(expressionSyntax)))));
         }
@@ -162,6 +267,24 @@ namespace VaVare.Statements
         /// <param name="useVarKeyword">Will use "var" keyword if true, otherwise the type.</param>
         /// <returns>The generated local declaration statement.</returns>
         public LocalDeclarationStatementSyntax DeclareAndAssign(string name, Type type, IBinaryExpression binaryExpression, bool useVarKeyword = true)
+        {
+            if (useVarKeyword)
+            {
+                return DeclareAndAssign(name, type, binaryExpression);
+            }
+            else
+            {
+                return DeclareAndAssign(name, binaryExpression);
+            }
+        }
+
+        public LocalDeclarationStatementSyntax DeclareAndAssign(string name, Type type, IBinaryExpression binaryExpression)
+            => DeclareAndAssign(name, TypeGenerator.Create(type), binaryExpression);
+
+        public LocalDeclarationStatementSyntax DeclareAndAssign(string name, IBinaryExpression binaryExpression)
+            => DeclareAndAssign(name, IdentifierName("var"), binaryExpression);
+
+        public LocalDeclarationStatementSyntax DeclareAndAssign(string name, TypeSyntax type, IBinaryExpression binaryExpression)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -178,7 +301,7 @@ namespace VaVare.Statements
                 throw new ArgumentNullException(nameof(binaryExpression));
             }
 
-            return LocalDeclarationStatement(VariableDeclaration(useVarKeyword ? IdentifierName("var") : TypeGenerator.Create(type))
+            return LocalDeclarationStatement(VariableDeclaration(type)
                 .WithVariables(SingletonSeparatedList(VariableDeclarator(Identifier(name))
                     .WithInitializer(EqualsValueClause(binaryExpression.GetBinaryExpression())))));
         }
@@ -191,6 +314,9 @@ namespace VaVare.Statements
         /// <param name="arguments">Arguments in the class constructor.</param>
         /// <returns>The generated assign declaration statement.</returns>
         public ExpressionStatementSyntax Assign(string name, Type type, ArgumentListSyntax arguments)
+          => Assign(name, TypeGenerator.Create(type), arguments);
+
+        public ExpressionStatementSyntax Assign(string name, TypeSyntax type, ArgumentListSyntax arguments)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -206,7 +332,7 @@ namespace VaVare.Statements
                 AssignmentExpression(
                     SyntaxKind.SimpleAssignmentExpression,
                     IdentifierName(name),
-                    ObjectCreationExpression(TypeGenerator.Create(type)).WithArgumentList(arguments).WithNewKeyword(Token(SyntaxKind.NewKeyword))));
+                    ObjectCreationExpression(type).WithArgumentList(arguments).WithNewKeyword(Token(SyntaxKind.NewKeyword))));
         }
 
         /// <summary>
@@ -217,6 +343,12 @@ namespace VaVare.Statements
         /// <param name="castTo">If we should do a cast while assign the variable.</param>
         /// <returns>The generated assign declaration syntax.</returns>
         public ExpressionStatementSyntax Assign(string name, ExpressionSyntax expressionSyntax, Type castTo = null)
+            => Assign(
+                name, 
+                expressionSyntax,
+                castTo is not null ? TypeGenerator.Create(castTo) : null
+               );
+        public ExpressionStatementSyntax Assign(string name, ExpressionSyntax expressionSyntax, TypeSyntax castTo)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -239,6 +371,12 @@ namespace VaVare.Statements
         /// <param name="castTo">If we should do a cast while assign the variable.</param>
         /// <returns>The generated assign declaration syntax.</returns>
         public ExpressionStatementSyntax Assign(string name, VariableReference reference, Type castTo = null)
+            => Assign(
+                name, 
+                reference,
+                castTo is not null ? TypeGenerator.Create(castTo) : null
+               );
+        public ExpressionStatementSyntax Assign(string name, VariableReference reference, TypeSyntax castTo)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -261,6 +399,12 @@ namespace VaVare.Statements
         /// <param name="castTo">If we should do a cast while assign the variabl.</param>
         /// <returns>The generated assign declaration syntax.</returns>
         public ExpressionStatementSyntax Assign(VariableReference reference, VariableReference valueReference, Type castTo = null)
+            => Assign(
+                reference, 
+                valueReference, 
+                castTo is not null ? TypeGenerator.Create(castTo) : null
+               );
+        public ExpressionStatementSyntax Assign(VariableReference reference, VariableReference valueReference, TypeSyntax castTo)
         {
             if (reference == null)
             {
@@ -279,7 +423,6 @@ namespace VaVare.Statements
 
             return Assign(reference, ReferenceGenerator.Create(valueReference), castTo);
         }
-
         /// <summary>
         /// Create the expression statement syntax to assign a reference to another expression.
         /// </summary>
@@ -288,6 +431,8 @@ namespace VaVare.Statements
         /// <param name="castTo">If we should do a cast while assign the variable.</param>
         /// <returns>The generated assign declaration syntax.</returns>
         public ExpressionStatementSyntax Assign(VariableReference reference, ExpressionSyntax expressionSyntax, Type castTo = null)
+            => Assign(reference, expressionSyntax, TypeGenerator.Create(castTo));
+        public ExpressionStatementSyntax Assign(VariableReference reference, ExpressionSyntax expressionSyntax, TypeSyntax castTo)
         {
             if (reference == null)
             {
@@ -299,9 +444,9 @@ namespace VaVare.Statements
                 throw new ArgumentNullException(nameof(expressionSyntax));
             }
 
-            if (castTo != null && castTo != typeof(void))
+            if (castTo != null)
             {
-                expressionSyntax = CastExpression(TypeGenerator.Create(castTo), expressionSyntax);
+                expressionSyntax = CastExpression(castTo, expressionSyntax);
             }
 
             return
@@ -345,6 +490,8 @@ namespace VaVare.Statements
         /// <param name="type">Type of the variable.</param>
         /// <returns>The declared expression statement syntax.</returns>
         public LocalDeclarationStatementSyntax Declare(string variableName, Type type)
+            => Declare(variableName, TypeGenerator.Create(type));
+        public LocalDeclarationStatementSyntax Declare(string variableName, TypeSyntax type)
         {
             if (type == null)
             {
@@ -357,7 +504,7 @@ namespace VaVare.Statements
             }
 
             return LocalDeclarationStatement(
-                VariableDeclaration(TypeGenerator.Create(type))
+                VariableDeclaration(type)
                     .WithVariables(SingletonSeparatedList<VariableDeclaratorSyntax>(
                         VariableDeclarator(Identifier(variableName)))));
         }

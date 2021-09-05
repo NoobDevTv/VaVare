@@ -21,13 +21,14 @@ namespace VaVare.Builders
         private readonly string _name;
         private readonly List<ParameterSyntax> _parameters;
         private readonly List<Modifiers> _modifiers;
-        private Type _returnType;
+        private readonly List<Parameter> _parameterXmlDocumentation;
+
+        private TypeSyntax _returnType;
         private BlockSyntax _body;
         private string _summary;
         private SyntaxKind? _overrideOperator;
 
         private SyntaxList<AttributeListSyntax> _attributes;
-        private readonly List<Parameter> _parameterXmlDocumentation;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MethodBuilder"/> class.
@@ -88,6 +89,17 @@ namespace VaVare.Builders
         /// <param name="type">The wanted return type</param>
         /// <returns>The current method builder</returns>
         public MethodBuilder WithReturnType(Type type)
+        {
+            _returnType = TypeGenerator.Create(type);
+            return this;
+        }
+
+        /// <summary>
+        /// Set method return type
+        /// </summary>
+        /// <param name="type">The wanted return type</param>
+        /// <returns>The current method builder</returns>
+        public MethodBuilder WithReturnType(TypeSyntax type)
         {
             _returnType = type;
             return this;
@@ -195,7 +207,7 @@ namespace VaVare.Builders
 
             if (_returnType != null)
             {
-                return MethodDeclaration(TypeGenerator.Create(_returnType), Identifier(_name));
+                return MethodDeclaration(_returnType, Identifier(_name));
             }
             else
             {
