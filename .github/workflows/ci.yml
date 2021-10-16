@@ -93,7 +93,7 @@ jobs:
       # Artifact for testing purpose
       - name: upload artifacts      
         uses: actions/upload-artifact@v2
-        if: env.debug
+        if: env.debug == 'true'
         with:
           name: test-result
           path: '**/*.nupkg'
