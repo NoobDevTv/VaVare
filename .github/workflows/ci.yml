@@ -68,7 +68,7 @@ jobs:
       - name: Set Version Suffix
         uses: jvbsl/litgit-action@master
         id: litgit
-        whith:
+        with:
           templates: '**/*.template'
           parameters: '-p VERSION_ADDITIONAL=${{env.suffix}} -c ./.github/configs/*/**.config'
 
