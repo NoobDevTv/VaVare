@@ -18,22 +18,30 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Set enviroment variables
+    # Set environment variables
     env:
       isProductive: ${{ github.ref == 'refs/heads/productive' }}
       isDeploy:  ${{ github.ref == 'refs/heads/deploy' }}
       isStable:  ${{ github.ref == 'refs/heads/stable' }}
-      isAlpha: ${{ !env.isProductive && !env.isDeploy }}
       isPush: ${{ github.event_name == 'push' }}
-      publish: ${{ env.isPush && (env.isProductive || env.isDeploy || env.isStable) }}
-      suffix: ${{ (env.isAlpha && "-alpha") || (env.isDeploy && "-beta") || "" }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+
+      # Set dynamic environment variables
+      - name: Set dynamic en
+        run: |
+          isAlpha=${{ !env.isProductive && !env.isDeploy}}
+          publish=${{ !env.isProductive && !env.isDeploy}}
+          suffix=${{ ($isAlpha && "-alpha") || (env.isDeploy && "-beta") || "" }}
+          echo 'isAlpha=$isAlpha' >> $GITHUB_ENV
+          echo 'publish=$publish' >> $GITHUB_ENV
+          echo 'suffix=$suffix' >> $GITHUB_ENV
+
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0 #to ensure to retrive everything for version lookup
+          fetch-depth: 0 #to ensure to retrieve everything for version lookup
           lfs: true
 
       # Setup powershell
