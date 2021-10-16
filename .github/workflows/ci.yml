@@ -18,12 +18,23 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    # Set enviroment variables
+    env:
+      isProductive: ${{ github.ref == 'refs/heads/productive' }}
+      isDeploy:  ${{ github.ref == 'refs/heads/deploy' }}
+      isStable:  ${{ github.ref == 'refs/heads/stable' }}
+      isAlpha: ${{ !env.isProductive && !env.isDeploy }}
+      isPush: ${{ github.event_name == 'push' }}
+      publish: ${{ env.isPush && (env.isProductive || env.isDeploy || env.isStable) }}
+      suffix: ${{ (env.isAlpha && "-alpha") || (env.isDeploy && "-beta") || "" }}
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0 #to ensure to retrive everything for version lookup
+          lfs: true
 
       # Setup powershell
       - name: Setup powershell
@@ -41,27 +52,18 @@ jobs:
         with:
           dotnet-version: '5.0.x' # SDK Version to use.
 
-      # Parse lit git templates
-      - name: Set GitInfo placeholder
-        run: pwsh ./.github/scripts/git-infos.ps1 -path './*'
-        
-      # Set version suffix
-      - name: Set Version SUFFIX for Release
-        if: github.ref == 'refs/heads/productive' 
-        run: pwsh ./.github/scripts/replace.ps1 -path './.github/configs/*' -placeholder SUFFIX -value ''
+      # Print current suffix
+      - name: Print suffix
+        run: echo "${{env.suffix}}"
 
-      - name: Set Version SUFFIX for BETA build
-        if: github.ref == 'refs/heads/deploy'
-        run: pwsh ./.github/scripts/replace.ps1 -path './.github/configs/*' -placeholder SUFFIX -value '-beta'
+      # Parse LitGit templates
+      - name: Set Version Suffix
+        uses: jvbsl/litgit-action@master
+        id: litgit
+        whith:
+          templates: '**/*.template'
+          parameters: '-p VERSION_ADDITIONAL=${{env.suffix}} -c ./.github/configs/*/**.config'
 
-      - name: Set Version SUFFIX for ALPHA build
-        if: github.ref != 'refs/heads/productive' && github.ref != 'refs/heads/deploy' 
-        run: pwsh ./.github/scripts/replace.ps1 -path './.github/configs/*' -placeholder SUFFIX -value '-alpha'
-      
-      # Parse lit git templates
-      - name: LitGit parse templates
-        run: pwsh ./.github/scripts/parse-template.ps1 -path './*' -litgit ./.github/LitGit/LitGit.ps1 -config ./.github/configs/VaVare.nuspec.config
-        
       # Restore all dependecies
       - name: Restore dependencies
         run: dotnet restore
@@ -76,12 +78,19 @@ jobs:
       
       # Create nupkg
       - name: Pack extension
-        if: github.event_name == 'push'
+        if: env.isPush
         run: pwsh -File ./.github/scripts/pack-files.ps1 -path './*'
-      
+
+      # Artifact for testing purpose
+      - name: upload artifacts      
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-result
+          path: **/*.nupkg
+
       # Setup Nuget
       - name: Setup NuGet.exe
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/productive' || github.ref == 'refs/heads/deploy' || github.ref == 'refs/heads/stable' )
+        if: env.publish
         # You may pin to the exact commit or the version.
         # uses: NuGet/setup-nuget@04b0c2b8d1b97922f67eca497d7cf0bf17b8ffe1
         uses: NuGet/setup-nuget@v1.0.5
@@ -95,5 +104,5 @@ jobs:
 
       # Push nuget packages
       - name: Publish packages
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/productive' || github.ref == 'refs/heads/deploy' || github.ref == 'refs/heads/stable' )
+        if: env.publish
         run: nuget push "**/*.nupkg" -src https://api.nuget.org/v3/index.json
