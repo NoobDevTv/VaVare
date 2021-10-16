@@ -31,9 +31,9 @@ jobs:
       # Set dynamic environment variables
       - name: Set dynamic environment variables
         run: |
-          isAlpha=${{ !env.isProductive && !env.isDeploy}}
-          publish=${{ env.isPush && !env.isProductive && !env.isDeploy}}
-          suffix="${{ (!env.isProductive && !env.isDeploy && '-alpha') || (env.isDeploy && '-beta') || '' }}"
+          isAlpha=${{ env.isProductive == 'false' && env.isDeploy == 'false'}}
+          publish=${{ env.isPush == 'true' && env.isProductive == 'false' && env.isDeploy == 'false'}}
+          suffix="${{ (env.isProductive == 'false' && env.isDeploy == 'false' && '-alpha') || (env.isDeploy == 'true' && '-beta') || '' }}"
           echo "isAlpha=$isAlpha" >> $GITHUB_ENV
           echo "publish=$publish" >> $GITHUB_ENV
           echo "suffix=$suffix" >> $GITHUB_ENV
@@ -70,7 +70,7 @@ jobs:
         id: litgit
         with:
           templates: '**/*.template'
-          parameters: '-p VERSION_ADDITIONAL=${{env.suffix}} -c ./.github/configs/*/**.config'
+          parameters: '-p VERSION_ADDITIONAL="${{env.suffix}}" -c ./.github/configs/*/**.config'
 
       # Restore all dependecies
       - name: Restore dependencies
