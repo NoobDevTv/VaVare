@@ -24,6 +24,7 @@ jobs:
       isDeploy:  ${{ github.ref == 'refs/heads/deploy' }}
       isStable:  ${{ github.ref == 'refs/heads/stable' }}
       isPush: ${{ github.event_name == 'push' }}
+      debug: false
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -92,13 +93,14 @@ jobs:
       # Artifact for testing purpose
       - name: upload artifacts      
         uses: actions/upload-artifact@v2
+        if: env.debug
         with:
           name: test-result
           path: '**/*.nupkg'
 
       # Setup Nuget
       - name: Setup NuGet.exe
-        if: env.publish
+        if: env.publish == 'true'
         # You may pin to the exact commit or the version.
         # uses: NuGet/setup-nuget@04b0c2b8d1b97922f67eca497d7cf0bf17b8ffe1
         uses: NuGet/setup-nuget@v1.0.5
@@ -112,5 +114,5 @@ jobs:
 
       # Push nuget packages
       - name: Publish packages
-        if: env.publish
+        if: env.publish == 'true'
         run: nuget push "**/*.nupkg" -src https://api.nuget.org/v3/index.json
