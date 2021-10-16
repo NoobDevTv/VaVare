@@ -33,7 +33,7 @@ jobs:
         run: |
           isAlpha=${{ env.isProductive == 'false' && env.isDeploy == 'false'}}
           publish=${{ env.isPush == 'true' && env.isProductive == 'false' && env.isDeploy == 'false'}}
-          suffix="${{ (env.isProductive == 'false' && env.isDeploy == 'false' && '-alpha') || (env.isDeploy == 'true' && '-beta') || '' }}"
+          suffix="${{ (env.isProductive == 'false' && env.isDeploy == 'false' && '-alpha') || (env.isProductive == 'false' && env.isDeploy == 'true' && '-beta') || '' }}"
           echo "isAlpha=$isAlpha" >> $GITHUB_ENV
           echo "publish=$publish" >> $GITHUB_ENV
           echo "suffix=$suffix" >> $GITHUB_ENV
