@@ -29,11 +29,11 @@ jobs:
     steps:
 
       # Set dynamic environment variables
-      - name: Set dynamic en
+      - name: Set dynamic environment variables
         run: |
           isAlpha=${{ !env.isProductive && !env.isDeploy}}
-          publish=${{ !env.isProductive && !env.isDeploy}}
-          suffix=${{ ($isAlpha && "-alpha") || (env.isDeploy && "-beta") || "" }}
+          publish=${{ env.isPush && !env.isProductive && !env.isDeploy}}
+          suffix=${{ (!env.isProductive && !env.isDeploy && "-alpha") || (env.isDeploy && "-beta") || "" }}
           echo 'isAlpha=$isAlpha' >> $GITHUB_ENV
           echo 'publish=$publish' >> $GITHUB_ENV
           echo 'suffix=$suffix' >> $GITHUB_ENV
