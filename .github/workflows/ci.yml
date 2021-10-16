@@ -34,9 +34,9 @@ jobs:
           isAlpha=${{ !env.isProductive && !env.isDeploy}}
           publish=${{ env.isPush && !env.isProductive && !env.isDeploy}}
           suffix="${{ (!env.isProductive && !env.isDeploy && '-alpha') || (env.isDeploy && '-beta') || '' }}"
-          echo 'isAlpha=$isAlpha' >> $GITHUB_ENV
-          echo 'publish=$publish' >> $GITHUB_ENV
-          echo 'suffix=$suffix' >> $GITHUB_ENV
+          echo "isAlpha=$isAlpha" >> $GITHUB_ENV
+          echo "publish=$publish" >> $GITHUB_ENV
+          echo "suffix=$suffix" >> $GITHUB_ENV
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
