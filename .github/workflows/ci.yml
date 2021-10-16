@@ -70,7 +70,7 @@ jobs:
         id: litgit
         with:
           templates: '**/*.template'
-          parameters: '-p VERSION_ADDITIONAL="${{env.suffix}}" -c ./.github/configs/*/**.config'
+          parameters: '-p VERSION_ADDITIONAL="${{env.suffix}}" -c ./.github/configs/**/*.config'
 
       # Restore all dependecies
       - name: Restore dependencies
