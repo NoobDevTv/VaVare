@@ -20,68 +20,71 @@ namespace VaVare.Tests.Builders
         [Test]
         public void Build_WhenGivenRecordName_CodeShouldContainRecordName()
         {
-            Assert.IsTrue(RecordBuilder.Build().ToString().Contains("TestRecord"));
-        }
-
-        [Test]
-        public void Build_WhenGivenPropertyList_CodeShouldContainProperties()
-        {
-            Assert.IsTrue(RecordBuilder.Build().ToString().Contains("TestRecord"));
+            Assert.That(RecordBuilder.Build().ToString().Contains("TestRecord"), Is.True);
         }
 
         [Test]
         public void Build_WhenGivenNamespace_CodeShouldContainNamespace()
         {
-            Assert.IsTrue(RecordBuilder.Build().ToString().Contains("MyNamespace"));
+            Assert.That(RecordBuilder.Build().ToString().Contains("MyNamespace"), Is.True);
         }
 
         [Test]
         public void Build_WhenGivenField_CodeShouldContainField()
         {
-            Assert.IsTrue(RecordBuilder.WithFields(new Field("myField", typeof(int), new List<Modifiers>() { Modifiers.Public})) .Build().ToString().Contains("publicintmyField;"));
+            var field = new Field("myField", typeof(int), new List<Modifiers>() { Modifiers.Public });
+            Assert.That(RecordBuilder.WithFields(field).Build().ToString().Contains("publicintmyField;"), Is.True);
         }
 
         [Test]
         public void Build_WhenGivenAttributes_CodeShouldContainAttributes()
         {
-            Assert.IsTrue(RecordBuilder.WithAttributes(new Attribute("MyAttribute")).Build().ToString().Contains("[MyAttribute]"));
+            Assert.That(RecordBuilder.WithAttributes(new Attribute("MyAttribute"))
+                .Build().ToString().Contains("[MyAttribute]"), Is.True);
         }
 
         [Test]
         public void Build_WhenGivenParameterList_CodeShouldContainParameters()
         {
-            Assert.IsTrue(RecordBuilder.WithParameterList(new Parameter("Bbq", typeof(int))).Build().ToString().Contains("TestRecord(intBbq)"));
-            Assert.IsTrue(RecordBuilder.WithParameterList(new Parameter("Bbq", typeof(int)), new Parameter("Foo", typeof(string))).Build().ToString().Contains("TestRecord(intBbq,stringFoo)"));
+            var parameter1 = new Parameter("Bbq", typeof(int));
+            var parameter2 = new Parameter("Foo", typeof(string));
+            Assert.That(RecordBuilder.WithParameterList(parameter1)
+                .Build().ToString().Contains("TestRecord(intBbq)"), Is.True);
+            Assert.That(RecordBuilder.WithParameterList(parameter1, parameter2)
+                    .Build().ToString().Contains("TestRecord(intBbq,stringFoo)"), Is.True);
         }
 
         [Test]
         public void Build_WhenGivenProperty_CodeShouldContainProperty()
         {
-            Assert.IsTrue(RecordBuilder.WithProperties(new AutoProperty("MyProperty", typeof(int), PropertyTypes.GetAndSet)).Build().ToString().Contains("intMyProperty{get;set;}"));
+            var property = new AutoProperty("MyProperty", typeof(int), PropertyTypes.GetAndSet);
+            Assert.That(RecordBuilder.WithProperties(property).Build().ToString().Contains("intMyProperty{get;set;}"), Is.True);
         }
 
         [Test]
         public void Build_WhenGivenUsing_CodeShouldContainUsing()
         {
-            Assert.IsTrue(RecordBuilder.WithUsings("some.namespace").Build().ToString().Contains("some.namespace"));
+            Assert.That(RecordBuilder.WithUsings("some.namespace").Build().ToString().Contains("some.namespace"), Is.True);
         }
 
         [Test]
         public void Build_CodeShouldContainRecordSpecifier()
         {
-            Assert.IsTrue(RecordBuilder.Build().ToString().Contains($"{RecordSpecifier}TestRecord;"));
+            Assert.That(RecordBuilder.Build().ToString().Contains($"{RecordSpecifier}TestRecord;"), Is.True);
         }
 
         [Test]
         public void Build_WhenGivenModifiers_CodeShouldContainModifiers()
         {
-            Assert.IsTrue(RecordBuilder.WithModifiers(Modifiers.Public, Modifiers.Abstract).Build().ToString().Contains($"publicabstract{RecordSpecifier}TestRecord"));
+            Assert.That(RecordBuilder.WithModifiers(Modifiers.Public, Modifiers.Abstract)
+                .Build().ToString().Contains($"publicabstract{RecordSpecifier}TestRecord"), Is.True);
         }
 
         [Test]
         public void Build_WhenGivenInheritance_CodeShouldContainInheritance()
         {
-            Assert.IsTrue(RecordBuilder.ThatInheritFrom(typeof(int)).Build().ToString().Contains("TestRecord:int"));
+            Assert.That(RecordBuilder.ThatInheritFrom(typeof(int))
+                .Build().ToString().Contains("TestRecord:int"), Is.True);
         }
     }
 }
