@@ -155,11 +155,19 @@ namespace VaVare.Builders.Base
             var @type = BuildBase();
             @type = @type.WithSummary(_summary);
             @type = BuildAttributes(@type);
+            @type = BuildOpenBrace(@type);
             @type = BuildMembers(@type);
+            @type = BuildCloseBrace(@type);
             return @type;
         }
 
         protected abstract TypeDeclarationSyntax BuildBase();
+
+        protected virtual TypeDeclarationSyntax BuildOpenBrace(TypeDeclarationSyntax typeDeclarationSyntax) =>
+            typeDeclarationSyntax;
+
+        protected virtual TypeDeclarationSyntax BuildCloseBrace(TypeDeclarationSyntax typeDeclarationSyntax) =>
+            typeDeclarationSyntax;
 
         protected TypeDeclarationSyntax BuildAttributes(TypeDeclarationSyntax @class)
         {
