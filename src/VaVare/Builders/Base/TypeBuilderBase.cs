@@ -156,10 +156,14 @@ namespace VaVare.Builders.Base
             @type = @type.WithSummary(_summary);
             @type = BuildAttributes(@type);
             @type = BuildMembers(@type);
+            @type = BuildSurroundingTokens(@type);
             return @type;
         }
 
         protected abstract TypeDeclarationSyntax BuildBase();
+
+        protected virtual TypeDeclarationSyntax BuildSurroundingTokens(TypeDeclarationSyntax typeDeclarationSyntax) =>
+            typeDeclarationSyntax;
 
         protected TypeDeclarationSyntax BuildAttributes(TypeDeclarationSyntax @class)
         {
