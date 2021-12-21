@@ -91,18 +91,11 @@ namespace VaVare.Builders
             return this;
         }
 
-        protected override TypeDeclarationSyntax BuildOpenBrace(TypeDeclarationSyntax typeDeclarationSyntax)
-        {
-            return typeDeclarationSyntax.Members.Count == 0
-                ? typeDeclarationSyntax
-                : typeDeclarationSyntax.WithOpenBraceToken(SyntaxFactory.Token(SyntaxKind.OpenBraceToken));
-        }
-
-        protected override TypeDeclarationSyntax BuildCloseBrace(TypeDeclarationSyntax typeDeclarationSyntax)
+        protected override TypeDeclarationSyntax BuildSurroundingTokens(TypeDeclarationSyntax typeDeclarationSyntax)
         {
             return typeDeclarationSyntax.Members.Count == 0
                 ? typeDeclarationSyntax.WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
-                : typeDeclarationSyntax.WithCloseBraceToken(SyntaxFactory.Token(SyntaxKind.CloseBraceToken));
+                : typeDeclarationSyntax.WithOpenBraceToken(SyntaxFactory.Token(SyntaxKind.OpenBraceToken)).WithCloseBraceToken(SyntaxFactory.Token(SyntaxKind.CloseBraceToken));
         }
 
         protected override TypeDeclarationSyntax BuildBase()
