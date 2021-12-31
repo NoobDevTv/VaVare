@@ -42,7 +42,7 @@ namespace VaVare.Statements
         /// <param name="value">Value to assign variable.</param>
         /// <param name="useVarKeyword">Will use "var" keyword if true, otherwise the type.</param>
         /// <returns>The generated local declaration statement.</returns>
-        [Obsolete("Use DeclareAndAssingStringValue to Declare and Assing as string or ParseDeclareAndAssing to parse string")]
+        [Obsolete("Use DeclareAndAssignStringValue to Declare and Assign as string or ParseDeclareAndAssign to parse string")]
         public LocalDeclarationStatementSyntax DeclareAndAssign(string name, string value, bool useVarKeyword = true)
         {
             if (name == null)
@@ -60,7 +60,7 @@ namespace VaVare.Statements
                     .WithInitializer(EqualsValueClauseFactory.GetEqualsValueClause($@"""{value}""").WithEqualsToken(Token(SyntaxKind.EqualsToken))))));
         }
 
-        public LocalDeclarationStatementSyntax DeclareAndAssingStringValue(string name, string value, StringType stringType, bool useVarKeyword = true)
+        public LocalDeclarationStatementSyntax DeclareAndAssignStringValue(string name, string value, StringType stringType, bool useVarKeyword = true)
         {
             if (name == null)
             {
@@ -89,11 +89,11 @@ namespace VaVare.Statements
                     .WithInitializer(EqualsValueClauseFactory.GetEqualsValueClause(value).WithEqualsToken(Token(SyntaxKind.EqualsToken))))));
         }
 
-        public LocalDeclarationStatementSyntax ParseDeclareAndAssing(string name, string value)
-            => ParseDeclareAndAssing(name, value, IdentifierName("var"));
-        public LocalDeclarationStatementSyntax ParseDeclareAndAssing(string name, string value, Type type)
-            => ParseDeclareAndAssing(name, value, TypeGenerator.Create(type));
-        public LocalDeclarationStatementSyntax ParseDeclareAndAssing(string name, string value, TypeSyntax type)
+        public LocalDeclarationStatementSyntax ParseDeclareAndAssign(string name, string value)
+            => ParseDeclareAndAssign(name, value, IdentifierName("var"));
+        public LocalDeclarationStatementSyntax ParseDeclareAndAssign(string name, string value, Type type)
+            => ParseDeclareAndAssign(name, value, TypeGenerator.Create(type));
+        public LocalDeclarationStatementSyntax ParseDeclareAndAssign(string name, string value, TypeSyntax type)
         {
             if (name == null)
             {
