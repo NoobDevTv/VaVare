@@ -56,9 +56,15 @@ namespace VaVare.Builders
         /// Add class fields.
         /// </summary>
         /// <param name="fields">An array of already declared fields.</param>
-        /// <returns>The current class builder</returns>
+        /// <returns>The current class builder.</returns>
+        /// /// <exception cref="ArgumentNullException">If <paramref name="fields"/> is <see langword="null"/>.</exception>
         public ClassBuilder WithFields(params FieldDeclarationSyntax[] fields)
         {
+            if (fields is null)
+            {
+                throw new ArgumentNullException(nameof(fields));
+            }
+
             return With(new FieldBuildMember(fields));
         }
 
