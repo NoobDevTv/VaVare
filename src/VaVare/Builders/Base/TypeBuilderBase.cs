@@ -4,13 +4,15 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using VaVare.Builders.BuilderHelpers;
 using VaVare.Builders.BuildMembers;
 using VaVare.Generators.Class;
 using VaVare.Generators.Common;
 using VaVare.Generators.Special;
 using VaVare.Models.Properties;
-using Attribute = VaVare.Models.Attribute;
+
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
+using Attribute = VaVare.Models.Attribute;
 
 namespace VaVare.Builders.Base
 {
@@ -23,16 +25,31 @@ namespace VaVare.Builders.Base
         private string _summary;
 
         protected TypeBuilderBase(string name, string @namespace)
-         : base(@namespace)
+         : this(name, @namespace, new List<Type>(), new List<Modifiers> { Modifiers.Public })
         {
-            if (string.IsNullOrEmpty(name))
+        }
+
+        private protected TypeBuilderBase(string name, string @namespace, List<Type> inheritance, List<Modifiers> modifiers)
+            : this(name, inheritance, modifiers, new MemberHelper(), new UsingHelper(), new NamespaceHelper(@namespace))
+        {
+        }
+
+        private protected TypeBuilderBase(string name, List<Type> inheritance, List<Modifiers> modifiers, MemberHelper memberHelper, UsingHelper usingHelper, NamespaceHelper namespaceHelper)
+            : base(memberHelper, usingHelper, namespaceHelper)
+        {
+            if (name is null)
             {
-                throw new ArgumentException("Value cannot be null or empty.", nameof(name));
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentException("Value cannot be whitespace or empty.", nameof(name));
             }
 
             Name = name.Replace(" ", "_");
-            _inheritance = new List<Type>();
-            _modifiers = new List<Modifiers> { Modifiers.Public };
+            _inheritance = inheritance;
+            _modifiers = modifiers;
         }
 
         protected string Name { get; }

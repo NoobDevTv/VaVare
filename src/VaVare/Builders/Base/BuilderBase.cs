@@ -13,10 +13,15 @@ namespace VaVare.Builders.Base
         private readonly MemberHelper _memberHelper;
 
         public BuilderBase(string @namespace)
+            : this(new MemberHelper(), new UsingHelper(), new NamespaceHelper(@namespace))
         {
-            _memberHelper = new MemberHelper();
-            _usingHelper = new UsingHelper();
-            _namespaceHelper = new NamespaceHelper(@namespace);
+        }
+
+        private protected BuilderBase(MemberHelper memberHelper, UsingHelper usingHelper, NamespaceHelper namespaceHelper)
+        {
+            _memberHelper = memberHelper;
+            _usingHelper = usingHelper;
+            _namespaceHelper = namespaceHelper;
         }
 
         /// <summary>
