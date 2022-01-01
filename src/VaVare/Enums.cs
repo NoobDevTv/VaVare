@@ -36,6 +36,11 @@ namespace VaVare
         /// Generate with a less than or equal conditional statement: <c>"&lt;="</c>.
         /// </summary>
         LessThanOrEqual,
+
+        /// <summary>
+        /// Generate with an is statement: <c>"is"</c>.
+        /// </summary>
+        Is,
     }
 
     /// <summary>
