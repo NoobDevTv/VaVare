@@ -5,7 +5,7 @@ using VaVare.Extensions;
 namespace VaVare.Models.References
 {
     /// <summary>
-    /// Represent the reference to a contant value.
+    /// Represent the reference to a constant value.
     /// </summary>
     public class ConstantReference : VariableReference
     {
@@ -30,7 +30,7 @@ namespace VaVare.Models.References
         public ConstantReference(string value, StringType stringType = StringType.Normal)
             : base(value)
         {
-            Name = stringType == StringType.Path ? $"@\"{value}\"" : $"\"{value}\"";
+            Name = stringType == StringType.Verbatim ? $"@\"{value}\"" : $"\"{value}\"";
         }
 
         protected ConstantReference(string variableName, MemberReference member)

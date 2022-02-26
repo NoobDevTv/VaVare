@@ -56,7 +56,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
             }
 
             return Argument(ArrayCreationExpression(ArrayType(TypeGenerator.Create(_type))
-                                .WithRankSpecifiers(SingletonList<ArrayRankSpecifierSyntax>(ArrayRankSpecifier(SingletonSeparatedList<ExpressionSyntax>(OmittedArraySizeExpression())))))
+                                .WithRankSpecifiers(SingletonList(ArrayRankSpecifier(SingletonSeparatedList<ExpressionSyntax>(OmittedArraySizeExpression())))))
                                 .WithInitializer(InitializerExpression(SyntaxKind.ArrayInitializerExpression, SeparatedList<ExpressionSyntax>(syntaxNodeOrTokens))));
         }
     }

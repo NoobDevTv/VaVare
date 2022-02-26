@@ -48,7 +48,7 @@ namespace VaVare.Tests.Integration
             var classBuilder = new ClassBuilder("Cat", "Models");
             var @class = classBuilder
                 .WithUsings("System")
-                .With(new EnumBuildMember("MyEnum", new List<EnumMember> { new EnumMember("EnumValueOne", 2, new Attribute[] { new Attribute("MyAttribute"), }), new EnumMember("EnumValueTwo")}, new List<Modifiers> { Modifiers.Public }))
+                .With(new EnumBuildMember("MyEnum", new List<EnumMember> { new EnumMember("EnumValueOne", 2, new[] { new Attribute("MyAttribute"), }), new EnumMember("EnumValueTwo")}, new List<Modifiers> { Modifiers.Public }))
                 .Build();
 
             Assert.AreEqual(

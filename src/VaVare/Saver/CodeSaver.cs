@@ -79,10 +79,13 @@ namespace VaVare.Saver
         {
             var cw = new AdhocWorkspace();
             cw.Options.WithChangedOption(CSharpFormattingOptions.IndentBraces, true);
+            var currentOptions = cw.Options;
             foreach (var optionKeyValue in _options)
             {
-                cw.Options = cw.Options.WithChangedOption(optionKeyValue.FormattingOption, optionKeyValue.Value);
+                currentOptions = currentOptions.WithChangedOption(optionKeyValue.FormattingOption, optionKeyValue.Value);
             }
+
+            _ = cw.TryApplyChanges(cw.CurrentSolution.WithOptions(currentOptions));
 
             return cw;
         }

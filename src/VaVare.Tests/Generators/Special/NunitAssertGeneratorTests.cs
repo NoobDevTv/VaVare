@@ -49,7 +49,7 @@ namespace VaVare.Tests.Generators.Special
         [Test]
         public void Contains_WhenCallingWithMessage_ShouldGenerateCode()
         {
-            Assert.AreEqual("Assert.IsTrue(\"test\".Contains(\"t\"),\"Message\");", NunitAssertGenerator.Contains(new ValueArgument("t"), new ValueArgument("test"), "Message").ToString());
+            Assert.AreEqual("Assert.IsTrue(\"test\".Contains(\"t\"),\"Message\");", NunitAssertGenerator.Contains(new StringValueArgument("t"), new StringValueArgument("test"), "Message").ToString());
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace VaVare.Tests.Generators.Special
         }
 
         [Test]
-        public void Throws_WhenCallingWithAReferencethatIsNotMethod_ShouldShowError()
+        public void Throws_WhenCallingWithAReferenceThatIsNotMethod_ShouldShowError()
         {
             Assert.Throws<ArgumentException>(() => NunitAssertGenerator.Throws(new VariableReference("test"), typeof(ArgumentException), "test").ToString());
         }

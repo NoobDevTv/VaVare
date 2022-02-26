@@ -239,7 +239,7 @@ namespace VaVare.Builders.Base
             return BaseList(
                 SeparatedList<BaseTypeSyntax>(
                     _inheritance.Select(i => SimpleBaseType(TypeGenerator.Create(i))),
-                    _inheritance.Skip(1).Select(i => Token(SyntaxKind.CommaToken))));
+                    _inheritance.Skip(1).Select(_ => Token(SyntaxKind.CommaToken))));
         }
     }
 }

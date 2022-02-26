@@ -35,7 +35,7 @@ namespace VaVare.Extensions.Naming
         /// <returns>The formatted class name.</returns>
         public static string FormattedClassName(this Type type)
         {
-            var index = type.Name.IndexOf("`");
+            var index = type.Name.IndexOf("`", StringComparison.Ordinal);
             if (index <= 0)
             {
                 return type.Name;

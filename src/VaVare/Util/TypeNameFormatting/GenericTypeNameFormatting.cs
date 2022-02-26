@@ -22,7 +22,7 @@ namespace VaVare.Util.TypeNameFormatting
         /// <returns>The formatted name.</returns>
         internal static string FormatName(Type type)
         {
-            var index = type.Name.IndexOf("`");
+            var index = type.Name.IndexOf("`", StringComparison.Ordinal);
             return index == -1 ? type.Name : type.Name.Substring(0, index);
         }
     }

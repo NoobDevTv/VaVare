@@ -32,7 +32,7 @@ namespace VaVare.Tests.Generators.Class
         [Test]
         public void Constructor_WhenCreatingConstructorWithBaseInitializerWithArgument_ShouldGenerateCorrectCode()
         {
-            Assert.AreEqual("MyClass():base(\"myText\"){}", ConstructorGenerator.Create("MyClass", BodyGenerator.Create(), constructorInitializer: new ConstructorInitializer(ConstructorInitializerTypes.Base, new List<Argument> { new ValueArgument("myText")})).ToString());
+            Assert.AreEqual("MyClass():base(\"myText\"){}", ConstructorGenerator.Create("MyClass", BodyGenerator.Create(), constructorInitializer: new ConstructorInitializer(ConstructorInitializerTypes.Base, new List<Argument> { new StringValueArgument("myText")})).ToString());
         }
 
         [Test]

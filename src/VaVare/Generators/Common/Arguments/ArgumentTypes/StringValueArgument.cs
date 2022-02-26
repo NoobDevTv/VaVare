@@ -6,7 +6,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
 {
     public class StringValueArgument : Argument
     {
-        private readonly IdentifierNameSyntax identifierName;
+        private readonly IdentifierNameSyntax _identifierName;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StringValueArgument"/> class.
@@ -24,7 +24,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
 
             Value = stringType == StringType.Verbatim ? $"@\"{value}\"" : $"\"{value}\"";
 
-            identifierName = CreateIdentifierNameSyntax(value);
+            _identifierName = CreateIdentifierNameSyntax(Value);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
             => new StringValueArgument(value, stringType: stringType, namedArgument: namedArgument);
 
         protected override ArgumentSyntax CreateArgumentSyntax()
-            => SyntaxFactory.Argument(identifierName);
+            => SyntaxFactory.Argument(_identifierName);
 
         private static IdentifierNameSyntax CreateIdentifierNameSyntax(object value)
         {

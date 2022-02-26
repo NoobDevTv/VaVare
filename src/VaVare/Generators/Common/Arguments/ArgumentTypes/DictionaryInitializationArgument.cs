@@ -39,7 +39,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
                         ImplicitElementAccess()
                             .WithArgumentList(
                                 BracketedArgumentList(
-                                    SingletonSeparatedList<ArgumentSyntax>(
+                                    SingletonSeparatedList(
                                         Argument(
                                             IdentifierName(
                                                 typeof(TKey) == typeof(string) ? $"\"{dictionaryValue.Key}\"" : dictionaryValue.Key.ToString()))))),

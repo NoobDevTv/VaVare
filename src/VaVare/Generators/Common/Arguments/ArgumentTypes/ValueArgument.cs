@@ -11,7 +11,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
     /// </summary>
     public class ValueArgument : Argument
     {
-        private readonly IdentifierNameSyntax identifierName;
+        private readonly IdentifierNameSyntax _identifierName;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ValueArgument"/> class.
@@ -32,7 +32,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
             }
 
             Value = value;
-            identifierName = CreateIdentifierNameSyntax(value);
+            _identifierName = CreateIdentifierNameSyntax(value);
         }
 
         /// <summary>
@@ -72,8 +72,13 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
                 Value = value;
             }
 
-            identifierName = CreateIdentifierNameSyntax(Value);
+            _identifierName = CreateIdentifierNameSyntax(Value);
         }
+
+        /// <summary>
+        /// Gets a <c>null</c> value argument.
+        /// </summary>
+        public static ValueArgument Null { get; } = new ValueArgument("null");
 
         /// <summary>
         /// Gets the value sent in as an argument.
@@ -87,7 +92,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
             => new ValueArgument(value, false, namedArgument: namedArgument);
 
         protected override ArgumentSyntax CreateArgumentSyntax()
-            => SyntaxFactory.Argument(identifierName);
+            => SyntaxFactory.Argument(_identifierName);
 
         private static IdentifierNameSyntax CreateIdentifierNameSyntax(object value)
         {

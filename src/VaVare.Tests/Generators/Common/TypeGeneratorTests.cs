@@ -65,9 +65,9 @@ namespace VaVare.Tests.Generators.Common
         }
 
         [Test]
-        public void Create_WhenCreatingWithNoPredfinedType_ShouldGenerateCode()
+        public void Create_WhenCreatingWithNoPredefinedType_ShouldGenerateCode()
         {
-            Assert.AreEqual("List", TypeGenerator.Create(typeof(List)).ToString());
+            Assert.AreEqual("TypeGeneratorTests", TypeGenerator.Create(typeof(TypeGeneratorTests)).ToString());
         }
 
         [Test]
@@ -89,7 +89,7 @@ namespace VaVare.Tests.Generators.Common
         }
 
         [Test]
-        public void Create_WhenCreatingWithNoPredfinedGenericType_ShouldGenerateCode()
+        public void Create_WhenCreatingWithNoPredefinedGenericType_ShouldGenerateCode()
         {
             Assert.AreEqual("List<string>", TypeGenerator.Create(typeof(List<string>)).ToString());
         }

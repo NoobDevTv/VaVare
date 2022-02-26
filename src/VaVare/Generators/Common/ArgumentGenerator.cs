@@ -38,7 +38,7 @@ namespace VaVare.Generators.Common
             var list = new List<SyntaxNodeOrToken>();
             foreach (var argument in arguments)
             {
-                list.Add(argument != null ? argument.GetArgumentSyntax() : new ValueArgument("null").GetArgumentSyntax());
+                list.Add(argument != null ? argument.GetArgumentSyntax() : ValueArgument.Null.GetArgumentSyntax());
                 list.Add(SyntaxFactory.Token(SyntaxKind.CommaToken));
             }
 

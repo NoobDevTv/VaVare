@@ -15,7 +15,7 @@ namespace VaVare.Tests.Compilation
         [OneTimeSetUp]
         public void SetUp()
         {
-            _compiler = new Compiler(null);
+            _compiler = new Compiler();
         }
 
         [Test]

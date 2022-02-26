@@ -102,7 +102,7 @@ namespace VaVare.Generators.Common
                         .WithArgumentList(ArgumentGenerator.Create(methodReference.Arguments.ToArray()));
                 }
             }
-            else if (reference is MemberReference)
+            else
             {
                 expressionSyntax = MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, expressionSyntax, IdentifierName(reference.Name));
             }
