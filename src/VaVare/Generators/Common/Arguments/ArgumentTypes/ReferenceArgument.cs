@@ -7,7 +7,7 @@ using VaVare.Models.References;
 namespace VaVare.Generators.Common.Arguments.ArgumentTypes
 {
     /// <summary>
-    /// Provides the functionality to generate reference arguments. Example of generated code: <c>(i.MyProperty)</c>
+    /// Provides the functionality to generate reference arguments. Example of generated code: <c>(i.MyProperty)</c>.
     /// </summary>
     public class ReferenceArgument : Argument
     {
@@ -17,7 +17,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
         /// Initializes a new instance of the <see cref="ReferenceArgument"/> class.
         /// </summary>
         /// <param name="reference">The variable/method reference.</param>
-        /// <param name="namedArgument">Specificy the argument for a partical parameter.</param>
+        /// <param name="namedArgument">Specify the argument for a particular parameter.</param>
         public ReferenceArgument(VariableReference reference, string namedArgument = null)
             : base(namedArgument)
         {

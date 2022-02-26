@@ -27,7 +27,7 @@ namespace VaVare.Builders
         /// Add class fields.
         /// </summary>
         /// <param name="fields">A set of wanted fields.</param>
-        /// <returns>The current class builder</returns>
+        /// <returns>The current class builder.</returns>
         public ClassBuilder WithFields(params Field[] fields)
         {
             return With(new FieldBuildMember(fields.Select(FieldGenerator.Create)));
@@ -37,7 +37,7 @@ namespace VaVare.Builders
         /// Add class fields.
         /// </summary>
         /// <param name="fields">An array of already declared fields.</param>
-        /// <returns>The current class builder</returns>
+        /// <returns>The current class builder.</returns>
         public ClassBuilder WithFields(params FieldDeclarationSyntax[] fields)
         {
             return With(new FieldBuildMember(fields));
@@ -47,7 +47,7 @@ namespace VaVare.Builders
         /// Add class constructor.
         /// </summary>
         /// <param name="constructor">An already generated constructor.</param>
-        /// <returns>The current class builder</returns>
+        /// <returns>The current class builder.</returns>
         public ClassBuilder WithConstructor(params ConstructorDeclarationSyntax[] constructor)
         {
             return With(new ConstructorBuildMember(constructor));

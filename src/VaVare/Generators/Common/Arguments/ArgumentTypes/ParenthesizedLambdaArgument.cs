@@ -9,7 +9,7 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 namespace VaVare.Generators.Common.Arguments.ArgumentTypes
 {
     /// <summary>
-    /// Provides the functionality to generate parenthesized lambda arguments. Example of generated code: <c>(() => Do()</c>
+    /// Provides the functionality to generate parenthesized lambda arguments. Example of generated code: <c>(() => Do()</c>.
     /// </summary>
     public class ParenthesizedLambdaArgument : Argument
     {
@@ -22,7 +22,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
         /// </summary>
         /// <param name="expressionSyntax">The expression to execute inside the lambda.</param>
         /// <param name="parameters">Parameters in the lambda.</param>
-        /// <param name="namedArgument">Specificy the argument for a partical parameter.</param>
+        /// <param name="namedArgument">Specify the argument for a particular parameter.</param>
         public ParenthesizedLambdaArgument(ExpressionSyntax expressionSyntax, IEnumerable<Parameter> parameters = null, string namedArgument = null)
             : base(namedArgument)
         {
@@ -40,7 +40,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
         /// </summary>
         /// <param name="blockSyntax">The block/body inside the lambda.</param>
         /// <param name="parameters">Parameters in the lambda.</param>
-        /// <param name="namedArgument">Specificy the argument for a partical parameter.</param>
+        /// <param name="namedArgument">Specify the argument for a particular parameter.</param>
         public ParenthesizedLambdaArgument(BlockSyntax blockSyntax, IEnumerable<Parameter> parameters = null, string namedArgument = null)
             : base(namedArgument)
         {

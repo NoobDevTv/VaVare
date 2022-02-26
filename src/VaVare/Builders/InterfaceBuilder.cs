@@ -5,7 +5,7 @@ using VaVare.Builders.Base;
 namespace VaVare.Builders
 {
     /// <summary>
-    /// Provides a builder to generate an interface
+    /// Provides a builder to generate an interface.
     /// </summary>
     public class InterfaceBuilder : TypeBuilderBase<InterfaceBuilder>
     {

@@ -23,7 +23,7 @@ namespace VaVare.Builders.Base
         /// Set the using directives.
         /// </summary>
         /// <param name="usings">A set of wanted using directive names.</param>
-        /// <returns>The current builder</returns>
+        /// <returns>The current builder.</returns>
         public TBuilder WithUsings(params string[] usings)
         {
             _usingHelper.AddUsings(usings);
@@ -33,8 +33,8 @@ namespace VaVare.Builders.Base
         /// <summary>
         /// Add build members that will be generated.
         /// </summary>
-        /// <param name="buidMembers">Build members to add</param>
-        /// <returns>The current builder</returns>
+        /// <param name="buildMembers">Build members to add.</param>
+        /// <returns>The current builder.</returns>
         public TBuilder With(params IBuildMember[] buildMembers)
         {
             _memberHelper.AddMembers(buildMembers);

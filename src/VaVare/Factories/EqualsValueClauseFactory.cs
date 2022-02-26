@@ -10,10 +10,10 @@ namespace VaVare.Factories
     internal static class EqualsValueClauseFactory
     {
         /// <summary>
-        /// Get the correct equals value clause for a specific type
+        /// Get the correct equals value clause for a specific type.
         /// </summary>
-        /// <param name="value">Value we want to put the variable equal as</param>
-        /// <returns>The correct equals value clause</returns>
+        /// <param name="value">Value we want to put the variable equal as.</param>
+        /// <returns>The correct equals value clause.</returns>
         internal static EqualsValueClauseSyntax GetEqualsValueClause(object value)
         {
             if (value is int)

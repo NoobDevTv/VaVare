@@ -6,15 +6,15 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace VaVare.Generators.Common.Arguments.ArgumentTypes
 {
     /// <summary>
-    /// Provides the functionality to generate variable argument. Example of generated code: <c>(myVariable)</c>
+    /// Provides the functionality to generate variable argument. Example of generated code: <c>(myVariable)</c>.
     /// </summary>
     public class VariableArgument : Argument
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="VariableArgument"/> class.
         /// </summary>
-        /// <param name="name">Name of the variable</param>
-        /// <param name="namedArgument">Specificy the argument for a partical parameter</param>
+        /// <param name="name">Name of the variable.</param>
+        /// <param name="namedArgument">Specify the argument for a particular parameter.</param>
         public VariableArgument(string name, string namedArgument = null)
             : base(namedArgument)
         {
@@ -27,7 +27,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
         }
 
         /// <summary>
-        /// Gets or sets the name of variable argument
+        /// Gets or sets the name of variable argument.
         /// </summary>
         public string Name { get; set; }
 

@@ -17,7 +17,7 @@ namespace VaVare.Models.Properties
         /// <param name="attributes">Attributes on the property.</param>
         /// <param name="getModifiers">The get modifiers.</param>
         /// <param name="setModifiers">The set modifiers.</param>
-        /// <param name="summary">XML documentation summary</param>
+        /// <param name="summary">XML documentation summary.</param>
         protected Property(
             string name,
             Type type,

@@ -12,11 +12,11 @@ namespace VaVare.Generators.Common
     internal static class GenericGenerator
     {
         /// <summary>
-        /// Create the syntax for a generic type
+        /// Create the syntax for a generic type.
         /// </summary>
-        /// <param name="name">Name the base (for example List)</param>
-        /// <param name="genericTypes">The generic types</param>
-        /// <returns>The declared generic name syntax</returns>
+        /// <param name="name">Name the base (for example List).</param>
+        /// <param name="genericTypes">The generic types.</param>
+        /// <returns>The declared generic name syntax.</returns>
         internal static GenericNameSyntax Create(string name, IEnumerable<Type> genericTypes)
         {
             if (name == null)

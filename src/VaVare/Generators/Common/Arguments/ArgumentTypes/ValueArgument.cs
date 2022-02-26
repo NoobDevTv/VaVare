@@ -22,7 +22,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
         /// Initializes a new instance of the <see cref="ValueArgument"/> class.
         /// </summary>
         /// <param name="value">Value to send in as an argument.</param>
-        /// <param name="namedArgument">Specificy the argument for a partical parameter.</param>
+        /// <param name="namedArgument">Specify the argument for a particular parameter.</param>
         public ValueArgument(object value, string namedArgument = null)
             : base(namedArgument)
         {
@@ -45,7 +45,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
         /// </summary>
         /// <param name="value">String value to send in as an argument.</param>
         /// <param name="stringType">The type of string.</param>
-        /// <param name="namedArgument">Specificy the argument for a partical parameter.</param>
+        /// <param name="namedArgument">Specify the argument for a particular parameter.</param>
         [Obsolete($"Please use {nameof(StringValueArgument)} instead")]
         public ValueArgument(string value, StringType stringType = StringType.Normal, string namedArgument = null)
             : this(value, true, stringType, namedArgument)
@@ -56,9 +56,9 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
         /// Initializes a new instance of the <see cref="ValueArgument"/> class.
         /// </summary>
         /// <param name="value">String value to send in as an argument.</param>
-        /// <param name="escapeValueAsString">If <see langword="true"/>, inverted commas are added to the <paramref name="value"/></param>
+        /// <param name="escapeValueAsString">If <see langword="true"/>, inverted commas are added to the <paramref name="value"/>.</param>
         /// <param name="stringType">The type of string.</param>
-        /// <param name="namedArgument">Specificy the argument for a partical parameter.</param>
+        /// <param name="namedArgument">Specify the argument for a particular parameter.</param>
         [Obsolete($"Please use {nameof(StringValueArgument)} instead")]
         public ValueArgument(string value, bool escapeValueAsString, StringType stringType = StringType.Normal, string namedArgument = null)
             : base(namedArgument)

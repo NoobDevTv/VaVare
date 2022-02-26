@@ -7,9 +7,9 @@ namespace VaVare.Extensions.Naming
     public static class TypeNamingExtensions
     {
         /// <summary>
-        /// Get the type name in a format that follow field naming conventions
+        /// Get the type name in a format that follow field naming conventions.
         /// </summary>
-        /// <param name="type">Type to create field name from</param>
+        /// <param name="type">Type to create field name from.</param>
         /// <returns>The formatted field name by removing I from interfaces, change first letter to lower, etc.</returns>
         public static string FormattedFieldName(this Type type)
         {
@@ -29,10 +29,10 @@ namespace VaVare.Extensions.Naming
         }
 
         /// <summary>
-        /// Get the type name in a format that follow class naming conventions
+        /// Get the type name in a format that follow class naming conventions.
         /// </summary>
-        /// <param name="type">Type to create class name from</param>
-        /// <returns>The formatted class name</returns>
+        /// <param name="type">Type to create class name from.</param>
+        /// <returns>The formatted class name.</returns>
         public static string FormattedClassName(this Type type)
         {
             var index = type.Name.IndexOf("`");

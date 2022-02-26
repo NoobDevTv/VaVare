@@ -19,10 +19,10 @@ namespace VaVare.Extensions.Naming
         }
 
         /// <summary>
-        /// Turn the first letter in a string to upper case
+        /// Turn the first letter in a string to upper case.
         /// </summary>
-        /// <param name="value">String to change</param>
-        /// <returns>A new string with the first letter in upper case</returns>
+        /// <param name="value">String to change.</param>
+        /// <returns>A new string with the first letter in upper case.</returns>
         public static string FirstLetterToUpperCase(this string value)
         {
             if (string.IsNullOrEmpty(value))

@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace VaVare.Generators.Common.Arguments.ArgumentTypes
 {
     /// <summary>
-    /// Provides the functionality to generate a class initialization argument. Example of generated code: <c>(new MyClass())</c>
+    /// Provides the functionality to generate a class initialization argument. Example of generated code: <c>(new MyClass())</c>.
     /// </summary>
     public class ClassInitializationArgument : Argument
     {
@@ -22,7 +22,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
         /// <param name="type">The class type to initialize.</param>
         /// <param name="arguments">Arguments used when initializing the class.</param>
         /// <param name="genericTypes">Generics of the class.</param>
-        /// <param name="namedArgument">Specificy the argument for a partical parameter.</param>
+        /// <param name="namedArgument">Specify the argument for a particular parameter.</param>
         public ClassInitializationArgument(
             Type type,
             IEnumerable<IArgument> arguments = null,

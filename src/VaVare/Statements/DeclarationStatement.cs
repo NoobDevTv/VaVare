@@ -423,6 +423,7 @@ namespace VaVare.Statements
 
             return Assign(reference, ReferenceGenerator.Create(valueReference), castTo);
         }
+
         /// <summary>
         /// Create the expression statement syntax to assign a reference to another expression.
         /// </summary>

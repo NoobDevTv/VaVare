@@ -7,7 +7,7 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 namespace VaVare.Generators.Common.BinaryExpressions
 {
     /// <summary>
-    /// Provides the functionality to generate binary expressions with math operators
+    /// Provides the functionality to generate binary expressions with math operators.
     /// </summary>
     public class MathBinaryExpression : IBinaryExpression
     {
@@ -48,10 +48,10 @@ namespace VaVare.Generators.Common.BinaryExpressions
         /// <summary>
         /// Initializes a new instance of the <see cref="MathBinaryExpression"/> class.
         /// </summary>
-        /// <param name="leftReference">The left reference</param>
-        /// <param name="rightReference">The right reference</param>
-        /// <param name="mathOperator">The math operator to generate</param>
-        /// <param name="useParenthes">If we should generate with paranthes surounding the the binary expression</param>
+        /// <param name="leftReference">The left reference.</param>
+        /// <param name="rightReference">The right reference.</param>
+        /// <param name="mathOperator">The math operator to generate.</param>
+        /// <param name="useParenthes">If we should generate with paranthes surounding the the binary expression.</param>
         public MathBinaryExpression(
             VariableReference leftReference,
             VariableReference rightReference,

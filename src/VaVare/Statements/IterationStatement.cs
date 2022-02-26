@@ -14,7 +14,7 @@ namespace VaVare.Statements
     public class IterationStatement
     {
         /// <summary>
-        /// Create the for statement syntax for a for loop with fixed start and stop
+        /// Create the for statement syntax for a for loop with fixed start and stop.
         /// </summary>
         /// <param name="start">Start number.</param>
         /// <param name="end">End number.</param>

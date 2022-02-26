@@ -7,7 +7,7 @@ using VaVare.Generators.Common.BinaryExpressions;
 namespace VaVare.Generators.Common.Arguments.ArgumentTypes
 {
     /// <summary>
-    /// Provides the functionality to generate binary expression argument. Example of generated code: <c>(1+2)</c>
+    /// Provides the functionality to generate binary expression argument. Example of generated code: <c>(1+2)</c>.
     /// </summary>
     public class BinaryExpressionArgument : Argument
     {
@@ -17,7 +17,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
         /// Initializes a new instance of the <see cref="BinaryExpressionArgument"/> class.
         /// </summary>
         /// <param name="binaryExpression">The binary expression.</param>
-        /// <param name="namedArgument">Specificy the argument for a partical parameter.</param>
+        /// <param name="namedArgument">Specify the argument for a particular parameter.</param>
         public BinaryExpressionArgument(IBinaryExpression binaryExpression, string namedArgument = null)
             : base(namedArgument)
         {

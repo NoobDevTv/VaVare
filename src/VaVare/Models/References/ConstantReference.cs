@@ -25,7 +25,7 @@ namespace VaVare.Models.References
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstantReference"/> class.
         /// </summary>
-        /// <param name="value">Value of the constant</param>
+        /// <param name="value">Value of the constant.</param>
         /// <param name="stringType">The type of string to generate.</param>
         public ConstantReference(string value, StringType stringType = StringType.Normal)
             : base(value)

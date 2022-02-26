@@ -6,7 +6,7 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 namespace VaVare.Generators.Common.Arguments.ArgumentTypes
 {
     /// <summary>
-    /// Provides the functionality to generate lambda arguments. Example of generated code: <c>(n=>MyMethod())</c>
+    /// Provides the functionality to generate lambda arguments. Example of generated code: <c>(n=>MyMethod())</c>.
     /// </summary>
     public class LambdaArgument : Argument
     {
@@ -19,7 +19,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
         /// </summary>
         /// <param name="expressionSyntax">Generated expression inside the lambda.</param>
         /// <param name="parameterName">Paramters in the lambda.</param>
-        /// <param name="namedArgument">Specificy the argument for a partical parameter.</param>
+        /// <param name="namedArgument">Specify the argument for a particular parameter.</param>
         public LambdaArgument(ExpressionSyntax expressionSyntax, string parameterName, string namedArgument = null)
             : base(namedArgument)
         {
@@ -42,7 +42,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
         /// </summary>
         /// <param name="blockSyntax">Generated block/body inside the lambda.</param>
         /// <param name="parameterName">Paramters in the lambda.</param>
-        /// <param name="namedArgument">Specificy the argument for a partical parameter.</param>
+        /// <param name="namedArgument">Specify the argument for a particular parameter.</param>
         public LambdaArgument(BlockSyntax blockSyntax, string parameterName, string namedArgument = null)
             : base(namedArgument)
         {

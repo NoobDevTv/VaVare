@@ -7,7 +7,7 @@ using VaVare.Models.References;
 namespace VaVare.Generators.Common.BinaryExpressions
 {
     /// <summary>
-    /// Provides the functionality to generate a condtional binary expression. Example of generated code: <c>test()+test.MyProp</c>
+    /// Provides the functionality to generate a conditional binary expression. Example of generated code: <c>test()+test.MyProp</c>.
     /// </summary>
     public class ConditionalBinaryExpression : IBinaryExpression
     {

@@ -27,7 +27,7 @@ namespace VaVare.Saver
         /// <summary>
         /// Initializes a new instance of the <see cref="CodeSaver"/> class.
         /// </summary>
-        /// <param name="options">A list with formatting options</param>
+        /// <param name="options">A list with formatting options.</param>
         public CodeSaver(IEnumerable<OptionKeyValue> options)
         {
             _options = new List<OptionKeyValue>(options);

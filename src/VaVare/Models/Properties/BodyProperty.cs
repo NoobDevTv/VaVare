@@ -20,7 +20,7 @@ namespace VaVare.Models.Properties
         /// <param name="attributes">Attributes of the property.</param>
         /// <param name="getModifiers">The get modifiers.</param>
         /// <param name="setModifiers">The set modifiers.</param>
-        /// <param name="summary">XML documentation summary</param>
+        /// <param name="summary">XML documentation summary.</param>
         public BodyProperty(
             string name,
             Type type,
@@ -56,12 +56,12 @@ namespace VaVare.Models.Properties
         }
 
         /// <summary>
-        /// Gets or sets the generated body of the get in a property
+        /// Gets or sets the generated body of the get in a property.
         /// </summary>
         public BlockSyntax GetBody { get; set; }
 
         /// <summary>
-        /// Gets or sets the generated body of the set in a property
+        /// Gets or sets the generated body of the set in a property.
         /// </summary>
         public BlockSyntax SetBody { get; set; }
     }

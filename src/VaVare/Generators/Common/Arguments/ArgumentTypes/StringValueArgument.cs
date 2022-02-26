@@ -18,7 +18,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
         /// </summary>
         /// <param name="value">String value to send in as an argument.</param>
         /// <param name="stringType">The type of string.</param>
-        /// <param name="namedArgument">Specificy the argument for a partical parameter.</param>
+        /// <param name="namedArgument">Specify the argument for a particular parameter.</param>
         public StringValueArgument(string value, StringType stringType = StringType.Normal, string namedArgument = null)
             : base(namedArgument)
         {

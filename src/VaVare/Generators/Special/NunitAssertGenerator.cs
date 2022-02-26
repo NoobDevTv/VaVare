@@ -76,7 +76,7 @@ namespace VaVare.Generators.Special
         /// </summary>
         /// <param name="actual">The actual argument.</param>
         /// <param name="message">Message if test fails.</param>
-        /// <returns>The declared expression statement syntax for Assert.IsFalse</returns>
+        /// <returns>The declared expression statement syntax for Assert.IsFalse.</returns>
         public static ExpressionStatementSyntax IsFalse(IArgument actual, string message = null)
         {
             return Is(false, actual, message);

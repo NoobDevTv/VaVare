@@ -43,10 +43,10 @@ namespace VaVare.Builders.Base
         protected string Name { get; }
 
         /// <summary>
-        /// Set type modifiers
+        /// Set type modifiers.
         /// </summary>
         /// <param name="modifier">A set of wanted modifiers.</param>
-        /// <returns>The current builder</returns>
+        /// <returns>The current builder.</returns>
         public TBuilder WithModifiers(params Modifiers[] modifier)
         {
             _modifiers.Clear();
@@ -92,7 +92,7 @@ namespace VaVare.Builders.Base
         /// Set type(s) that the generated class should inherit from.
         /// </summary>
         /// <param name="types">A set of types to inherit from.</param>
-        /// <returns>The current builder</returns>
+        /// <returns>The current builder.</returns>
         public TBuilder ThatInheritFrom(params Type[] types)
         {
             _inheritance.Clear();
@@ -104,7 +104,7 @@ namespace VaVare.Builders.Base
         /// Set type attributes.
         /// </summary>
         /// <param name="attributes">A syntax list of already generated attributes.</param>
-        /// <returns>The current builder</returns>
+        /// <returns>The current builder.</returns>
         public TBuilder WithAttributes(SyntaxList<AttributeListSyntax> attributes)
         {
             _attributes = attributes;
@@ -115,7 +115,7 @@ namespace VaVare.Builders.Base
         /// Set type attributes.
         /// </summary>
         /// <param name="attributes">A set of wanted attributes.</param>
-        /// <returns>The current builder</returns>
+        /// <returns>The current builder.</returns>
         public TBuilder WithAttributes(params Attribute[] attributes)
         {
             _attributes = AttributeGenerator.Create(attributes);
@@ -125,8 +125,8 @@ namespace VaVare.Builders.Base
         /// <summary>
         /// Set type methods.
         /// </summary>
-        /// <param name="methods">A set of already generated methods</param>
-        /// <returns>The current class builder</returns>
+        /// <param name="methods">A set of already generated methods.</param>
+        /// <returns>The current class builder.</returns>
         public TBuilder WithMethods(params BaseMethodDeclarationSyntax[] methods)
         {
             return With(new MethodBuildMember(methods));
@@ -136,7 +136,7 @@ namespace VaVare.Builders.Base
         /// Set type properties.
         /// </summary>
         /// <param name="properties">A set of wanted properties.</param>
-        /// <returns>The current builder</returns>
+        /// <returns>The current builder.</returns>
         public TBuilder WithProperties(params Property[] properties)
         {
             return With(new PropertyBuildMember(properties.Select(PropertyGenerator.Create)));
@@ -145,8 +145,8 @@ namespace VaVare.Builders.Base
         /// <summary>
         /// Add type properties.
         /// </summary>
-        /// <param name="properties">A sete of already generated properties</param>
-        /// <returns>The current builder</returns>
+        /// <param name="properties">A set of already generated properties.</param>
+        /// <returns>The current builder.</returns>
         public TBuilder WithProperties(params PropertyDeclarationSyntax[] properties)
         {
             return With(new PropertyBuildMember(properties));
@@ -155,7 +155,7 @@ namespace VaVare.Builders.Base
         /// <summary>
         /// Add region.
         /// </summary>
-        /// <param name="regionMember">The region</param>
+        /// <param name="regionMember">The region.</param>
         /// <returns>The current builder.</returns>
         public TBuilder WithRegions(params RegionBuildMember[] regionMember)
         {
