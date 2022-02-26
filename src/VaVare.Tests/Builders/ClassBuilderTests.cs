@@ -78,5 +78,11 @@ namespace VaVare.Tests.Builders
         {
             Assert.IsTrue(_classBuilder.WithTypeParameters(new TypeParameter("T", Variance.In), new TypeParameter("U", Variance.Out)).Build().ToString().Contains("TestClass<inT,outU>"));
         }
+
+        [Test]
+        public void Build_WhenGivenTypeParameterConstraints_CodeShouldContainTypeParameterConstraints()
+        {
+            Assert.IsTrue(_classBuilder.WithTypeParameters(new TypeParameter("T")).WithTypeConstraintClauses(new TypeParameterConstraintClause("T", new TypeParameterConstraint(TypeParameterConstraint.ConstraintType.Constructor), new TypeParameterConstraint(TypeParameterConstraint.ConstraintType.Class))).Build().ToString().Contains("TestClass<T>whereT:new(),class"));
+        }
     }
 }
