@@ -66,5 +66,17 @@ namespace VaVare.Tests.Builders
         {
             Assert.IsTrue(_classBuilder.ThatInheritFrom(typeof(int)).Build().ToString().Contains("TestClass:int"));
         }
+
+        [Test]
+        public void Build_WhenGivenTypeParameter_CodeShouldContainTypeParameter()
+        {
+            Assert.IsTrue(_classBuilder.WithTypeParameters(new TypeParameter("T", Variance.In)).Build().ToString().Contains("TestClass<inT>"));
+        }
+
+        [Test]
+        public void Build_WhenGivenTypeParameters_CodeShouldContainTypeParameters()
+        {
+            Assert.IsTrue(_classBuilder.WithTypeParameters(new TypeParameter("T", Variance.In), new TypeParameter("U", Variance.Out)).Build().ToString().Contains("TestClass<inT,outU>"));
+        }
     }
 }

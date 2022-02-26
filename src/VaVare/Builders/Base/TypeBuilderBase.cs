@@ -8,6 +8,7 @@ using VaVare.Builders.BuildMembers;
 using VaVare.Generators.Class;
 using VaVare.Generators.Common;
 using VaVare.Generators.Special;
+using VaVare.Models;
 using VaVare.Models.Properties;
 using Attribute = VaVare.Models.Attribute;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
@@ -19,6 +20,7 @@ namespace VaVare.Builders.Base
     {
         private readonly List<Type> _inheritance;
         private readonly List<Modifiers> _modifiers;
+        private readonly List<TypeParameter> _typeParameters;
         private SyntaxList<AttributeListSyntax> _attributes;
         private string _summary;
 
@@ -33,6 +35,7 @@ namespace VaVare.Builders.Base
             Name = name.Replace(" ", "_");
             _inheritance = new List<Type>();
             _modifiers = new List<Modifiers> { Modifiers.Public };
+            _typeParameters = new List<TypeParameter>();
         }
 
         protected string Name { get; }
@@ -46,6 +49,18 @@ namespace VaVare.Builders.Base
         {
             _modifiers.Clear();
             _modifiers.AddRange(modifier);
+            return (TBuilder)this;
+        }
+
+        /// <summary>
+        /// Add generic type parameters.
+        /// </summary>
+        /// <param name="typeParameters">The type parameters.</param>
+        /// <returns>The current builder.</returns>
+        public TBuilder WithTypeParameters(params TypeParameter[] typeParameters)
+        {
+            _typeParameters.Clear();
+            _typeParameters.AddRange(typeParameters);
             return (TBuilder)this;
         }
 
@@ -153,10 +168,12 @@ namespace VaVare.Builders.Base
         public TypeDeclarationSyntax BuildWithoutNamespace()
         {
             var @type = BuildBase();
+            @type = BuildTypeParameters(@type);
             @type = @type.WithSummary(_summary);
             @type = BuildAttributes(@type);
             @type = BuildMembers(@type);
             @type = BuildSurroundingTokens(@type);
+
             return @type;
         }
 
@@ -173,6 +190,11 @@ namespace VaVare.Builders.Base
         protected SyntaxTokenList CreateModifiers()
         {
             return ModifierGenerator.Create(_modifiers.ToArray());
+        }
+
+        protected TypeDeclarationSyntax BuildTypeParameters(TypeDeclarationSyntax @class)
+        {
+            return _typeParameters.Count == 0 ? @class : @class.WithTypeParameterList(TypeParameterGenerator.Create(_typeParameters));
         }
 
         protected BaseListSyntax CreateBaseList()
