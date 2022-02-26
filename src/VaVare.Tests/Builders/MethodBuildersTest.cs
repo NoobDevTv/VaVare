@@ -85,5 +85,12 @@ namespace VaVare.Tests.Builders
             var builder = new MethodBuilder("MyMethod");
             Assert.IsTrue(builder.WithTypeParameters(new TypeParameter("T", Variance.In), new TypeParameter("U", Variance.Out)).Build().ToString().Contains("MyMethod<inT,outU>"));
         }
+
+        [Test]
+        public void Build_WhenGivenTypeParameterConstraints_CodeShouldContainTypeParameterConstraints()
+        {
+            var builder = new MethodBuilder("MyMethod");
+            Assert.IsTrue(builder.WithTypeParameters(new TypeParameter("T")).WithTypeConstraintClauses(new TypeParameterConstraintClause("T", new TypeParameterConstraint(TypeParameterConstraint.ConstraintType.Constructor), new TypeParameterConstraint(TypeParameterConstraint.ConstraintType.Class))).Build().ToString().Contains("MyMethod<T>()whereT:new(),class"));
+        }
     }
 }

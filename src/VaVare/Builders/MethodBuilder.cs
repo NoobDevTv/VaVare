@@ -22,6 +22,7 @@ namespace VaVare.Builders
         private readonly List<ParameterSyntax> _parameters;
         private readonly List<Modifiers> _modifiers;
         private readonly List<TypeParameter> _typeParameters;
+        private readonly List<TypeParameterConstraintClause> _constraintClauses;
         private readonly List<Parameter> _parameterXmlDocumentation;
 
         private TypeSyntax _returnType;
@@ -46,6 +47,7 @@ namespace VaVare.Builders
             _parameters = new List<ParameterSyntax>();
             _modifiers = new List<Modifiers>();
             _typeParameters = new List<TypeParameter>();
+            _constraintClauses = new List<TypeParameterConstraintClause>();
             _parameterXmlDocumentation = new List<Parameter>();
             _body = BodyGenerator.Create();
         }
@@ -176,6 +178,28 @@ namespace VaVare.Builders
         }
 
         /// <summary>
+        /// Add constraint clauses on the generic parameters.
+        /// </summary>
+        /// <param name="constraintClauses">The constraint clauses on the generic parameters.</param>
+        /// <returns>The current builder.</returns>
+        public MethodBuilder WithTypeConstraintClauses(params TypeParameterConstraintClause[] constraintClauses)
+        {
+            _constraintClauses.Clear();
+            return AddTypeConstraintClauses(constraintClauses);
+        }
+
+        /// <summary>
+        /// Add constraint clauses on the generic parameters.
+        /// </summary>
+        /// <param name="constraintClauses">The constraint clauses on the generic parameters.</param>
+        /// <returns>The current builder.</returns>
+        public MethodBuilder AddTypeConstraintClauses(params TypeParameterConstraintClause[] constraintClauses)
+        {
+            _constraintClauses.AddRange(constraintClauses);
+            return this;
+        }
+
+        /// <summary>
         /// Set operator overloading.
         /// </summary>
         /// <param name="operator">Operator to overload</param>
@@ -221,13 +245,13 @@ namespace VaVare.Builders
 
             if (_returnType != null)
             {
-                return BuildTypeParameters(MethodDeclaration(_returnType, Identifier(_name)));
+                return BuildTypeParameterConstraintClauses(BuildTypeParameters(MethodDeclaration(_returnType, Identifier(_name))));
             }
             else
             {
-                return BuildTypeParameters(MethodDeclaration(
+                return BuildTypeParameterConstraintClauses(BuildTypeParameters(MethodDeclaration(
                         PredefinedType(Token(SyntaxKind.VoidKeyword)),
-                        Identifier(_name)));
+                        Identifier(_name))));
             }
         }
 
@@ -244,6 +268,11 @@ namespace VaVare.Builders
         private MethodDeclarationSyntax BuildTypeParameters(MethodDeclarationSyntax method)
         {
             return _typeParameters.Count == 0 ? method : method.WithTypeParameterList(TypeParameterGenerator.Create(_typeParameters));
+        }
+
+        protected MethodDeclarationSyntax BuildTypeParameterConstraintClauses(MethodDeclarationSyntax method)
+        {
+            return _constraintClauses.Count == 0 ? method : method.WithConstraintClauses(TypeParameterConstraintGenerator.Create(_constraintClauses));
         }
 
         private BaseMethodDeclarationSyntax BuildAttributes(BaseMethodDeclarationSyntax method)

@@ -21,6 +21,7 @@ namespace VaVare.Builders.Base
         private readonly List<Type> _inheritance;
         private readonly List<Modifiers> _modifiers;
         private readonly List<TypeParameter> _typeParameters;
+        private readonly List<TypeParameterConstraintClause> _constraintClauses;
         private SyntaxList<AttributeListSyntax> _attributes;
         private string _summary;
 
@@ -36,6 +37,7 @@ namespace VaVare.Builders.Base
             _inheritance = new List<Type>();
             _modifiers = new List<Modifiers> { Modifiers.Public };
             _typeParameters = new List<TypeParameter>();
+            _constraintClauses = new List<TypeParameterConstraintClause>();
         }
 
         protected string Name { get; }
@@ -61,6 +63,28 @@ namespace VaVare.Builders.Base
         {
             _typeParameters.Clear();
             _typeParameters.AddRange(typeParameters);
+            return (TBuilder)this;
+        }
+
+        /// <summary>
+        /// Add constraint clauses on the generic parameters.
+        /// </summary>
+        /// <param name="constraintClauses">The constraint clauses on the generic parameters.</param>
+        /// <returns>The current builder.</returns>
+        public TBuilder WithTypeConstraintClauses(params TypeParameterConstraintClause[] constraintClauses)
+        {
+            _constraintClauses.Clear();
+            return AddTypeConstraintClauses(constraintClauses);
+        }
+
+        /// <summary>
+        /// Add constraint clauses on the generic parameters.
+        /// </summary>
+        /// <param name="constraintClauses">The constraint clauses on the generic parameters.</param>
+        /// <returns>The current builder.</returns>
+        public TBuilder AddTypeConstraintClauses(params TypeParameterConstraintClause[] constraintClauses)
+        {
+            _constraintClauses.AddRange(constraintClauses);
             return (TBuilder)this;
         }
 
@@ -169,6 +193,7 @@ namespace VaVare.Builders.Base
         {
             var @type = BuildBase();
             @type = BuildTypeParameters(@type);
+            @type = BuildTypeParameterConstraintClauses(@type);
             @type = @type.WithSummary(_summary);
             @type = BuildAttributes(@type);
             @type = BuildMembers(@type);
@@ -195,6 +220,11 @@ namespace VaVare.Builders.Base
         protected TypeDeclarationSyntax BuildTypeParameters(TypeDeclarationSyntax @class)
         {
             return _typeParameters.Count == 0 ? @class : @class.WithTypeParameterList(TypeParameterGenerator.Create(_typeParameters));
+        }
+
+        protected TypeDeclarationSyntax BuildTypeParameterConstraintClauses(TypeDeclarationSyntax @class)
+        {
+            return _constraintClauses.Count == 0 ? @class : @class.WithConstraintClauses(TypeParameterConstraintGenerator.Create(_constraintClauses));
         }
 
         protected BaseListSyntax CreateBaseList()
