@@ -21,6 +21,7 @@ namespace VaVare.Builders
         private readonly string _name;
         private readonly List<ParameterSyntax> _parameters;
         private readonly List<Modifiers> _modifiers;
+        private readonly List<TypeParameter> _typeParameters;
         private readonly List<Parameter> _parameterXmlDocumentation;
 
         private TypeSyntax _returnType;
@@ -44,6 +45,7 @@ namespace VaVare.Builders
             _name = name.Replace(" ", "_");
             _parameters = new List<ParameterSyntax>();
             _modifiers = new List<Modifiers>();
+            _typeParameters = new List<TypeParameter>();
             _parameterXmlDocumentation = new List<Parameter>();
             _body = BodyGenerator.Create();
         }
@@ -162,6 +164,18 @@ namespace VaVare.Builders
         }
 
         /// <summary>
+        /// Add generic type parameters.
+        /// </summary>
+        /// <param name="typeParameters">The type parameters.</param>
+        /// <returns>The current builder.</returns>
+        public MethodBuilder WithTypeParameters(params TypeParameter[] typeParameters)
+        {
+            _typeParameters.Clear();
+            _typeParameters.AddRange(typeParameters);
+            return this;
+        }
+
+        /// <summary>
         /// Set operator overloading.
         /// </summary>
         /// <param name="operator">Operator to overload</param>
@@ -207,13 +221,13 @@ namespace VaVare.Builders
 
             if (_returnType != null)
             {
-                return MethodDeclaration(_returnType, Identifier(_name));
+                return BuildTypeParameters(MethodDeclaration(_returnType, Identifier(_name)));
             }
             else
             {
-                return MethodDeclaration(
+                return BuildTypeParameters(MethodDeclaration(
                         PredefinedType(Token(SyntaxKind.VoidKeyword)),
-                        Identifier(_name));
+                        Identifier(_name)));
             }
         }
 
@@ -225,6 +239,11 @@ namespace VaVare.Builders
             }
 
             return method.WithModifiers(ModifierGenerator.Create(_modifiers.ToArray()));
+        }
+
+        private MethodDeclarationSyntax BuildTypeParameters(MethodDeclarationSyntax method)
+        {
+            return _typeParameters.Count == 0 ? method : method.WithTypeParameterList(TypeParameterGenerator.Create(_typeParameters));
         }
 
         private BaseMethodDeclarationSyntax BuildAttributes(BaseMethodDeclarationSyntax method)

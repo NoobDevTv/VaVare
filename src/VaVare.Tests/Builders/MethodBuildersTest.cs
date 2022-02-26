@@ -71,5 +71,19 @@ namespace VaVare.Tests.Builders
 
             StringAssert.Contains("publicstaticMyMethodoperator==(){}",builder.Build().ToString());
         }
+        
+        [Test]
+        public void Build_WhenGivenTypeParameter_CodeShouldContainTypeParameter()
+        {
+            var builder = new MethodBuilder("MyMethod");
+            Assert.IsTrue(builder.WithTypeParameters(new TypeParameter("T", Variance.In)).Build().ToString().Contains("MyMethod<inT>"));
+        }
+
+        [Test]
+        public void Build_WhenGivenTypeParameters_CodeShouldContainTypeParameters()
+        {
+            var builder = new MethodBuilder("MyMethod");
+            Assert.IsTrue(builder.WithTypeParameters(new TypeParameter("T", Variance.In), new TypeParameter("U", Variance.Out)).Build().ToString().Contains("MyMethod<inT,outU>"));
+        }
     }
 }
