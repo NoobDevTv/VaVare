@@ -79,7 +79,8 @@ namespace VaVare.Generators.Special
 
         private static SyntaxList<XmlNodeSyntax> CreateParameterDocumentation(SyntaxList<XmlNodeSyntax> content, Parameter parameter)
         {
-            return content.AddRange(new List<XmlNodeSyntax> {
+            return content.AddRange(new List<XmlNodeSyntax>
+            {
                 XmlText().WithTextTokens(
                         TokenList(
                             new[]
@@ -94,7 +95,7 @@ namespace VaVare.Generators.Special
                                         DocumentationCommentExterior("///")),
                                     " ",
                                     " ",
-                                    TriviaList())
+                                    TriviaList()),
                             })),
                 XmlExampleElement(SingletonList<XmlNodeSyntax>(
                         XmlText().WithTextTokens(
@@ -118,7 +119,8 @@ namespace VaVare.Generators.Special
                     .WithEndTag(
                         XmlElementEndTag(
                             XmlName(
-                                Identifier("param")))) });
+                                Identifier("param")))),
+            });
         }
     }
 }

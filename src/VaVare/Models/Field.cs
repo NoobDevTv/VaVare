@@ -70,7 +70,7 @@ namespace VaVare.Models
         public ExpressionSyntax InitializeWith { get; set; }
 
         /// <summary>
-        /// Gets or sets the xml documentation summary of the field.
+        /// Gets the xml documentation summary of the field.
         /// </summary>
         public string Summary { get; }
     }

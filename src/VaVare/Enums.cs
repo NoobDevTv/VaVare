@@ -198,7 +198,7 @@ namespace VaVare
         /// </summary>
         Multiply,
     }
-    
+
     public enum ConstructorInitializerTypes
     {
         /// <summary>

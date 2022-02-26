@@ -1,17 +1,12 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using System;
 using Microsoft.CodeAnalysis.CSharp;
-using System;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace VaVare.Generators.Common.Arguments.ArgumentTypes
 {
     public class StringValueArgument : Argument
     {
         private readonly IdentifierNameSyntax identifierName;
-
-        /// <summary>
-        /// Gets the value sent in as an argument.
-        /// </summary>
-        public string Value { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StringValueArgument"/> class.
@@ -32,13 +27,19 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
             identifierName = CreateIdentifierNameSyntax(value);
         }
 
-        protected override ArgumentSyntax CreateArgumentSyntax()
-            => SyntaxFactory.Argument(identifierName);
+        /// <summary>
+        /// Gets the value sent in as an argument.
+        /// </summary>
+        public string Value { get; }
 
         public static StringValueArgument Parse(string value, StringType stringType = StringType.Normal)
             => new StringValueArgument(value, stringType: stringType);
+
         public static StringValueArgument Parse(string value, StringType stringType, string namedArgument)
             => new StringValueArgument(value, stringType: stringType, namedArgument: namedArgument);
+
+        protected override ArgumentSyntax CreateArgumentSyntax()
+            => SyntaxFactory.Argument(identifierName);
 
         private static IdentifierNameSyntax CreateIdentifierNameSyntax(object value)
         {

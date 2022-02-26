@@ -59,7 +59,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
                             {
                                 TypeGenerator.Create(typeof(TKey)),
                                 Token(SyntaxKind.CommaToken),
-                                TypeGenerator.Create(typeof(TValue))
+                                TypeGenerator.Create(typeof(TValue)),
                             })))).WithInitializer(InitializerExpression(
                 SyntaxKind.ObjectInitializerExpression, SeparatedList<ExpressionSyntax>(syntaxNodeOrTokens.ToArray()))));
         }

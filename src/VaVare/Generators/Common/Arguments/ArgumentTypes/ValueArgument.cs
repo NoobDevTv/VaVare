@@ -14,11 +14,6 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
         private readonly IdentifierNameSyntax identifierName;
 
         /// <summary>
-        /// Gets the value sent in as an argument.
-        /// </summary>
-        public object Value { get; }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ValueArgument"/> class.
         /// </summary>
         /// <param name="value">Value to send in as an argument.</param>
@@ -80,19 +75,25 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
             identifierName = CreateIdentifierNameSyntax(Value);
         }
 
-        protected override ArgumentSyntax CreateArgumentSyntax() 
-            => SyntaxFactory.Argument(identifierName);
+        /// <summary>
+        /// Gets the value sent in as an argument.
+        /// </summary>
+        public object Value { get; }
 
         public static ValueArgument Parse(string value)
             => new ValueArgument(value, false);
+
         public static ValueArgument Parse(string value, string namedArgument)
             => new ValueArgument(value, false, namedArgument: namedArgument);
+
+        protected override ArgumentSyntax CreateArgumentSyntax()
+            => SyntaxFactory.Argument(identifierName);
 
         private static IdentifierNameSyntax CreateIdentifierNameSyntax(object value)
         {
             var name = value.ToString();
 
-            if(value is bool)
+            if (value is bool)
             {
                 name = name.ToLower();
             }

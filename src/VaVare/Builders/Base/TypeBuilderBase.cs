@@ -10,8 +10,10 @@ using VaVare.Generators.Common;
 using VaVare.Generators.Special;
 using VaVare.Models;
 using VaVare.Models.Properties;
-using Attribute = VaVare.Models.Attribute;
+
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
+
+using Attribute = VaVare.Models.Attribute;
 
 namespace VaVare.Builders.Base
 {
@@ -236,7 +238,7 @@ namespace VaVare.Builders.Base
 
             return BaseList(
                 SeparatedList<BaseTypeSyntax>(
-                    _inheritance.Select(i => SimpleBaseType(TypeGenerator.Create(i))), 
+                    _inheritance.Select(i => SimpleBaseType(TypeGenerator.Create(i))),
                     _inheritance.Skip(1).Select(i => Token(SyntaxKind.CommaToken))));
         }
     }
