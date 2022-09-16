@@ -43,7 +43,7 @@ namespace VaVare.Tests.Generators.Common
         [Test]
         public void Create_WhenCreatingWithSingleTypeParameterWithAttributesAndVariance_ShouldGenerateCorrectCode()
         {
-            Assert.AreEqual("<[SomeAttribute]inTest1>", TypeParameterGenerator.Create(new TypeParameter("Test1", Variance.In, new Attribute("SomeAttribute"))).ToString());
+            Assert.AreEqual("<[SomeAttribute]inTest1>", TypeParameterGenerator.Create(new TypeParameter("Test1", Variance.In, null, new Attribute("SomeAttribute"))).ToString());
         }
     }
 }
