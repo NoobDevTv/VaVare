@@ -37,7 +37,7 @@ namespace VaVare.Builders
         /// Add struct fields.
         /// </summary>
         /// <param name="fields">An array of already struct fields.</param>
-        /// <returns>The current struct builder</returns>
+        /// <returns>The current struct builder.</returns>
         public StructBuilder WithFields(params FieldDeclarationSyntax[] fields)
         {
             return With(new FieldBuildMember(fields));

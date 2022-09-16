@@ -40,7 +40,7 @@ namespace VaVare.Tests.Generators.Common.Arguments.ArgumentTypes
         [Test]
         public void GetArgumentSyntax_WhenUsingStringValue_ShouldGetCodeThatContainsQuotes()
         {
-            var argument = new ValueArgument("test");
+            var argument = new StringValueArgument("test");
             var syntax = argument.GetArgumentSyntax();
 
             Assert.IsInstanceOf<ArgumentSyntax>(syntax);
@@ -50,7 +50,7 @@ namespace VaVare.Tests.Generators.Common.Arguments.ArgumentTypes
         [Test]
         public void GetArgumentSyntax_WhenUsingStringValueAndArgumentTypePath_ShouldGetCodeThatContainsQuotesAndAtSign()
         {
-            var argument = new ValueArgument("test", StringType.Path);
+            var argument = new StringValueArgument("test", StringType.Verbatim);
             var syntax = argument.GetArgumentSyntax();
 
             Assert.IsInstanceOf<ArgumentSyntax>(syntax);
@@ -60,7 +60,7 @@ namespace VaVare.Tests.Generators.Common.Arguments.ArgumentTypes
         [Test]
         public void Constructor_WhenUsingNonBooleanStringOrNumber_ShouldThrowException()
         {
-            Assert.Throws<ArgumentException>(() => new ValueArgument(new List<string>()));
+            Assert.Throws<ArgumentException>(() => _ = new ValueArgument(new List<string>()));
         }
     }
 }

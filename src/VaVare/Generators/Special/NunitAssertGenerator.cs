@@ -76,7 +76,7 @@ namespace VaVare.Generators.Special
         /// </summary>
         /// <param name="actual">The actual argument.</param>
         /// <param name="message">Message if test fails.</param>
-        /// <returns>The declared expression statement syntax for Assert.IsFalse</returns>
+        /// <returns>The declared expression statement syntax for Assert.IsFalse.</returns>
         public static ExpressionStatementSyntax IsFalse(IArgument actual, string message = null)
         {
             return Is(false, actual, message);
@@ -104,7 +104,7 @@ namespace VaVare.Generators.Special
             var arguments = new List<IArgument>
             {
                 new InvocationArgument(Statement.Expression.Invoke(actual.GetArgumentSyntax().ToString(), "Contains", new List<IArgument> { expectedContain }).AsExpression()),
-                new ValueArgument(message)
+                new StringValueArgument(message),
             };
             return Statement.Expression.Invoke("Assert", "IsTrue", arguments).AsStatement();
         }
@@ -140,7 +140,7 @@ namespace VaVare.Generators.Special
             var arguments = new List<IArgument>
             {
                 new ParenthesizedLambdaArgument(Statement.Expression.Invoke(variableReference).AsExpression()),
-                new ValueArgument(message ?? string.Empty)
+                new StringValueArgument(message ?? string.Empty),
             };
             return Statement.Expression.Invoke("Assert", "Throws", arguments, new List<Type>() { exception }).AsStatement();
         }
@@ -161,7 +161,7 @@ namespace VaVare.Generators.Special
             {
                 expected,
                 actual,
-                new ValueArgument(message ?? string.Empty)
+                new StringValueArgument(message ?? string.Empty),
             };
             return Statement.Expression.Invoke("Assert", Enum.GetName(typeof(AssertType), assertType), arguments).AsStatement();
         }
@@ -176,7 +176,7 @@ namespace VaVare.Generators.Special
             var argument = new List<IArgument>
             {
                 actual,
-                new ValueArgument(message ?? string.Empty)
+                new StringValueArgument(message ?? string.Empty),
             };
             return Statement.Expression.Invoke("Assert", exected ? "IsTrue" : "IsFalse", argument).AsStatement();
         }

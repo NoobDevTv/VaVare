@@ -14,7 +14,7 @@ namespace VaVare.Tests.Generators.Common.Arguments.ArgumentTypes
         {
             var argument = new ObjectInitializationArgument(
                 CustomType.Create("CustomClass"),
-                new Dictionary<string, IArgument> { ["Property"] = new ValueArgument("hello") });
+                new Dictionary<string, IArgument> { ["Property"] = new StringValueArgument("hello") });
 
             var syntax = argument.GetArgumentSyntax();
 
@@ -29,7 +29,7 @@ namespace VaVare.Tests.Generators.Common.Arguments.ArgumentTypes
                 CustomType.Create("CustomClass"),
                 new Dictionary<string, IArgument>
                     {
-                        ["Property"] = new ValueArgument("hello"),
+                        ["Property"] = new StringValueArgument("hello"),
                         ["AnotherProperty"] = new VariableArgument("variable")
                     });
 
@@ -72,7 +72,7 @@ namespace VaVare.Tests.Generators.Common.Arguments.ArgumentTypes
                             new Dictionary<string, IArgument>
                                 {
                                     ["Property"] =
-                                    new ValueArgument(
+                                    new StringValueArgument(
                                         "hello")
                                 })
                     });

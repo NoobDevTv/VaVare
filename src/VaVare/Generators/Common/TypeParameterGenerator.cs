@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using VaVare.Models;
+
 namespace VaVare.Generators.Common;
 
 public class TypeParameterGenerator

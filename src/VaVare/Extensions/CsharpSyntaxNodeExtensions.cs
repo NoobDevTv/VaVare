@@ -20,7 +20,7 @@ namespace VaVare.Generators.Special
         /// <typeparam name="T">Syntax type.</typeparam>
         /// <param name="syntax">The syntax.</param>
         /// <param name="summary">Summary text.</param>
-        /// <param name="parameters">Parameters in the summary</param>
+        /// <param name="parameters">Parameters in the summary.</param>
         /// <returns>Return syntax node with summary.</returns>
         public static T WithSummary<T>(this T syntax, string summary, IEnumerable<Parameter> parameters = null)
             where T : CSharpSyntaxNode
@@ -79,7 +79,8 @@ namespace VaVare.Generators.Special
 
         private static SyntaxList<XmlNodeSyntax> CreateParameterDocumentation(SyntaxList<XmlNodeSyntax> content, Parameter parameter)
         {
-            return content.AddRange(new List<XmlNodeSyntax> {
+            return content.AddRange(new List<XmlNodeSyntax>
+            {
                 XmlText().WithTextTokens(
                         TokenList(
                             new[]
@@ -94,7 +95,7 @@ namespace VaVare.Generators.Special
                                         DocumentationCommentExterior("///")),
                                     " ",
                                     " ",
-                                    TriviaList())
+                                    TriviaList()),
                             })),
                 XmlExampleElement(SingletonList<XmlNodeSyntax>(
                         XmlText().WithTextTokens(
@@ -118,7 +119,8 @@ namespace VaVare.Generators.Special
                     .WithEndTag(
                         XmlElementEndTag(
                             XmlName(
-                                Identifier("param")))) });
+                                Identifier("param")))),
+            });
         }
     }
 }

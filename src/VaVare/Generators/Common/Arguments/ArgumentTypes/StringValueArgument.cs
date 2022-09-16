@@ -1,24 +1,19 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using System;
 using Microsoft.CodeAnalysis.CSharp;
-using System;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace VaVare.Generators.Common.Arguments.ArgumentTypes
 {
     public class StringValueArgument : Argument
     {
-        private readonly IdentifierNameSyntax identifierName;
-
-        /// <summary>
-        /// Gets the value sent in as an argument.
-        /// </summary>
-        public string Value { get; }
+        private readonly IdentifierNameSyntax _identifierName;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StringValueArgument"/> class.
         /// </summary>
         /// <param name="value">String value to send in as an argument.</param>
         /// <param name="stringType">The type of string.</param>
-        /// <param name="namedArgument">Specificy the argument for a partical parameter.</param>
+        /// <param name="namedArgument">Specify the argument for a particular parameter.</param>
         public StringValueArgument(string value, StringType stringType = StringType.Normal, string namedArgument = null)
             : base(namedArgument)
         {
@@ -29,16 +24,22 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
 
             Value = stringType == StringType.Verbatim ? $"@\"{value}\"" : $"\"{value}\"";
 
-            identifierName = CreateIdentifierNameSyntax(value);
+            _identifierName = CreateIdentifierNameSyntax(Value);
         }
 
-        protected override ArgumentSyntax CreateArgumentSyntax()
-            => SyntaxFactory.Argument(identifierName);
+        /// <summary>
+        /// Gets the value sent in as an argument.
+        /// </summary>
+        public string Value { get; }
 
         public static StringValueArgument Parse(string value, StringType stringType = StringType.Normal)
             => new StringValueArgument(value, stringType: stringType);
+
         public static StringValueArgument Parse(string value, StringType stringType, string namedArgument)
             => new StringValueArgument(value, stringType: stringType, namedArgument: namedArgument);
+
+        protected override ArgumentSyntax CreateArgumentSyntax()
+            => SyntaxFactory.Argument(_identifierName);
 
         private static IdentifierNameSyntax CreateIdentifierNameSyntax(object value)
         {

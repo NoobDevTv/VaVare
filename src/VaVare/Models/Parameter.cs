@@ -48,7 +48,7 @@ namespace VaVare.Models
         public ParameterModifiers Modifier { get; set; }
 
         /// <summary>
-        /// Gets or sets the xml documentation
+        /// Gets the xml documentation.
         /// </summary>
         public string XmlDocumentation { get; }
     }

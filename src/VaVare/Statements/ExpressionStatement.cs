@@ -54,7 +54,7 @@ namespace VaVare.Statements
         }
 
         /// <summary>
-        /// Create the expression statement syntax to invoke a method in a chain (for example <c>myVariable.myProperty.MyMethod()</c>)
+        /// Create the expression statement syntax to invoke a method in a chain (for example <c>myVariable.myProperty.MyMethod()</c>).
         /// </summary>
         /// <param name="reference">The reference chain.</param>
         /// <returns>A invocation object with both statement and expression.</returns>

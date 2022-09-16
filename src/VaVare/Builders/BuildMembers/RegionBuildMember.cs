@@ -53,7 +53,7 @@ namespace VaVare.Builders.BuildMembers
                         Trivia(
                             RegionDirectiveTrivia(true)
                                 .WithEndOfDirectiveToken(
-                                    Token(TriviaList(PreprocessingMessage($" {_regionName} \n")), SyntaxKind.EndOfDirectiveToken,TriviaList())))));
+                                    Token(TriviaList(PreprocessingMessage($" {_regionName} \n")), SyntaxKind.EndOfDirectiveToken, TriviaList())))));
 
             return newMembersSyntaxList.Replace(newMembersSyntaxList.First(), modifiedFirstMember);
         }

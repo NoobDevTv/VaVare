@@ -62,7 +62,7 @@ namespace VaVare.Tests.Generators.Common.Arguments.ArgumentTypes
         [Test]
         public void GetArgumentSyntax_WhenInitializeClassWithMultipleGenericAsArgument_ShouldGetCorrectCode()
         {
-            var argument = new ClassInitializationArgument(typeof(List), genericTypes: new[] { typeof(List<List<int>>) });
+            var argument = new ClassInitializationArgument(typeof(List<>), genericTypes: new[] { typeof(List<List<int>>) });
             var syntax = argument.GetArgumentSyntax();
 
             Assert.IsInstanceOf<ArgumentSyntax>(syntax);

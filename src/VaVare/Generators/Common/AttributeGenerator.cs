@@ -29,7 +29,7 @@ namespace VaVare.Generators.Common
             }
 
             return
-                SyntaxFactory.List<AttributeListSyntax>(attributesSyntax);
+                SyntaxFactory.List(attributesSyntax);
         }
 
         private static AttributeSyntax Create(Attribute attribute)

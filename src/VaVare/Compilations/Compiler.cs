@@ -139,6 +139,7 @@ namespace VaVare.Compilations
                 {
                     result = compilation.Emit(outputPath);
                 }
+
                 var outputRows = ConvertDiagnosticsToOutputRows(result.Diagnostics);
                 return new CompileResult(outputPath, result.Success, outputRows);
             });

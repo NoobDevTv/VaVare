@@ -14,7 +14,7 @@ using Attribute = VaVare.Models.Attribute;
 namespace VaVare.Builders
 {
     /// <summary>
-    /// Provides a builder to generate a method
+    /// Provides a builder to generate a method.
     /// </summary>
     public class MethodBuilder
     {
@@ -35,7 +35,7 @@ namespace VaVare.Builders
         /// <summary>
         /// Initializes a new instance of the <see cref="MethodBuilder"/> class.
         /// </summary>
-        /// <param name="name">Name of the method</param>
+        /// <param name="name">Name of the method.</param>
         public MethodBuilder(string name)
         {
             if (string.IsNullOrEmpty(name))
@@ -56,7 +56,7 @@ namespace VaVare.Builders
         /// Set method parameters.
         /// </summary>
         /// <param name="parameters">A set of wanted parameters.</param>
-        /// <returns>The current method builder</returns>
+        /// <returns>The current method builder.</returns>
         public MethodBuilder WithParameters(params Parameter[] parameters)
         {
             _parameters.Clear();
@@ -79,7 +79,7 @@ namespace VaVare.Builders
         /// Set method parameters.
         /// </summary>
         /// <param name="parameters">A set of already generated parameters.</param>
-        /// <returns>The current method builder</returns>
+        /// <returns>The current method builder.</returns>
         public MethodBuilder WithParameters(params ParameterSyntax[] parameters)
         {
             _parameters.Clear();
@@ -88,10 +88,10 @@ namespace VaVare.Builders
         }
 
         /// <summary>
-        /// Set method return type
+        /// Set method return type.
         /// </summary>
-        /// <param name="type">The wanted return type</param>
-        /// <returns>The current method builder</returns>
+        /// <param name="type">The wanted return type.</param>
+        /// <returns>The current method builder.</returns>
         public MethodBuilder WithReturnType(Type type)
         {
             _returnType = TypeGenerator.Create(type);
@@ -99,10 +99,10 @@ namespace VaVare.Builders
         }
 
         /// <summary>
-        /// Set method return type
+        /// Set method return type.
         /// </summary>
-        /// <param name="type">The wanted return type</param>
-        /// <returns>The current method builder</returns>
+        /// <param name="type">The wanted return type.</param>
+        /// <returns>The current method builder.</returns>
         public MethodBuilder WithReturnType(TypeSyntax type)
         {
             _returnType = type;
@@ -112,8 +112,8 @@ namespace VaVare.Builders
         /// <summary>
         /// Set method attributs.
         /// </summary>
-        /// <param name="attributes">A set of wanted attributes</param>
-        /// <returns>The current method builder</returns>
+        /// <param name="attributes">A set of wanted attributes.</param>
+        /// <returns>The current method builder.</returns>
         public MethodBuilder WithAttributes(params Attribute[] attributes)
         {
             _attributes = AttributeGenerator.Create(attributes);
@@ -123,8 +123,8 @@ namespace VaVare.Builders
         /// <summary>
         /// Set method attributes.
         /// </summary>
-        /// <param name="attributes">A set of already generated attributes </param>
-        /// <returns>The current method builder</returns>
+        /// <param name="attributes">A set of already generated attributes.</param>
+        /// <returns>The current method builder.</returns>
         public MethodBuilder WithAttributes(SyntaxList<AttributeListSyntax> attributes)
         {
             _attributes = attributes;
@@ -135,7 +135,7 @@ namespace VaVare.Builders
         /// Set method body.
         /// </summary>
         /// <param name="body">The method body.</param>
-        /// <returns>The current method builder</returns>
+        /// <returns>The current method builder.</returns>
         public MethodBuilder WithBody(BlockSyntax body)
         {
             _body = body;
@@ -146,7 +146,7 @@ namespace VaVare.Builders
         /// Set method xml summary.
         /// </summary>
         /// <param name="summary">The method summary.</param>
-        /// <returns>The current method builder</returns>
+        /// <returns>The current method builder.</returns>
         public MethodBuilder WithSummary(string summary)
         {
             _summary = summary;
@@ -157,7 +157,7 @@ namespace VaVare.Builders
         /// Set method modifiers.
         /// </summary>
         /// <param name="modifiers">A set of wanted modifiers.</param>
-        /// <returns>The current method builder</returns>
+        /// <returns>The current method builder.</returns>
         public MethodBuilder WithModifiers(params Modifiers[] modifiers)
         {
             _modifiers.Clear();
@@ -202,7 +202,7 @@ namespace VaVare.Builders
         /// <summary>
         /// Set operator overloading.
         /// </summary>
-        /// <param name="operator">Operator to overload</param>
+        /// <param name="operator">Operator to overload.</param>
         /// <returns>The current method builder.</returns>
         public MethodBuilder WithOperatorOverloading(Operators @operator)
         {
@@ -213,7 +213,7 @@ namespace VaVare.Builders
         /// <summary>
         /// Set operator overloading.
         /// </summary>
-        /// <param name="operator">Operator to overload</param>
+        /// <param name="operator">Operator to overload.</param>
         /// <returns>The current method builder.</returns>
         public MethodBuilder WithOperatorOverloading(SyntaxKind @operator)
         {

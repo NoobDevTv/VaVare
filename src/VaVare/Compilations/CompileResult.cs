@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace VaVare.Compilations
 {
     /// <summary>
-    /// Represent the result after a compilation
+    /// Represent the result after a compilation.
     /// </summary>
     [Serializable]
     public class CompileResult

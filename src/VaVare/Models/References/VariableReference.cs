@@ -19,7 +19,7 @@ namespace VaVare.Models.References
         /// <summary>
         /// Initializes a new instance of the <see cref="VariableReference"/> class.
         /// </summary>
-        /// <param name="variableName">Name of the variable,</param>
+        /// <param name="variableName">Name of the variable,.</param>
         public VariableReference(string variableName)
         {
             if (variableName == null)
@@ -33,8 +33,8 @@ namespace VaVare.Models.References
         /// <summary>
         /// Initializes a new instance of the <see cref="VariableReference"/> class.
         /// </summary>
-        /// <param name="variableName">Name of the variable</param>
-        /// <param name="member">Member to reference on the variable</param>
+        /// <param name="variableName">Name of the variable.</param>
+        /// <param name="member">Member to reference on the variable.</param>
         public VariableReference(string variableName, MemberReference member)
             : this(variableName)
         {

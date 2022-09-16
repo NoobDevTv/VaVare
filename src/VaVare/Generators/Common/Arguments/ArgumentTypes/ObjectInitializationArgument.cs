@@ -13,22 +13,22 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 namespace VaVare.Generators.Common.Arguments.ArgumentTypes
 {
     /// <summary>
-    /// Provides the functionality to generate a object initialization. Example of generated code: <c>(new MyClass())</c>
+    /// Provides the functionality to generate a object initialization. Example of generated code: <c>(new MyClass())</c>.
     /// </summary>
     public class ObjectInitializationArgument : Argument
     {
-        private readonly Type type;
+        private readonly Type _type;
 
         private readonly Dictionary<string, IArgument> _dictionary;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectInitializationArgument"/> class.
         /// </summary>
-        /// <param name="type">Type of the object</param>
-        /// <param name="dictionary">Properties used for object initialization</param>
+        /// <param name="type">Type of the object.</param>
+        /// <param name="dictionary">Properties used for object initialization.</param>
         public ObjectInitializationArgument(Type type, IDictionary<string, IArgument> dictionary)
         {
-            this.type = type;
+            this._type = type;
             this._dictionary = new Dictionary<string, IArgument>(dictionary);
         }
 
@@ -52,7 +52,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
             }
 
             return Argument(
-                ObjectCreationExpression(TypeGenerator.Create(type)).WithInitializer(
+                ObjectCreationExpression(TypeGenerator.Create(_type)).WithInitializer(
                     InitializerExpression(
                         SyntaxKind.ObjectInitializerExpression,
                         SeparatedList<ExpressionSyntax>(syntaxNodeOrTokens.ToArray()))));

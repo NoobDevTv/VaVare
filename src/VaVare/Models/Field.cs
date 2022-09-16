@@ -16,8 +16,8 @@ namespace VaVare.Models
         /// <param name="type">Type of the field.</param>
         /// <param name="modifiers">The fields modifiers.</param>
         /// <param name="attributes">The fields attributes.</param>
-        /// <param name="initializeWith">Expression used to initialize field</param>
-        /// <param name="summary">XML documentation summary</param>
+        /// <param name="initializeWith">Expression used to initialize field.</param>
+        /// <param name="summary">XML documentation summary.</param>
         public Field(
             string name,
             Type type,
@@ -70,7 +70,7 @@ namespace VaVare.Models
         public ExpressionSyntax InitializeWith { get; set; }
 
         /// <summary>
-        /// Gets or sets the xml documentation summary of the field.
+        /// Gets the xml documentation summary of the field.
         /// </summary>
         public string Summary { get; }
     }

@@ -11,18 +11,13 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
     /// </summary>
     public class ValueArgument : Argument
     {
-        private readonly IdentifierNameSyntax identifierName;
-
-        /// <summary>
-        /// Gets the value sent in as an argument.
-        /// </summary>
-        public object Value { get; }
+        private readonly IdentifierNameSyntax _identifierName;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ValueArgument"/> class.
         /// </summary>
         /// <param name="value">Value to send in as an argument.</param>
-        /// <param name="namedArgument">Specificy the argument for a partical parameter.</param>
+        /// <param name="namedArgument">Specify the argument for a particular parameter.</param>
         public ValueArgument(object value, string namedArgument = null)
             : base(namedArgument)
         {
@@ -37,7 +32,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
             }
 
             Value = value;
-            identifierName = CreateIdentifierNameSyntax(value);
+            _identifierName = CreateIdentifierNameSyntax(value);
         }
 
         /// <summary>
@@ -45,7 +40,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
         /// </summary>
         /// <param name="value">String value to send in as an argument.</param>
         /// <param name="stringType">The type of string.</param>
-        /// <param name="namedArgument">Specificy the argument for a partical parameter.</param>
+        /// <param name="namedArgument">Specify the argument for a particular parameter.</param>
         [Obsolete($"Please use {nameof(StringValueArgument)} instead")]
         public ValueArgument(string value, StringType stringType = StringType.Normal, string namedArgument = null)
             : this(value, true, stringType, namedArgument)
@@ -56,9 +51,9 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
         /// Initializes a new instance of the <see cref="ValueArgument"/> class.
         /// </summary>
         /// <param name="value">String value to send in as an argument.</param>
-        /// <param name="escapeValueAsString">If <see langword="true"/>, inverted commas are added to the <paramref name="value"/></param>
+        /// <param name="escapeValueAsString">If <see langword="true"/>, inverted commas are added to the <paramref name="value"/>.</param>
         /// <param name="stringType">The type of string.</param>
-        /// <param name="namedArgument">Specificy the argument for a partical parameter.</param>
+        /// <param name="namedArgument">Specify the argument for a particular parameter.</param>
         [Obsolete($"Please use {nameof(StringValueArgument)} instead")]
         public ValueArgument(string value, bool escapeValueAsString, StringType stringType = StringType.Normal, string namedArgument = null)
             : base(namedArgument)
@@ -77,22 +72,33 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
                 Value = value;
             }
 
-            identifierName = CreateIdentifierNameSyntax(Value);
+            _identifierName = CreateIdentifierNameSyntax(Value);
         }
 
-        protected override ArgumentSyntax CreateArgumentSyntax() 
-            => SyntaxFactory.Argument(identifierName);
+        /// <summary>
+        /// Gets a <c>null</c> value argument.
+        /// </summary>
+        public static ValueArgument Null { get; } = new ValueArgument("null");
+
+        /// <summary>
+        /// Gets the value sent in as an argument.
+        /// </summary>
+        public object Value { get; }
 
         public static ValueArgument Parse(string value)
             => new ValueArgument(value, false);
+
         public static ValueArgument Parse(string value, string namedArgument)
             => new ValueArgument(value, false, namedArgument: namedArgument);
+
+        protected override ArgumentSyntax CreateArgumentSyntax()
+            => SyntaxFactory.Argument(_identifierName);
 
         private static IdentifierNameSyntax CreateIdentifierNameSyntax(object value)
         {
             var name = value.ToString();
 
-            if(value is bool)
+            if (value is bool)
             {
                 name = name.ToLower();
             }

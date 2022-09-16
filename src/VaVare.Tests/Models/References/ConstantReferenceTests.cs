@@ -11,7 +11,7 @@ namespace VaVare.Tests.Models.References
         [Test]
         public void Constructor_WhenGivingANonNumericOrNonBoolean_ShouldThrowException()
         {
-            Assert.Throws<ArgumentException>(() => new ConstantReference(new List<string>()));
+            Assert.Throws<ArgumentException>(() => _ = new ConstantReference(new List<string>()));
         }
     }
 }

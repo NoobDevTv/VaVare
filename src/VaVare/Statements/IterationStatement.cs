@@ -14,7 +14,7 @@ namespace VaVare.Statements
     public class IterationStatement
     {
         /// <summary>
-        /// Create the for statement syntax for a for loop with fixed start and stop
+        /// Create the for statement syntax for a for loop with fixed start and stop.
         /// </summary>
         /// <param name="start">Start number.</param>
         /// <param name="end">End number.</param>
@@ -63,7 +63,7 @@ namespace VaVare.Statements
                         VariableDeclarator(
                             Identifier(variableName),
                             null,
-                            EqualsValueClause(ReferenceGenerator.Create(start)))
+                            EqualsValueClause(ReferenceGenerator.Create(start))),
                     })),
                 SeparatedList<ExpressionSyntax>(),
                 BinaryExpression(
@@ -72,7 +72,7 @@ namespace VaVare.Statements
                         ReferenceGenerator.Create(end)),
                 SeparatedList<ExpressionSyntax>(new[]
                 {
-                    PostfixUnaryExpression(SyntaxKind.PostIncrementExpression, IdentifierName(variableName))
+                    PostfixUnaryExpression(SyntaxKind.PostIncrementExpression, IdentifierName(variableName)),
                 }), body);
         }
 

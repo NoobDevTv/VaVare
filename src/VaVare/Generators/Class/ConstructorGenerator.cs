@@ -23,8 +23,8 @@ namespace VaVare.Generators.Class
         /// <param name="parameters">A list with parameters.</param>
         /// <param name="modifiers">A list with modifiers.</param>
         /// <param name="attributes">A list with attributes.</param>
-        /// <param name="constructorInitializer">The constructor initializer</param>
-        /// <param name="summary">XML documentation summary</param>
+        /// <param name="constructorInitializer">The constructor initializer.</param>
+        /// <param name="summary">XML documentation summary.</param>
         /// <returns>The declaration syntax for a constructor.</returns>
         public static ConstructorDeclarationSyntax Create(
             string className,

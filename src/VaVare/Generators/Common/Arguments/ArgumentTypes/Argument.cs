@@ -14,7 +14,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
         /// <summary>
         /// Initializes a new instance of the <see cref="Argument"/> class.
         /// </summary>
-        /// <param name="namedArgument">Specificy the argument for a partical parameter.</param>
+        /// <param name="namedArgument">Specify the argument for a particular parameter.</param>
         protected Argument(string namedArgument = null)
         {
             _namedArgument = namedArgument;
@@ -23,7 +23,7 @@ namespace VaVare.Generators.Common.Arguments.ArgumentTypes
         /// <summary>
         /// Get the generated argument syntax.
         /// </summary>
-        /// <returns>The generated argument syntax</returns>
+        /// <returns>The generated argument syntax.</returns>
         public ArgumentSyntax GetArgumentSyntax()
         {
             var argumentSyntax = CreateArgumentSyntax();

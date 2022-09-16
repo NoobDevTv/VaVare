@@ -23,7 +23,7 @@ namespace VaVare.Tests.Integration
                     .WithParameters(new Parameter("args", typeof(string[])))
                     .WithBody(
                         BodyGenerator.Create(
-                            Statement.Expression.Invoke("Console", "WriteLine", new List<IArgument>() { new ValueArgument("Hello world") }).AsStatement(),
+                            Statement.Expression.Invoke("Console", "WriteLine", new List<IArgument>() { new StringValueArgument("Hello world") }).AsStatement(),
                             Statement.Expression.Invoke("Console", "ReadLine").AsStatement()
                             ))
                     .WithModifiers(Modifiers.Public, Modifiers.Static)

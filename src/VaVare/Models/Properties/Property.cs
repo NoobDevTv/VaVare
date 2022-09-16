@@ -17,7 +17,7 @@ namespace VaVare.Models.Properties
         /// <param name="attributes">Attributes on the property.</param>
         /// <param name="getModifiers">The get modifiers.</param>
         /// <param name="setModifiers">The set modifiers.</param>
-        /// <param name="summary">XML documentation summary</param>
+        /// <param name="summary">XML documentation summary.</param>
         protected Property(
             string name,
             Type type,
@@ -72,7 +72,7 @@ namespace VaVare.Models.Properties
         public IEnumerable<Modifiers> GetModifiers { get; set; }
 
         /// <summary>
-        /// Gets or sets the set modifiers.
+        /// Gets the set modifiers.
         /// </summary>
         public IEnumerable<Modifiers> SetModifiers { get; }
 

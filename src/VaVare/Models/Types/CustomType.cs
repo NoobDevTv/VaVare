@@ -3,7 +3,7 @@
 namespace VaVare.Models.Types
 {
     /// <summary>
-    /// Provides functionality to create a custom type
+    /// Provides functionality to create a custom type.
     /// </summary>
     public static class CustomType
     {

@@ -35,35 +35,35 @@ namespace VaVare.Tests.Statements
         [Test]
         public void CreateLocal_WhenCreatingStringVariable_ShouldAddQuotes()
         {
-            Assert.AreEqual("vartestVariable=\"hello\";", _statement.DeclareAndAssign("testVariable", "hello").ToString());
+            Assert.AreEqual("vartestVariable=\"hello\";", _statement.DeclareAndAssignStringValue("testVariable", "hello", StringType.Normal).ToString());
         }
 
         [Test]
-        public void DeclareAndAssign_WhenCreateTypeAndAssignToVariableReference_ShouldAssignToVarible()
+        public void DeclareAndAssign_WhenCreateTypeAndAssignToVariableReference_ShouldAssignToVariable()
         {
             Assert.AreEqual("vartest=myVariable;", _statement.DeclareAndAssign("test", new VariableReference("myVariable")).ToString());
         }
 
         [Test]
-        public void DeclareAndAssign_WhenCreateTypeAndAssignToContant_ShouldAssignToVarible()
+        public void DeclareAndAssign_WhenCreateTypeAndAssignToConstant_ShouldAssignToVariable()
         {
             Assert.AreEqual("vartest=1;", _statement.DeclareAndAssign("test", new ConstantReference(1)).ToString());
         }
 
         [Test]
-        public void DeclareAndAssign_WhenCreateTypeAndAssignToStringConstant_ShouldAssignToVarible()
+        public void DeclareAndAssign_WhenCreateTypeAndAssignToStringConstant_ShouldAssignToVariable()
         {
             Assert.AreEqual("vartest=\"1\";", _statement.DeclareAndAssign("test", new ConstantReference("1")).ToString());
         }
 
         [Test]
-        public void DeclareAndAssign_WhenCreateTypeAndAssignToStringPathConstant_ShouldAssignToVarible()
+        public void DeclareAndAssign_WhenCreateTypeAndAssignToStringVerbatimConstant_ShouldAssignToVariable()
         {
-            Assert.AreEqual("vartest=@\"1\";", _statement.DeclareAndAssign("test", new ConstantReference("1", StringType.Path)).ToString());
+            Assert.AreEqual("vartest=@\"1\";", _statement.DeclareAndAssign("test", new ConstantReference("1", StringType.Verbatim)).ToString());
         }
 
         [Test]
-        public void DeclareAndAssign_WhenCreateTypeAndAssignToVariableMember_ShouldAssignToVarible()
+        public void DeclareAndAssign_WhenCreateTypeAndAssignToVariableMember_ShouldAssignToVariable()
         {
             Assert.AreEqual("vartest=var.member;", _statement.DeclareAndAssign("test", new VariableReference("var", new MemberReference("member"))).ToString());
         }
@@ -71,7 +71,7 @@ namespace VaVare.Tests.Statements
         [Test]
         public void DeclareAndAssign_WhenCreateTypeAndAssignToClassInstance_ShouldAssignToClassInstance()
         {
-            Assert.AreEqual("vartest=newList();", _statement.DeclareAndAssign("test", typeof(List), ArgumentGenerator.Create()).ToString());
+            Assert.AreEqual("vartest=newRandom();", _statement.DeclareAndAssign("test", typeof(Random), ArgumentGenerator.Create()).ToString());
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace VaVare.Tests.Statements
         [Test]
         public void Assign_WhenAssignVariableToClassInstance_ShouldAssignVariable()
         {
-            Assert.AreEqual("test=newList();", _statement.Assign("test", typeof(List), ArgumentGenerator.Create()).ToString());
+            Assert.AreEqual("test=newRandom();", _statement.Assign("test", typeof(Random), ArgumentGenerator.Create()).ToString());
         }
 
         [Test]

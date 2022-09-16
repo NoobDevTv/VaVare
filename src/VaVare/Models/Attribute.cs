@@ -5,7 +5,7 @@ using VaVare.Generators.Common.Arguments.ArgumentTypes;
 namespace VaVare.Models
 {
     /// <summary>
-    /// Represent an attribute
+    /// Represent an attribute.
     /// </summary>
     public class Attribute
     {

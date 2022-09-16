@@ -32,7 +32,7 @@ namespace VaVare.Generators.Class
                 variableDeclarator = variableDeclarator.WithInitializer(EqualsValueClause(field.InitializeWith));
             }
 
-            var fieldDeclaration = FieldDeclaration(VariableDeclaration(TypeGenerator.Create(field.Type), SeparatedList(new[] { variableDeclarator})));
+            var fieldDeclaration = FieldDeclaration(VariableDeclaration(TypeGenerator.Create(field.Type), SeparatedList(new[] { variableDeclarator })));
 
             if (field.Modifiers != null)
             {
