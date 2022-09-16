@@ -11,10 +11,11 @@ public enum Variance
 
 public class TypeParameter
 {
-    public TypeParameter(string name, Variance variance = Variance.None, params Attribute[] attributes)
+    public TypeParameter(string name, Variance variance = Variance.None, string xmlDocumentation = null, params Attribute[] attributes)
     {
         Name = name;
         Variance = variance;
+        XmlDocumentation = xmlDocumentation;
         Attributes = attributes;
     }
 
@@ -23,4 +24,9 @@ public class TypeParameter
     public Variance Variance { get; }
 
     public Attribute[] Attributes { get; }
+
+    /// <summary>
+    /// Gets the xml documentation.
+    /// </summary>
+    public string XmlDocumentation { get; }
 }

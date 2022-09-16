@@ -21,9 +21,10 @@ namespace VaVare.Builders
         private readonly string _name;
         private readonly List<ParameterSyntax> _parameters;
         private readonly List<Modifiers> _modifiers;
-        private readonly List<TypeParameter> _typeParameters;
+        private readonly List<TypeParameterSyntax> _typeParameters;
+        private readonly List<ParameterSummary> _typeParameterXmlDocumentation;
         private readonly List<TypeParameterConstraintClause> _constraintClauses;
-        private readonly List<Parameter> _parameterXmlDocumentation;
+        private readonly List<ParameterSummary> _parameterXmlDocumentation;
 
         private TypeSyntax _returnType;
         private BlockSyntax _body;
@@ -46,9 +47,10 @@ namespace VaVare.Builders
             _name = name.Replace(" ", "_");
             _parameters = new List<ParameterSyntax>();
             _modifiers = new List<Modifiers>();
-            _typeParameters = new List<TypeParameter>();
+            _typeParameters = new List<TypeParameterSyntax>();
             _constraintClauses = new List<TypeParameterConstraintClause>();
-            _parameterXmlDocumentation = new List<Parameter>();
+            _typeParameterXmlDocumentation = new List<ParameterSummary>();
+            _parameterXmlDocumentation = new List<ParameterSummary>();
             _body = BodyGenerator.Create();
         }
 
@@ -68,7 +70,7 @@ namespace VaVare.Builders
 
                 if (parameter.XmlDocumentation != null)
                 {
-                    _parameterXmlDocumentation.Add(parameter);
+                    _parameterXmlDocumentation.Add(new ParameterSummary(parameter));
                 }
             }
 
@@ -84,6 +86,58 @@ namespace VaVare.Builders
         {
             _parameters.Clear();
             _parameters.AddRange(parameters);
+            return this;
+        }
+
+        /// <summary>
+        /// Set method parameters.
+        /// </summary>
+        /// <param name="parameters">A set of already generated parameters and their given summaries.</param>
+        /// <returns>The current method builder.</returns>
+        public MethodBuilder WithParameters(params (ParameterSyntax parameter, string xmlSummary)[] parameters)
+        {
+            _parameters.Clear();
+            foreach (var p in parameters)
+            {
+                _parameters.Add(p.parameter);
+                if (p.xmlSummary is not null)
+                {
+                    _parameterXmlDocumentation.Add(new ParameterSummary(p.parameter.Identifier.Text, p.xmlSummary, false));
+                }
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        /// Set method parameters.
+        /// </summary>
+        /// <param name="parameters">A set of already generated type parameters.</param>
+        /// <returns>The current method builder.</returns>
+        public MethodBuilder WithParameters(params TypeParameterSyntax[] parameters)
+        {
+            _typeParameters.Clear();
+            _typeParameters.AddRange(parameters);
+            return this;
+        }
+
+        /// <summary>
+        /// Set method parameters.
+        /// </summary>
+        /// <param name="parameters">A set of already generated type parameters and their given summaries.</param>
+        /// <returns>The current method builder.</returns>
+        public MethodBuilder WithTypeParameters(params (TypeParameterSyntax parameter, string xmlSummary)[] parameters)
+        {
+            _typeParameters.Clear();
+            foreach (var p in parameters)
+            {
+                _typeParameters.Add(p.parameter);
+                if (p.xmlSummary is not null)
+                {
+                    _parameterXmlDocumentation.Add(new ParameterSummary(p.parameter.Identifier.Text, p.xmlSummary, false));
+                }
+            }
+
             return this;
         }
 
@@ -110,7 +164,7 @@ namespace VaVare.Builders
         }
 
         /// <summary>
-        /// Set method attributs.
+        /// Set method attributes.
         /// </summary>
         /// <param name="attributes">A set of wanted attributes.</param>
         /// <returns>The current method builder.</returns>
@@ -173,7 +227,16 @@ namespace VaVare.Builders
         public MethodBuilder WithTypeParameters(params TypeParameter[] typeParameters)
         {
             _typeParameters.Clear();
-            _typeParameters.AddRange(typeParameters);
+            _typeParameterXmlDocumentation.Clear();
+            foreach (var p in typeParameters)
+            {
+                _typeParameters.Add(TypeParameterGenerator.CreateSyntax(p));
+                if (p.XmlDocumentation is not null)
+                {
+                    _typeParameterXmlDocumentation.Add(new ParameterSummary(p));
+                }
+            }
+
             return this;
         }
 
@@ -230,7 +293,7 @@ namespace VaVare.Builders
             var method = BuildMethodBase();
             method = BuildModifiers(method);
             method = BuildAttributes(method);
-            method = method.WithSummary(_summary, _parameterXmlDocumentation);
+            method = method.WithSummary(_summary, _typeParameterXmlDocumentation.Concat(_parameterXmlDocumentation));
             method = BuildParameters(method);
             method = BuildBody(method);
             return method;

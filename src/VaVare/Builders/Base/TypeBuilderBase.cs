@@ -22,7 +22,8 @@ namespace VaVare.Builders.Base
     {
         private readonly List<Type> _inheritance;
         private readonly List<Modifiers> _modifiers;
-        private readonly List<TypeParameter> _typeParameters;
+        private readonly List<TypeParameterSyntax> _typeParameters;
+        private readonly List<ParameterSummary> _typeParameterXmlDocumentation;
         private readonly List<TypeParameterConstraintClause> _constraintClauses;
         private SyntaxList<AttributeListSyntax> _attributes;
         private string _summary;
@@ -38,7 +39,8 @@ namespace VaVare.Builders.Base
             Name = name.Replace(" ", "_");
             _inheritance = new List<Type>();
             _modifiers = new List<Modifiers> { Modifiers.Public };
-            _typeParameters = new List<TypeParameter>();
+            _typeParameters = new List<TypeParameterSyntax>();
+            _typeParameterXmlDocumentation = new List<ParameterSummary>();
             _constraintClauses = new List<TypeParameterConstraintClause>();
         }
 
@@ -64,7 +66,51 @@ namespace VaVare.Builders.Base
         public TBuilder WithTypeParameters(params TypeParameter[] typeParameters)
         {
             _typeParameters.Clear();
+            _typeParameterXmlDocumentation.Clear();
+            foreach (var p in typeParameters)
+            {
+                _typeParameters.Add(TypeParameterGenerator.CreateSyntax(p));
+                if (p is not null)
+                {
+                    _typeParameterXmlDocumentation.Add(new ParameterSummary(p));
+                }
+            }
+
+            return (TBuilder)this;
+        }
+
+        /// <summary>
+        /// Add generic type parameters.
+        /// </summary>
+        /// <param name="typeParameters">The type parameters and xml summarries.</param>
+        /// <returns>The current builder.</returns>
+        public TBuilder WithTypeParameters(params (TypeParameterSyntax parameter, string xmlSummary)[] typeParameters)
+        {
+            _typeParameters.Clear();
+            _typeParameterXmlDocumentation.Clear();
+            foreach (var p in typeParameters)
+            {
+                _typeParameters.Add(p.parameter);
+                if (p.xmlSummary is not null)
+                {
+                    _typeParameterXmlDocumentation.Add(new ParameterSummary(p.parameter.Identifier.Text, p.xmlSummary, true));
+                }
+            }
+
+            return (TBuilder)this;
+        }
+
+        /// <summary>
+        /// Add generic type parameters.
+        /// </summary>
+        /// <param name="typeParameters">The type parameters.</param>
+        /// <returns>The current builder.</returns>
+        public TBuilder WithTypeParameters(params TypeParameterSyntax[] typeParameters)
+        {
+            _typeParameters.Clear();
+            _typeParameterXmlDocumentation.Clear();
             _typeParameters.AddRange(typeParameters);
+
             return (TBuilder)this;
         }
 
@@ -196,7 +242,7 @@ namespace VaVare.Builders.Base
             var @type = BuildBase();
             @type = BuildTypeParameters(@type);
             @type = BuildTypeParameterConstraintClauses(@type);
-            @type = @type.WithSummary(_summary);
+            @type = @type.WithSummary(_summary, _typeParameterXmlDocumentation);
             @type = BuildAttributes(@type);
             @type = BuildMembers(@type);
             @type = BuildSurroundingTokens(@type);

@@ -20,12 +20,12 @@ namespace VaVare.Generators.Special
         /// <typeparam name="T">Syntax type.</typeparam>
         /// <param name="syntax">The syntax.</param>
         /// <param name="summary">Summary text.</param>
-        /// <param name="parameters">Parameters in the summary.</param>
+        /// <param name="parameterSummaries">Parameters in the summary.</param>
         /// <returns>Return syntax node with summary.</returns>
-        public static T WithSummary<T>(this T syntax, string summary, IEnumerable<Parameter> parameters = null)
+        public static T WithSummary<T>(this T syntax, string summary, IEnumerable<ParameterSummary> parameterSummaries)
             where T : CSharpSyntaxNode
         {
-            parameters = parameters ?? new List<Parameter>();
+            parameterSummaries = parameterSummaries ?? new List<ParameterSummary>();
 
             if (string.IsNullOrEmpty(summary))
             {
@@ -36,7 +36,7 @@ namespace VaVare.Generators.Special
 
             content = CreateSummaryDocumentation(content, summary);
 
-            foreach (var parameter in parameters.Where(p => p.XmlDocumentation != null))
+            foreach (var parameter in parameterSummaries)
             {
                 content = CreateParameterDocumentation(content, parameter);
             }
@@ -48,6 +48,24 @@ namespace VaVare.Generators.Special
                     SyntaxKind.SingleLineDocumentationCommentTrivia,
                     content));
             return syntax.WithLeadingTrivia(trivia);
+        }
+
+        /// <summary>
+        /// Create summary to syntax node.
+        /// </summary>
+        /// <typeparam name="T">Syntax type.</typeparam>
+        /// <param name="syntax">The syntax.</param>
+        /// <param name="summary">Summary text.</param>
+        /// <param name="parameters">Parameter summaries.</param>
+        /// <param name="typeParameters">Type parameter summaries.</param>
+        /// <returns>Return syntax node with summary.</returns>
+        public static T WithSummary<T>(this T syntax, string summary, IEnumerable<Parameter> parameters = null, IEnumerable<TypeParameter> typeParameters = null)
+            where T : CSharpSyntaxNode
+        {
+            var paramSums = parameters?.Where(p => p.XmlDocumentation != null).Select(x => new ParameterSummary(x));
+            var typeParamSums = typeParameters?.Where(p => p.XmlDocumentation != null)
+                .Select(x => new ParameterSummary(x));
+            return WithSummary(syntax, summary, (paramSums is not null && typeParamSums is not null) ? typeParamSums.Concat(paramSums) : (paramSums ?? typeParamSums));
         }
 
         private static SyntaxList<XmlNodeSyntax> CreateSummaryDocumentation(SyntaxList<XmlNodeSyntax> content, string text)
@@ -77,8 +95,9 @@ namespace VaVare.Generators.Special
             });
         }
 
-        private static SyntaxList<XmlNodeSyntax> CreateParameterDocumentation(SyntaxList<XmlNodeSyntax> content, Parameter parameter)
+        private static SyntaxList<XmlNodeSyntax> CreateParameterDocumentation(SyntaxList<XmlNodeSyntax> content, ParameterSummary parameter)
         {
+            string paramTag = parameter.IsTypeParameter ? "typeparam" : "param";
             return content.AddRange(new List<XmlNodeSyntax>
             {
                 XmlText().WithTextTokens(
@@ -102,24 +121,24 @@ namespace VaVare.Generators.Special
                                     TokenList(
                                         XmlTextLiteral(
                                             TriviaList(),
-                                            parameter.XmlDocumentation,
-                                            parameter.XmlDocumentation,
+                                            parameter.Summary,
+                                            parameter.Summary,
                                             TriviaList())))))
                     .WithStartTag(XmlElementStartTag(
                                 XmlName(
-                                    Identifier("param")))
+                                    Identifier(paramTag)))
                             .WithAttributes(
                                 SingletonList<XmlAttributeSyntax>(
                                     XmlNameAttribute(
                                         XmlName(
                                             Identifier(" name")),
                                         Token(SyntaxKind.DoubleQuoteToken),
-                                        IdentifierName(parameter.Name),
+                                        IdentifierName(parameter.ParameterName),
                                         Token(SyntaxKind.DoubleQuoteToken)))))
                     .WithEndTag(
                         XmlElementEndTag(
                             XmlName(
-                                Identifier("param")))),
+                                Identifier(paramTag)))),
             });
         }
     }

@@ -16,10 +16,15 @@ public class TypeParameterGenerator
 
     public static TypeParameterListSyntax Create(IEnumerable<TypeParameter> typeParameter)
     {
-        return SyntaxFactory.TypeParameterList(SyntaxFactory.SeparatedList(typeParameter.Select(Create)));
+        return SyntaxFactory.TypeParameterList(SyntaxFactory.SeparatedList(typeParameter.Select(CreateSyntax)));
     }
 
-    private static TypeParameterSyntax Create(TypeParameter typeParameter)
+    public static TypeParameterListSyntax Create(IEnumerable<TypeParameterSyntax> typeParameter)
+    {
+        return SyntaxFactory.TypeParameterList(SyntaxFactory.SeparatedList(typeParameter));
+    }
+
+    public static TypeParameterSyntax CreateSyntax(TypeParameter typeParameter)
     {
         var tp = SyntaxFactory.TypeParameter(typeParameter.Name);
         switch (typeParameter.Variance)
