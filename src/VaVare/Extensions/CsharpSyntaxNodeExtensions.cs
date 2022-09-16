@@ -32,21 +32,17 @@ namespace VaVare.Generators.Special
                 return syntax;
             }
 
-            var content = List<XmlNodeSyntax>();
-
-            content = CreateSummaryDocumentation(content, summary);
-
+            var nodes = new List<XmlNodeSyntax>();
+            nodes.Add(CreateSummaryDocumentation(summary));
             foreach (var parameter in parameterSummaries)
             {
-                content = CreateParameterDocumentation(content, parameter);
+                nodes.Add(XmlNewLine("\n"));
+                nodes.Add(CreateParameterDocumentation(parameter));
             }
 
-            content = content.Add(XmlText().WithTextTokens(TokenList(XmlTextNewLine(TriviaList(), "\n", "\n", TriviaList()))));
+            nodes.Add(CreateXmlNewLine());
 
-            var trivia = Trivia(
-                DocumentationCommentTrivia(
-                    SyntaxKind.SingleLineDocumentationCommentTrivia,
-                    content));
+            var trivia = Trivia(DocumentationComment(nodes.ToArray()));
             return syntax.WithLeadingTrivia(trivia);
         }
 
@@ -68,78 +64,75 @@ namespace VaVare.Generators.Special
             return WithSummary(syntax, summary, (paramSums is not null && typeParamSums is not null) ? typeParamSums.Concat(paramSums) : (paramSums ?? typeParamSums));
         }
 
-        private static SyntaxList<XmlNodeSyntax> CreateSummaryDocumentation(SyntaxList<XmlNodeSyntax> content, string text)
+        private static XmlTextSyntax CreateXmlNewLine(bool continueComment = false)
         {
-            var summary = new List<SyntaxToken>();
-            summary.Add(XmlTextNewLine(TriviaList(), "\n", "\n", TriviaList()));
-            var commentLines = text.Split(new[] { "\n" }, StringSplitOptions.None);
-            for (int n = 0; n < commentLines.Length; n++)
-            {
-                var fixedCommentLine = $" {commentLines[n]}";
-                if (n != commentLines.Length - 1)
-                {
-                    fixedCommentLine += "\n";
-                }
-
-                summary.Add(XmlTextLiteral(TriviaList(DocumentationCommentExterior("///")), fixedCommentLine, fixedCommentLine, TriviaList()));
-            }
-
-            summary.Add(XmlTextNewLine(TriviaList(), "\n", "\n", TriviaList()));
-            summary.Add(XmlTextLiteral(TriviaList(DocumentationCommentExterior("///")), " ", " ", TriviaList()));
-
-            return content.AddRange(new List<XmlNodeSyntax>
-            {
-                XmlText().WithTextTokens(TokenList(XmlTextLiteral(TriviaList(DocumentationCommentExterior("///")), " ", " ", TriviaList()))),
-                XmlElement(XmlElementStartTag(XmlName(Identifier("summary"))), XmlElementEndTag(XmlName(Identifier("summary"))))
-                    .WithContent(SingletonList<XmlNodeSyntax>(XmlText().WithTextTokens(TokenList(summary)))),
-            });
+            var xmlText = continueComment
+                ? XmlTextNewLine("\n", true)
+                : XmlTextNewLine(TriviaList(), "\n", "\n", TriviaList());
+            return XmlText().WithTextTokens(TokenList(xmlText));
         }
 
-        private static SyntaxList<XmlNodeSyntax> CreateParameterDocumentation(SyntaxList<XmlNodeSyntax> content, ParameterSummary parameter)
+        private static XmlElementSyntax CreateSummaryDocumentation(string text)
         {
-            string paramTag = parameter.IsTypeParameter ? "typeparam" : "param";
-            return content.AddRange(new List<XmlNodeSyntax>
+            return XmlSummaryElement(CreateMultilineXmlTextContent(text, true));
+        }
+
+        private static XmlNodeSyntax[] CreateMultilineXmlTextContent(string content, bool forceMultiLine = false, bool surroundNewLinesIfMultiLine = true)
+        {
+            var commentLines = content.Split(new[] { "\n" }, StringSplitOptions.None);
+            if (commentLines.Length == 1 && !forceMultiLine)
             {
-                XmlText().WithTextTokens(
-                        TokenList(
-                            new[]
-                            {
-                                XmlTextNewLine(
-                                    TriviaList(),
-                                    "\n",
-                                    "\n",
-                                    TriviaList()),
-                                XmlTextLiteral(
-                                    TriviaList(
-                                        DocumentationCommentExterior("///")),
-                                    " ",
-                                    " ",
-                                    TriviaList()),
-                            })),
-                XmlExampleElement(SingletonList<XmlNodeSyntax>(
-                        XmlText().WithTextTokens(
-                                    TokenList(
-                                        XmlTextLiteral(
-                                            TriviaList(),
-                                            parameter.Summary,
-                                            parameter.Summary,
-                                            TriviaList())))))
-                    .WithStartTag(XmlElementStartTag(
-                                XmlName(
-                                    Identifier(paramTag)))
-                            .WithAttributes(
-                                SingletonList<XmlAttributeSyntax>(
-                                    XmlNameAttribute(
-                                        XmlName(
-                                            Identifier(" name")),
-                                        Token(SyntaxKind.DoubleQuoteToken),
-                                        IdentifierName(parameter.ParameterName),
-                                        Token(SyntaxKind.DoubleQuoteToken)))))
-                    .WithEndTag(
-                        XmlElementEndTag(
-                            XmlName(
-                                Identifier(paramTag)))),
-            });
+                return new XmlNodeSyntax[] { XmlText(content) };
+            }
+
+            var res = new XmlNodeSyntax[(commentLines.Length * 2) - 1 + (surroundNewLinesIfMultiLine ? 2 : 0)];
+
+            var index = 0;
+
+            if (surroundNewLinesIfMultiLine)
+            {
+                res[index++] = XmlNewLine("\n");
+            }
+
+            for (int i = 0; i < commentLines.Length; i++)
+            {
+                var l = commentLines[i];
+                res[index++] = XmlText(l);
+                if (i < commentLines.Length - 1)
+                {
+                    res[index++] = XmlNewLine("\n");
+                }
+            }
+
+            if (surroundNewLinesIfMultiLine)
+            {
+                res[index] = XmlNewLine("\n");
+            }
+
+            return res;
+        }
+
+        private static XmlElementSyntax CreateParameterDocumentation(ParameterSummary parameter)
+        {
+            var content = CreateMultilineXmlTextContent(parameter.Summary);
+            return parameter.IsTypeParameter
+                    ? XmlTypeParamElement(parameter.ParameterName, content)
+                    : XmlParamElement(parameter.ParameterName, content);
+        }
+
+        /// <summary>
+        /// Creates the syntax representation of a param element within xml documentation comments (e.g. for
+        /// documentation of method parameters).
+        /// </summary>
+        /// <param name="parameterName">The name of the parameter.</param>
+        /// <param name="content">
+        /// A list of syntax nodes that represents the content of the param element
+        /// (e.g. the description and meaning of the parameter).
+        /// </param>
+        /// <returns>The created xml element.</returns>
+        public static XmlElementSyntax XmlTypeParamElement(string parameterName, params XmlNodeSyntax[] content)
+        {
+            return XmlParamElement(parameterName, List(content));
         }
     }
 }
