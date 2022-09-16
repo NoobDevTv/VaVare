@@ -21,8 +21,9 @@ namespace VaVare.Generators.Special
         /// <param name="syntax">The syntax.</param>
         /// <param name="summary">Summary text.</param>
         /// <param name="parameterSummaries">Parameters in the summary.</param>
+        /// <param name="returnsSummary">Summary for the return value.</param>
         /// <returns>Return syntax node with summary.</returns>
-        public static T WithSummary<T>(this T syntax, string summary, IEnumerable<ParameterSummary> parameterSummaries)
+        public static T WithSummary<T>(this T syntax, string summary, IEnumerable<ParameterSummary> parameterSummaries, string returnsSummary = null)
             where T : CSharpSyntaxNode
         {
             parameterSummaries = parameterSummaries ?? new List<ParameterSummary>();
@@ -40,6 +41,12 @@ namespace VaVare.Generators.Special
                 nodes.Add(CreateParameterDocumentation(parameter));
             }
 
+            if (returnsSummary is not null)
+            {
+                nodes.Add(XmlNewLine("\n"));
+                nodes.Add(XmlReturnsElement(CreateMultilineXmlTextContent(returnsSummary)));
+            }
+
             nodes.Add(CreateXmlNewLine());
 
             var trivia = Trivia(DocumentationComment(nodes.ToArray()));
@@ -54,14 +61,15 @@ namespace VaVare.Generators.Special
         /// <param name="summary">Summary text.</param>
         /// <param name="parameters">Parameter summaries.</param>
         /// <param name="typeParameters">Type parameter summaries.</param>
+        /// <param name="returnsSummary">Summary for the return value.</param>
         /// <returns>Return syntax node with summary.</returns>
-        public static T WithSummary<T>(this T syntax, string summary, IEnumerable<Parameter> parameters = null, IEnumerable<TypeParameter> typeParameters = null)
+        public static T WithSummary<T>(this T syntax, string summary, IEnumerable<Parameter> parameters = null, IEnumerable<TypeParameter> typeParameters = null, string returnsSummary = null)
             where T : CSharpSyntaxNode
         {
             var paramSums = parameters?.Where(p => p.XmlDocumentation != null).Select(x => new ParameterSummary(x));
             var typeParamSums = typeParameters?.Where(p => p.XmlDocumentation != null)
                 .Select(x => new ParameterSummary(x));
-            return WithSummary(syntax, summary, (paramSums is not null && typeParamSums is not null) ? typeParamSums.Concat(paramSums) : (paramSums ?? typeParamSums));
+            return WithSummary(syntax, summary, (paramSums is not null && typeParamSums is not null) ? typeParamSums.Concat(paramSums) : (paramSums ?? typeParamSums), returnsSummary);
         }
 
         private static XmlTextSyntax CreateXmlNewLine(bool continueComment = false)

@@ -29,6 +29,7 @@ namespace VaVare.Builders
         private TypeSyntax _returnType;
         private BlockSyntax _body;
         private string _summary;
+        private string _returnsSummary;
         private SyntaxKind? _overrideOperator;
 
         private SyntaxList<AttributeListSyntax> _attributes;
@@ -145,21 +146,23 @@ namespace VaVare.Builders
         /// Set method return type.
         /// </summary>
         /// <param name="type">The wanted return type.</param>
+        /// <param name="returnsSummary">Summary for the return value.</param>
         /// <returns>The current method builder.</returns>
-        public MethodBuilder WithReturnType(Type type)
+        public MethodBuilder WithReturnType(Type type, string returnsSummary = null)
         {
-            _returnType = TypeGenerator.Create(type);
-            return this;
+            return WithReturnType(TypeGenerator.Create(type), returnsSummary);
         }
 
         /// <summary>
         /// Set method return type.
         /// </summary>
         /// <param name="type">The wanted return type.</param>
+        /// <param name="returnsSummary">Summary for the return value.</param>
         /// <returns>The current method builder.</returns>
-        public MethodBuilder WithReturnType(TypeSyntax type)
+        public MethodBuilder WithReturnType(TypeSyntax type, string returnsSummary = null)
         {
             _returnType = type;
+            _returnsSummary = returnsSummary;
             return this;
         }
 
@@ -293,7 +296,7 @@ namespace VaVare.Builders
             var method = BuildMethodBase();
             method = BuildModifiers(method);
             method = BuildAttributes(method);
-            method = method.WithSummary(_summary, _typeParameterXmlDocumentation.Concat(_parameterXmlDocumentation));
+            method = method.WithSummary(_summary, _typeParameterXmlDocumentation.Concat(_parameterXmlDocumentation), _returnsSummary);
             method = BuildParameters(method);
             method = BuildBody(method);
             return method;
