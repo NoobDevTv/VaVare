@@ -90,7 +90,7 @@ namespace VaVare.Generators.Special
             var commentLines = content.Split(new[] { "\n" }, StringSplitOptions.None);
             if (commentLines.Length == 1 && !forceMultiLine)
             {
-                return new XmlNodeSyntax[] { XmlText(content) };
+                return new XmlNodeSyntax[] { XmlUnencodedText(content) };
             }
 
             var res = new XmlNodeSyntax[(commentLines.Length * 2) - 1 + (surroundNewLinesIfMultiLine ? 2 : 0)];
@@ -105,7 +105,7 @@ namespace VaVare.Generators.Special
             for (int i = 0; i < commentLines.Length; i++)
             {
                 var l = commentLines[i];
-                res[index++] = XmlText(l);
+                res[index++] = XmlUnencodedText(l);
                 if (i < commentLines.Length - 1)
                 {
                     res[index++] = XmlNewLine("\n");
@@ -118,6 +118,11 @@ namespace VaVare.Generators.Special
             }
 
             return res;
+        }
+
+        private static XmlTextSyntax XmlUnencodedText(string value)
+        {
+            return XmlText(XmlTextLiteral(TriviaList(), value, value, TriviaList()));
         }
 
         private static XmlElementSyntax CreateParameterDocumentation(ParameterSummary parameter)
