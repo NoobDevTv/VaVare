@@ -145,7 +145,13 @@ namespace VaVare.Generators.Special
         /// <returns>The created xml element.</returns>
         public static XmlElementSyntax XmlTypeParamElement(string parameterName, params XmlNodeSyntax[] content)
         {
-            return XmlParamElement(parameterName, List(content));
+            return XmlTypeParamElement(parameterName, List(content));
+        }
+
+        private static XmlElementSyntax XmlTypeParamElement(string parameterName, SyntaxList<XmlNodeSyntax> content)
+        {
+            XmlElementSyntax element = XmlElement("typeparam", content);
+            return element.WithStartTag(element.StartTag.AddAttributes(XmlNameAttribute(parameterName)));
         }
     }
 }

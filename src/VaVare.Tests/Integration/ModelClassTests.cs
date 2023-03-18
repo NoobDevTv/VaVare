@@ -154,6 +154,23 @@ namespace VaVare.Tests.Integration
         }
 
         [Test]
+        public void Test_CreateClassWithMethodThatHaveTypeParamXmlDocumentation()
+        {
+            var classBuilder = new ClassBuilder("Cat", "Models");
+            var @class = classBuilder
+                .WithUsings("System")
+                .WithMethods(new MethodBuilder("MyMethod")
+                    .WithTypeParameters(new TypeParameter("MyParameter",  xmlDocumentation: "Some documentation"))
+                    .WithSummary("Some summary")
+                    .Build())
+                .Build();
+
+            Assert.AreEqual(
+                "usingSystem;namespaceModels{publicclassCat{/// <summary>\n/// Some summary\n/// </summary>\n/// <typeparam name=\"MyParameter\">Some documentation</typeparam>\nvoidMyMethod<MyParameter>(){}}}",
+                @class.ToString());
+        }
+
+        [Test]
         public void Test_CreateClassWithMethodThatHaveMultipleSUmmarysAndSingleLineComments()
         {
             var classBuilder = new ClassBuilder("Cat", "Models");
